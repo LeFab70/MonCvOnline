@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E💼%3C/text%3E%3C/svg%3E">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     
     <!-- Custom Styles -->
@@ -932,8 +933,14 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <!-- Optional local env; ignored in git. Provide via Render if not present. -->
-    <script src="js/env.js" onerror="console.warn('env.js not found; expecting ENV from hosting provider')"></script>
+    <!-- Inline ENV for production hosting (non-sensitive EmailJS identifiers) -->
+    <script>
+        window.ENV = window.ENV || {
+            EMAILJS_SERVICE_ID: 'service_1xzcin8',
+            EMAILJS_TEMPLATE_ID: 'template_60wvkxw',
+            EMAILJS_PUBLIC_KEY: 't0s2lAoINc5OJqR1c'
+        };
+    </script>
     <script src="js/animations.js"></script>
     <script src="js/email.js"></script>
     

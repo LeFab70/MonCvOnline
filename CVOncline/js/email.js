@@ -57,11 +57,7 @@ class EmailService {
             };
 
             // Send email
-            const result = await emailjs.send(
-                this.serviceId,
-                this.templateId,
-                templateParams
-            );
+            const result = await emailjs.send(this.serviceId, this.templateId, templateParams);
 
             if (result.status === 200) {
                 this.showNotification('Message envoyé avec succès !', 'success');
