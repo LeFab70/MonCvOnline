@@ -51,9 +51,11 @@ class EmailService {
             const templateParams = {
                 from_name: formData.get('name'),
                 from_email: formData.get('email'),
+                reply_to: formData.get('email'), // widely supported param name
                 subject: formData.get('subject'),
                 message: formData.get('message'),
-                to_name: 'Fabrice Kouonang'
+                to_name: 'Fabrice Kouonang',
+                to_email: 'kouonang2002@gmail.com'
             };
 
             // Send email
