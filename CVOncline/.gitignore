@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+
+# Local environment (do NOT commit real keys)
+js/env.js
+
+# Logs
+*.log
+
+# Build/Cache (if any)
+dist/
+cache/
+.tmp/
