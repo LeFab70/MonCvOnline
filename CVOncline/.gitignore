@@ -19,6 +19,9 @@ CV/
 # Exception: Allow public CV PDF in documents folder
 !documents/*.pdf
 
+# Exclude documents README (contains sensitive info)
+documents/README.md
+
 # Logs
 *.log
 
