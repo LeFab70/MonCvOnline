@@ -2,15 +2,19 @@
 
 This folder contains the PDF version of the CV for download.
 
-## How to add your CV PDF:
+## CV PDF Available:
 
-1. Place your PDF file in this folder
-2. Name it exactly: `CV_Fabrice_Kouonang.pdf`
+✅ **CV_Fabrice_Kouonang_Ok.pdf** - CV principal disponible au téléchargement
+
+## How to update your CV PDF:
+
+1. Replace the PDF file in this folder
+2. Keep the exact name: `CV_Fabrice_Kouonang_Ok.pdf`
 3. The download link in the website will automatically work
 
 ## File naming convention:
 - Use underscores instead of spaces
-- Keep the exact name: `CV_Fabrice_Kouonang.pdf`
+- Keep the exact name: `CV_Fabrice_Kouonang_Ok.pdf`
 - Only PDF files are supported for download
 
 ## Security note:
