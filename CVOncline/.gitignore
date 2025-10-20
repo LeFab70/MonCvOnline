@@ -4,7 +4,7 @@
 # Local environment (do NOT commit real keys)
 js/env.js
 
-# Documents (PDF, DOCX, etc.)
+# Documents (PDF, DOCX, etc.) - Exclude sensitive documents
 *.pdf
 *.docx
 *.doc
@@ -12,6 +12,9 @@ js/env.js
 *.xls
 *.pptx
 *.ppt
+
+# CV folder - contains personal documents
+CV/
 
 # Logs
 *.log
