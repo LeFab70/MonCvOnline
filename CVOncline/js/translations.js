@@ -458,6 +458,9 @@ class LanguageManager {
         
         // Update language flags
         this.updateLanguageFlags();
+        
+        // Update form placeholders
+        this.updatePlaceholders();
     }
     
     updateText(selector, text) {
@@ -465,6 +468,21 @@ class LanguageManager {
         elements.forEach(element => {
             element.textContent = text;
         });
+    }
+    
+    updatePlaceholders() {
+        const t = TRANSLATIONS[this.currentLanguage];
+        
+        // Update placeholders
+        const nameInput = document.querySelector('input[name="name"]');
+        const emailInput = document.querySelector('input[name="email"]');
+        const subjectInput = document.querySelector('input[name="subject"]');
+        const messageTextarea = document.querySelector('textarea[name="message"]');
+        
+        if (nameInput) nameInput.placeholder = t.contact.namePlaceholder;
+        if (emailInput) emailInput.placeholder = t.contact.emailPlaceholder;
+        if (subjectInput) subjectInput.placeholder = t.contact.subjectPlaceholder;
+        if (messageTextarea) messageTextarea.placeholder = t.contact.messagePlaceholder;
     }
     
     updateLanguageFlags() {
