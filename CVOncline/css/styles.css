@@ -303,31 +303,42 @@ body {
 
 /* Language Switcher Styles */
 .language-switcher {
-    background: none;
-    border: none;
     cursor: pointer;
-    padding: 4px;
-    border-radius: 50%;
     transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
 
 .language-switcher:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: scale(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.language-switcher.active {
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
 .language-flag {
-    display: inline-block;
-    opacity: 0.6;
     transition: all 0.3s ease;
-    filter: grayscale(0.3);
+    opacity: 0.8;
 }
 
 .language-flag.active {
     opacity: 1;
-    filter: grayscale(0);
     transform: scale(1.1);
 }
+
+/* Footer language switcher specific styles */
+footer .language-switcher:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+footer .language-switcher.active {
+    border-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 
 .language-flag:hover {
     opacity: 0.8;

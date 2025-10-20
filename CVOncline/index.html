@@ -50,11 +50,13 @@
                 <div class="flex items-center space-x-4">
                     <!-- Language Switcher -->
                     <div class="flex space-x-2">
-                        <button class="language-switcher" data-lang="fr" title="Français">
+                        <button class="language-switcher bg-white bg-opacity-20 hover:bg-opacity-30 px-3 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2" data-lang="fr" title="Français">
                             <span class="language-flag text-lg active" data-lang="fr">🇫🇷</span>
+                            <span class="text-white font-medium text-sm" data-translate="nav.french">FR</span>
                         </button>
-                        <button class="language-switcher" data-lang="en" title="English">
+                        <button class="language-switcher bg-white bg-opacity-20 hover:bg-opacity-30 px-3 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2" data-lang="en" title="English">
                             <span class="language-flag text-lg" data-lang="en">🇬🇧</span>
+                            <span class="text-white font-medium text-sm" data-translate="nav.english">EN</span>
                         </button>
                     </div>
                     <button class="md:hidden" @click="mobileMenuOpen = !mobileMenuOpen">
@@ -938,11 +940,13 @@
             
             <!-- Language Switcher in Footer -->
             <div class="flex justify-center space-x-4 mb-8">
-                <button class="language-switcher" data-lang="fr" title="Français">
+                <button class="language-switcher bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2" data-lang="fr" title="Français">
                     <span class="language-flag text-xl active" data-lang="fr">🇫🇷</span>
+                    <span class="text-white font-medium" data-translate="nav.french">Français</span>
                 </button>
-                <button class="language-switcher" data-lang="en" title="English">
+                <button class="language-switcher bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2" data-lang="en" title="English">
                     <span class="language-flag text-xl" data-lang="en">🇬🇧</span>
+                    <span class="text-white font-medium" data-translate="nav.english">English</span>
                 </button>
             </div>
             

@@ -10,7 +10,9 @@ const TRANSLATIONS = {
             experience: "Expérience",
             projects: "Projets",
             volunteer: "Bénévolat",
-            contact: "Contact"
+            contact: "Contact",
+            french: "FR",
+            english: "EN"
         },
         
         // Hero Section
@@ -162,7 +164,9 @@ const TRANSLATIONS = {
             experience: "Experience",
             projects: "Projects",
             volunteer: "Volunteer",
-            contact: "Contact"
+            contact: "Contact",
+            french: "FR",
+            english: "EN"
         },
         
         // Hero Section
