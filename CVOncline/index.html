@@ -20,36 +20,47 @@
     <nav class="fixed top-0 w-full z-50 glass-effect" x-show="showNav" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="-translate-y-full" x-transition:enter-end="translate-y-0">
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold text-gradient">Fabrice  Kouonang</div>
+                <div class="text-2xl font-bold text-gradient" data-translate="hero.name">Fabrice Kouonang</div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#accueil" class="text-gray-700 hover:text-blue-600 transition-colors duration-300 flex items-center" @click="scrollTo('accueil')">
-                        <i class="fas fa-home mr-2"></i>Accueil
+                        <i class="fas fa-home mr-2"></i><span data-translate="nav.home">Accueil</span>
                     </a>
                     <a href="#apropos" class="text-gray-700 hover:text-blue-600 transition-colors duration-300 flex items-center" @click="scrollTo('apropos')">
-                        <i class="fas fa-user mr-2"></i>À propos
+                        <i class="fas fa-user mr-2"></i><span data-translate="nav.about">À propos</span>
                     </a>
                     <a href="#competences" class="text-gray-700 hover:text-blue-600 transition-colors duration-300 flex items-center" @click="scrollTo('competences')">
-                        <i class="fas fa-cogs mr-2"></i>Compétences
+                        <i class="fas fa-cogs mr-2"></i><span data-translate="nav.skills">Compétences</span>
                     </a>
                     <a href="#formation" class="text-gray-700 hover:text-blue-600 transition-colors duration-300 flex items-center" @click="scrollTo('formation')">
-                        <i class="fas fa-graduation-cap mr-2"></i>Formation
+                        <i class="fas fa-graduation-cap mr-2"></i><span data-translate="nav.education">Formation</span>
                     </a>
                     <a href="#experience" class="text-gray-700 hover:text-blue-600 transition-colors duration-300 flex items-center" @click="scrollTo('experience')">
-                        <i class="fas fa-briefcase mr-2"></i>Expérience
+                        <i class="fas fa-briefcase mr-2"></i><span data-translate="nav.experience">Expérience</span>
                     </a>
                     <a href="#projets" class="text-gray-700 hover:text-blue-600 transition-colors duration-300 flex items-center" @click="scrollTo('projets')">
-                        <i class="fas fa-project-diagram mr-2"></i>Projets
+                        <i class="fas fa-project-diagram mr-2"></i><span data-translate="nav.projects">Projets</span>
                     </a>
                     <a href="#benevolat" class="text-gray-700 hover:text-blue-600 transition-colors duration-300 flex items-center" @click="scrollTo('benevolat')">
-                        <i class="fas fa-heart mr-2"></i>Bénévolat
+                        <i class="fas fa-heart mr-2"></i><span data-translate="nav.volunteer">Bénévolat</span>
                     </a>
                     <a href="#contact" class="text-gray-700 hover:text-blue-600 transition-colors duration-300 flex items-center" @click="scrollTo('contact')">
-                        <i class="fas fa-envelope mr-2"></i>Contact
+                        <i class="fas fa-envelope mr-2"></i><span data-translate="nav.contact">Contact</span>
                     </a>
                 </div>
-                <button class="md:hidden" @click="mobileMenuOpen = !mobileMenuOpen">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
+                <div class="flex items-center space-x-4">
+                    <!-- Language Switcher -->
+                    <div class="flex space-x-2">
+                        <button class="language-switcher" data-lang="fr" title="Français">
+                            <span class="language-flag text-lg active" data-lang="fr">🇫🇷</span>
+                        </button>
+                        <button class="language-switcher" data-lang="en" title="English">
+                            <span class="language-flag text-lg" data-lang="en">🇬🇧</span>
+                        </button>
+                    </div>
+                    <button class="md:hidden" @click="mobileMenuOpen = !mobileMenuOpen">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -76,28 +87,28 @@
                 </div>
             </div>
             
-            <h1 class="text-6xl md:text-8xl font-bold mb-6 typing-animation section-enter">
-                Fabrice  Kouonang
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 typing-animation section-enter" data-translate="hero.name">
+                Fabrice Kouonang
             </h1>
             
             <div class="text-2xl md:text-4xl mb-8 opacity-90 section-enter">
-                <span class="inline-block mr-4">Développeur</span>
-                <span class="inline-block mr-4 text-yellow-300">Full Stack</span>
-                <span class="inline-block">Passionné</span>
+                <span class="inline-block mr-4" data-translate="hero.title">Développeur</span>
+                <span class="inline-block mr-4 text-yellow-300" data-translate="hero.title">Full Stack</span>
+                <span class="inline-block" data-translate="hero.title">Passionné</span>
             </div>
             
-            <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto opacity-80 section-enter">
+            <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto opacity-80 section-enter" data-translate="hero.subtitle">
                 Créateur d'expériences numériques exceptionnelles avec une expertise en développement web et mobile moderne
             </p>
             
             <div class="flex flex-col sm:flex-row gap-6 justify-center section-enter">
                 <button class="btn-primary px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg" @click="scrollTo('apropos')">
                     <i class="fas fa-user mr-2"></i>
-                    Découvrir mon profil
+                    <span data-translate="hero.discover">Découvrir mon profil</span>
                 </button>
                 <button class="btn-secondary px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105" @click="scrollTo('contact')">
                     <i class="fas fa-envelope mr-2"></i>
-                    Me contacter
+                    <span data-translate="hero.contact">Me contacter</span>
                 </button>
             </div>
         </div>
@@ -912,21 +923,31 @@
     <footer class="bg-gray-900 text-white py-12">
         <div class="container mx-auto px-6 text-center">
             <div class="mb-8">
-                <h3 class="text-2xl font-bold mb-4">Fabrice Orgrick Kouonang</h3>
-                <p class="text-gray-400">Développeur Full Stack Passionné</p>
+                <h3 class="text-2xl font-bold mb-4" data-translate="footer.name">Fabrice Orgrick Kouonang</h3>
+                <p class="text-gray-400" data-translate="footer.subtitle">Développeur Full Stack Passionné</p>
             </div>
             
             <div class="flex justify-center space-x-8 mb-8">
-                <a href="#accueil" class="text-gray-400 hover:text-white transition-colors duration-300">Accueil</a>
-                <a href="#apropos" class="text-gray-400 hover:text-white transition-colors duration-300">À propos</a>
-                <a href="#competences" class="text-gray-400 hover:text-white transition-colors duration-300">Compétences</a>
-                <a href="#projets" class="text-gray-400 hover:text-white transition-colors duration-300">Projets</a>
-                <a href="#experience" class="text-gray-400 hover:text-white transition-colors duration-300">Expérience</a>
-                <a href="#contact" class="text-gray-400 hover:text-white transition-colors duration-300">Contact</a>
+                <a href="#accueil" class="text-gray-400 hover:text-white transition-colors duration-300" data-translate="nav.home">Accueil</a>
+                <a href="#apropos" class="text-gray-400 hover:text-white transition-colors duration-300" data-translate="nav.about">À propos</a>
+                <a href="#competences" class="text-gray-400 hover:text-white transition-colors duration-300" data-translate="nav.skills">Compétences</a>
+                <a href="#projets" class="text-gray-400 hover:text-white transition-colors duration-300" data-translate="nav.projects">Projets</a>
+                <a href="#experience" class="text-gray-400 hover:text-white transition-colors duration-300" data-translate="nav.experience">Expérience</a>
+                <a href="#contact" class="text-gray-400 hover:text-white transition-colors duration-300" data-translate="nav.contact">Contact</a>
+            </div>
+            
+            <!-- Language Switcher in Footer -->
+            <div class="flex justify-center space-x-4 mb-8">
+                <button class="language-switcher" data-lang="fr" title="Français">
+                    <span class="language-flag text-xl active" data-lang="fr">🇫🇷</span>
+                </button>
+                <button class="language-switcher" data-lang="en" title="English">
+                    <span class="language-flag text-xl" data-lang="en">🇬🇧</span>
+                </button>
             </div>
             
             <div class="border-t border-gray-800 pt-8">
-                <p class="text-gray-400">&copy; 2024 Fabrice Orgrick Kouonang. Tous droits réservés.</p>
+                <p class="text-gray-400">&copy; 2024 <span data-translate="footer.name">Fabrice Orgrick Kouonang</span>. <span data-translate="footer.copyright">Tous droits réservés.</span></p>
             </div>
         </div>
     </footer>
@@ -941,6 +962,7 @@
             EMAILJS_PUBLIC_KEY: 't0s2lAoINc5OJqR1c'
         };
     </script>
+    <script src="js/translations.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/email.js"></script>
     
@@ -963,6 +985,9 @@
                         once: true,
                         offset: 100
                     });
+                    
+                    // Initialize Language Manager
+                    window.languageManager = new LanguageManager();
                 },
                 
                 scrollTo(elementId) {

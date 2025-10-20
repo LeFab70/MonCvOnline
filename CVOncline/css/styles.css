@@ -301,6 +301,55 @@ body {
     }
 }
 
+/* Language Switcher Styles */
+.language-switcher {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.language-switcher:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.language-flag {
+    display: inline-block;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    filter: grayscale(0.3);
+}
+
+.language-flag.active {
+    opacity: 1;
+    filter: grayscale(0);
+    transform: scale(1.1);
+}
+
+.language-flag:hover {
+    opacity: 0.8;
+    filter: grayscale(0);
+}
+
+/* Smooth transitions for language changes */
+[data-translate] {
+    transition: opacity 0.3s ease;
+}
+
+/* Mobile language switcher */
+@media (max-width: 768px) {
+    .language-switcher {
+        padding: 8px;
+    }
+    
+    .language-flag {
+        font-size: 1.2rem;
+    }
+}
+
 @media (max-width: 480px) {
     .typing-animation {
         font-size: 2rem;
