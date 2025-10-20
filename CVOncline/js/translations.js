@@ -151,6 +151,15 @@ const TRANSLATIONS = {
             name: "Fabrice Orgrick Kouonang",
             subtitle: "Développeur Full Stack Passionné",
             copyright: "Tous droits réservés."
+        },
+        
+        // Download Section
+        download: {
+            title: "Téléchargez mon CV",
+            subtitle: "Consultez ma version PDF complète pour une vue d'ensemble détaillée de mon parcours professionnel",
+            button: "Télécharger le CV PDF",
+            info: "Format PDF • Optimisé pour l'impression",
+            note: "💡 Conseil : Gardez cette page ouverte pour une expérience interactive complète !"
         }
     },
     
@@ -305,6 +314,15 @@ const TRANSLATIONS = {
             name: "Fabrice Orgrick Kouonang",
             subtitle: "Passionate Full Stack Developer",
             copyright: "All rights reserved."
+        },
+        
+        // Download Section
+        download: {
+            title: "Download my CV",
+            subtitle: "View my complete PDF version for a detailed overview of my professional journey",
+            button: "Download CV PDF",
+            info: "PDF Format • Print Optimized",
+            note: "💡 Tip: Keep this page open for a complete interactive experience!"
         }
     }
 };
@@ -456,6 +474,13 @@ class LanguageManager {
         this.updateText('[data-translate="footer.name"]', t.footer.name);
         this.updateText('[data-translate="footer.subtitle"]', t.footer.subtitle);
         this.updateText('[data-translate="footer.copyright"]', t.footer.copyright);
+        
+        // Update download section
+        this.updateText('[data-translate="download.title"]', t.download.title);
+        this.updateText('[data-translate="download.subtitle"]', t.download.subtitle);
+        this.updateText('[data-translate="download.button"]', t.download.button);
+        this.updateText('[data-translate="download.info"]', t.download.info);
+        this.updateText('[data-translate="download.note"]', t.download.note);
         
         // Update document title
         document.title = `${t.hero.name} - ${t.hero.title}`;

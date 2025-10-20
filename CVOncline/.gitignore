@@ -4,6 +4,15 @@
 # Local environment (do NOT commit real keys)
 js/env.js
 
+# Documents (PDF, DOCX, etc.)
+*.pdf
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.pptx
+*.ppt
+
 # Logs
 *.log
 
@@ -11,5 +20,3 @@ js/env.js
 dist/
 cache/
 .tmp/
-
-
