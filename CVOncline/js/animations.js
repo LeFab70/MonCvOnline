@@ -238,3 +238,5 @@ document.addEventListener('DOMContentLoaded', () => {
 // Export for use in other scripts
 window.AnimationController = AnimationController;
 window.ParticleSystem = ParticleSystem;
+
+
