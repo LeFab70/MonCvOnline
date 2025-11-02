@@ -8,8 +8,15 @@ class AnimationController {
         this.setupScrollAnimations();
         this.setupTypingAnimation();
         this.setupSkillBars();
+        this.setupProgressBars();
         this.setupTimelineAnimations();
         this.setupParallaxEffects();
+        this.setupHoverAnimations();
+        this.setupIconAnimations();
+        this.setupCardStagger();
+        this.setupGradientAnimations();
+        this.setupRippleEffects();
+        this.setupScrollReveal();
     }
 
     // Setup scroll-triggered animations
@@ -172,6 +179,106 @@ class AnimationController {
                     });
                 }
             });
+        });
+    }
+
+    // Setup hover animations for icons
+    setupIconAnimations() {
+        const icons = document.querySelectorAll('i.fas, i.fab, i.far');
+        icons.forEach(icon => {
+            // Add hover class if not already present
+            if (!icon.classList.contains('icon-hover')) {
+                icon.classList.add('icon-hover');
+            }
+            
+            // Add pulse effect on hover for certain icons
+            icon.addEventListener('mouseenter', () => {
+                icon.style.transition = 'all 0.3s ease';
+            });
+        });
+    }
+
+    // Setup enhanced hover animations
+    setupHoverAnimations() {
+        // Add hover effects to cards
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+        });
+
+        // Add scale hover to buttons
+        document.querySelectorAll('button, .btn-primary, .btn-secondary').forEach(btn => {
+            btn.classList.add('scale-hover');
+        });
+    }
+
+    // Setup staggered card animations
+    setupCardStagger() {
+        const cardContainers = document.querySelectorAll('.grid');
+        cardContainers.forEach(container => {
+            const cards = container.querySelectorAll('.card-enter, .bg-white.rounded-2xl');
+            cards.forEach((card, index) => {
+                card.style.transitionDelay = `${index * 0.1}s`;
+                card.classList.add('stagger-item');
+            });
+        });
+    }
+
+    // Setup gradient animations
+    setupGradientAnimations() {
+        // Add animated gradient to hero section
+        const heroSection = document.querySelector('#accueil');
+        if (heroSection) {
+            heroSection.classList.add('gradient-animated');
+        }
+
+        // Add gradient animation to section backgrounds
+        document.querySelectorAll('.gradient-bg').forEach(section => {
+            section.classList.add('gradient-animated');
+        });
+    }
+
+    // Setup ripple effects on buttons
+    setupRippleEffects() {
+        document.querySelectorAll('button, .btn-primary, .btn-secondary, a.btn-primary').forEach(btn => {
+            btn.classList.add('ripple-effect');
+        });
+    }
+
+    // Enhanced scroll reveal animations
+    setupScrollReveal() {
+        const revealElements = document.querySelectorAll('section, .card-enter, .timeline-item');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        
+                        // Add fade-in-scale effect
+                        if (entry.target.classList.contains('card-enter')) {
+                            entry.target.classList.add('fade-in-scale');
+                        }
+                    }, index * 100);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+    }
+
+    // Setup progress bar enhancements
+    setupProgressBars() {
+        const skillBars = document.querySelectorAll('.skill-bar-animate');
+        skillBars.forEach(bar => {
+            bar.classList.add('progress-bar-enhanced');
         });
     }
 }
