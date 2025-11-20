@@ -16,34 +16,52 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="min-h-screen" x-data="cvApp()">
+    <!-- Scroll Progress Indicator -->
+    <div class="fixed top-0 left-0 h-1 w-full bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-600 z-[10000] transition-[width] duration-200 ease-out" :style="{ width: scrollProgress + '%' }" aria-hidden="true"></div>
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-[9999] glass-effect" x-show="showNav" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="-translate-y-full" x-transition:enter-end="translate-y-0" style="z-index: 9999;">
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <div class="text-2xl font-bold text-white drop-shadow-lg" data-translate="hero.name">Fabrice Kouonang</div>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#accueil" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform" @click="scrollTo('accueil')">
+                    <a href="#accueil" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
+                       @click="scrollTo('accueil')" :class="{'text-yellow-300': activeSection === 'accueil'}"
+                       :aria-current="activeSection === 'accueil' ? 'page' : null">
                         <i class="fas fa-home mr-2"></i><span data-translate="nav.home">Accueil</span>
                     </a>
-                    <a href="#apropos" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform" @click="scrollTo('apropos')">
+                    <a href="#apropos" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
+                       @click="scrollTo('apropos')" :class="{'text-yellow-300': activeSection === 'apropos'}"
+                       :aria-current="activeSection === 'apropos' ? 'page' : null">
                         <i class="fas fa-user mr-2"></i><span data-translate="nav.about">À propos</span>
                     </a>
-                    <a href="#competences" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform" @click="scrollTo('competences')">
+                    <a href="#competences" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
+                       @click="scrollTo('competences')" :class="{'text-yellow-300': activeSection === 'competences'}"
+                       :aria-current="activeSection === 'competences' ? 'page' : null">
                         <i class="fas fa-cogs mr-2"></i><span data-translate="nav.skills">Compétences</span>
                     </a>
-                    <a href="#formation" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform" @click="scrollTo('formation')">
+                    <a href="#formation" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
+                       @click="scrollTo('formation')" :class="{'text-yellow-300': activeSection === 'formation'}"
+                       :aria-current="activeSection === 'formation' ? 'page' : null">
                         <i class="fas fa-graduation-cap mr-2"></i><span data-translate="nav.education">Formation</span>
                     </a>
-                    <a href="#experience" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform" @click="scrollTo('experience')">
+                    <a href="#experience" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
+                       @click="scrollTo('experience')" :class="{'text-yellow-300': activeSection === 'experience'}"
+                       :aria-current="activeSection === 'experience' ? 'page' : null">
                         <i class="fas fa-briefcase mr-2"></i><span data-translate="nav.experience">Expérience</span>
                     </a>
-                    <a href="#projets" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform" @click="scrollTo('projets')">
+                    <a href="#projets" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
+                       @click="scrollTo('projets')" :class="{'text-yellow-300': activeSection === 'projets'}"
+                       :aria-current="activeSection === 'projets' ? 'page' : null">
                         <i class="fas fa-project-diagram mr-2"></i><span data-translate="nav.projects">Projets</span>
                     </a>
-                    <a href="#benevolat" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform" @click="scrollTo('benevolat')">
+                    <a href="#benevolat" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
+                       @click="scrollTo('benevolat')" :class="{'text-yellow-300': activeSection === 'benevolat'}"
+                       :aria-current="activeSection === 'benevolat' ? 'page' : null">
                         <i class="fas fa-heart mr-2"></i><span data-translate="nav.volunteer">Bénévolat</span>
                     </a>
-                    <a href="#contact" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform" @click="scrollTo('contact')">
+                    <a href="#contact" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
+                       @click="scrollTo('contact')" :class="{'text-yellow-300': activeSection === 'contact'}"
+                       :aria-current="activeSection === 'contact' ? 'page' : null">
                         <i class="fas fa-envelope mr-2"></i><span data-translate="nav.contact">Contact</span>
                     </a>
                 </div>
@@ -59,13 +77,147 @@
                             <span class="text-white font-medium text-sm" data-translate="nav.english">EN</span>
                         </button>
                     </div>
-                    <button class="md:hidden text-white hover:text-yellow-300 transition-colors duration-300" @click="mobileMenuOpen = !mobileMenuOpen">
+                    <button class="md:hidden text-white hover:text-yellow-300 transition-colors duration-300" @click="mobileMenuOpen = !mobileMenuOpen" :aria-expanded="mobileMenuOpen.toString()" aria-label="Ouvrir le menu mobile">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
     </nav>
+
+    <!-- Desktop Summary Navigation -->
+    <aside class="hidden xl:block fixed bottom-32 right-6 z-40 w-64" aria-label="Sommaire de navigation"
+           x-show="showSummary" x-transition.opacity x-transition.scale.origin-bottom-right>
+        <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/60 p-5 space-y-3">
+            <div class="flex items-center justify-between">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-[0.3em]" data-translate="ui.summaryTitle">Sommaire</p>
+                <button type="button" class="text-[11px] font-semibold text-blue-600 hover:text-blue-800"
+                        @click="showSummary = false" data-translate="ui.hideSummary">
+                    Masquer
+                </button>
+            </div>
+            <div class="space-y-2">
+                <template x-for="section in sections" :key="section.id">
+                    <button
+                        type="button"
+                        class="w-full flex items-center rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+                        @click="scrollTo(section.id)"
+                        :class="activeSection === section.id ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'bg-white/0 text-gray-600 hover:bg-white hover:text-blue-600'">
+                        <i class="text-base" :class="section.icon" aria-hidden="true"></i>
+                        <span class="ml-3" :data-translate="section.translationKey" x-init="$el.textContent = section.label"></span>
+                        <span class="ml-auto w-2 h-2 rounded-full" :class="activeSection === section.id ? 'bg-white' : 'bg-gray-300'"></span>
+                    </button>
+                </template>
+            </div>
+        </div>
+    </aside>
+    <button type="button" class="hidden xl:flex fixed bottom-32 right-6 z-30 items-center space-x-2 bg-white/90 border border-white/60 backdrop-blur px-4 py-2 rounded-full shadow-lg text-sm font-semibold text-gray-700 hover:text-blue-600 transition"
+            x-show="!showSummary" x-transition.opacity
+            @click="showSummary = true">
+        <i class="fas fa-list-ul text-blue-600"></i>
+        <span data-translate="ui.showSummary">Afficher le sommaire</span>
+    </button>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="md:hidden fixed inset-0 z-[9998]" x-show="mobileMenuOpen" x-transition.opacity>
+        <div class="absolute inset-0 bg-black/60" @click="mobileMenuOpen = false" aria-hidden="true"></div>
+        <div class="absolute top-0 right-0 h-full w-72 bg-white shadow-2xl p-6 flex flex-col"
+             x-transition:enter="transition transform duration-300"
+             x-transition:enter-start="translate-x-full"
+             x-transition:enter-end="translate-x-0"
+             x-transition:leave="transition transform duration-300"
+             x-transition:leave-start="translate-x-0"
+             x-transition:leave-end="translate-x-full"
+             role="dialog" aria-modal="true" aria-label="Navigation mobile">
+            <div class="flex items-center justify-between mb-6">
+                <span class="text-lg font-semibold text-gray-800" data-translate="ui.menuTitle">Menu</span>
+                <button class="text-gray-500 hover:text-gray-700" @click="mobileMenuOpen = false" aria-label="Fermer le menu">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <div class="space-y-4 flex-1 overflow-y-auto">
+                <template x-for="section in sections" :key="'mobile-' + section.id">
+                    <button
+                        type="button"
+                        class="w-full flex items-center justify-between text-left px-4 py-3 rounded-xl border border-gray-100 text-gray-700 font-medium hover:border-blue-300 hover:text-blue-600 transition-colors"
+                        @click="scrollTo(section.id)"
+                        :class="activeSection === section.id ? 'bg-blue-50 border-blue-200 text-blue-700' : ''">
+                        <div class="flex items-center space-x-3">
+                            <i class="text-base" :class="section.icon" aria-hidden="true"></i>
+                            <span :data-translate="section.translationKey" x-init="$el.textContent = section.label"></span>
+                        </div>
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </button>
+                </template>
+            </div>
+            <div class="mt-6 space-y-4">
+                <div class="flex space-x-3">
+                    <button class="language-switcher flex-1 bg-gray-100 hover:bg-gray-200 px-4 py-3 rounded-xl flex items-center justify-center space-x-2" data-lang="fr">
+                        <span class="language-flag text-lg" data-lang="fr">🇫🇷</span>
+                        <span class="font-semibold text-gray-800" data-translate="nav.french">FR</span>
+                    </button>
+                    <button class="language-switcher flex-1 bg-gray-100 hover:bg-gray-200 px-4 py-3 rounded-xl flex items-center justify-center space-x-2" data-lang="en">
+                        <span class="language-flag text-lg" data-lang="en">🇬🇧</span>
+                        <span class="font-semibold text-gray-800" data-translate="nav.english">EN</span>
+                    </button>
+                </div>
+                <a href="#contact" @click="mobileMenuOpen = false"
+                   class="inline-flex items-center justify-center w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-500 transition-colors">
+                    <i class="fas fa-paper-plane mr-2"></i>
+                    <span data-translate="hero.contact">Me contacter</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Actions -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end space-y-3">
+        <button type="button"
+                class="bg-gray-900/90 text-white px-4 py-2 rounded-full shadow-2xl flex items-center space-x-2 text-sm font-semibold hover:bg-gray-900 transition focus:outline-none focus:ring-2 focus:ring-white/60"
+                x-show="showBackToTop"
+                x-transition
+                @click="scrollTo('accueil')"
+                aria-label="Revenir en haut de page">
+            <i class="fas fa-arrow-up"></i>
+            <span data-translate="ui.backToTop">Haut de page</span>
+        </button>
+        <button type="button" class="bg-white/90 backdrop-blur shadow-2xl rounded-full px-5 py-3 text-sm font-semibold text-gray-800 flex items-center space-x-2 border border-white/60 md:hidden"
+                @click="mobileQuickNavOpen = true" aria-label="Ouvrir la liste des sections">
+            <i class="fas fa-list text-blue-600"></i>
+            <span data-translate="ui.sections">Sections</span>
+        </button>
+    </div>
+
+    <!-- Mobile Quick Sections Sheet -->
+    <div class="md:hidden fixed inset-0 z-40" x-show="mobileQuickNavOpen" x-transition.opacity>
+        <div class="absolute inset-0 bg-black/50" aria-hidden="true" @click="mobileQuickNavOpen = false"></div>
+        <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 shadow-2xl"
+             x-transition:enter="transition transform duration-300"
+             x-transition:enter-start="translate-y-full"
+             x-transition:enter-end="translate-y-0"
+             x-transition:leave="transition transform duration-300"
+             x-transition:leave-start="translate-y-0"
+             x-transition:leave-end="translate-y-full">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-800" data-translate="ui.browseSections">Parcourir les sections</h3>
+                <button class="text-gray-500 hover:text-gray-700" @click="mobileQuickNavOpen = false" aria-label="Fermer la liste des sections">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="grid gap-3">
+                <template x-for="section in sections" :key="'sheet-' + section.id">
+                    <button
+                        type="button"
+                        class="w-full flex items-center px-4 py-3 rounded-2xl border border-gray-100 text-left font-semibold text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors"
+                        @click="scrollTo(section.id); mobileQuickNavOpen = false"
+                        :class="activeSection === section.id ? 'bg-blue-50 border-blue-200 text-blue-700' : ''">
+                        <i class="text-base" :class="section.icon" aria-hidden="true"></i>
+                        <span class="ml-3" :data-translate="section.translationKey" x-init="$el.textContent = section.label"></span>
+                    </button>
+                </template>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="accueil" class="min-h-screen gradient-bg flex items-center justify-center relative overflow-hidden">
@@ -104,11 +256,11 @@
             </p>
             
             <div class="flex flex-col sm:flex-row gap-6 justify-center section-enter">
-                <button class="btn-primary px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg" @click="scrollTo('apropos')">
-                    <i class="fas fa-user mr-2"></i>
-                    <span data-translate="hero.discover">Découvrir mon profil</span>
+                <button class="btn-primary px-8 py-4 rounded-full text-lg font-semibold text-white hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg" @click="scrollTo('apropos')">
+                    <i class="fas fa-user mr-2 text-white"></i>
+                    <span class="text-white" data-translate="hero.discover">Découvrir mon profil</span>
                 </button>
-                <button class="btn-secondary px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105" @click="scrollTo('contact')">
+                <button class="btn-secondary px-8 py-4 rounded-full text-lg font-semibold text-white border-2 border-white hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105" @click="scrollTo('contact')">
                     <i class="fas fa-envelope mr-2"></i>
                     <span data-translate="hero.contact">Me contacter</span>
                 </button>
@@ -118,6 +270,68 @@
         <!-- Scroll Indicator -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
             <i class="fas fa-chevron-down text-2xl text-white opacity-70"></i>
+        </div>
+    </section>
+
+    <!-- Landing Showcase Section -->
+    <section id="landing" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 section-enter">
+                    <p class="text-sm font-semibold uppercase tracking-[0.4em] text-sky-500" data-translate="landing.badge">Portfolio Projects</p>
+                    <h2 class="text-5xl font-bold text-gray-900 leading-tight" data-translate="landing.title">Découvrez mes réalisations techniques</h2>
+                    <p class="text-lg text-gray-600 leading-relaxed" data-translate="landing.subtitle">
+                        Explorez une collection de projets concrets qui démontrent mon expertise en développement full-stack, 
+                        applications mobiles iOS, et solutions cloud. Chaque projet illustre ma capacité à combiner créativité, 
+                        performance et meilleures pratiques pour créer des expériences numériques exceptionnelles.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="landing-chip bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
+                            <h4 class="font-bold text-gray-800 mb-2" data-translate="landing.chipWebTitle">Applications Web Full-Stack</h4>
+                            <p class="text-gray-600" data-translate="landing.chipWebDesc">
+                                MailBox : Système de messagerie avec API REST Node.js/Express, authentification JWT, 
+                                interface moderne Tailwind CSS. Architecture scalable et sécurisée.
+                            </p>
+                        </div>
+                        <div class="landing-chip bg-purple-50 border-l-4 border-purple-500 p-4 rounded-lg">
+                            <h4 class="font-bold text-gray-800 mb-2" data-translate="landing.chip3dTitle">Applications Mobiles iOS</h4>
+                            <p class="text-gray-600" data-translate="landing.chip3dDesc">
+                                SwiftDataExpensesSave et GymApp : Applications natives iOS développées en SwiftUI avec SwiftData, 
+                                intégration Firebase/Firestore, géolocalisation, reconnaissance d'images (MobileNetV2), 
+                                et notifications push. Expérience utilisateur fluide et moderne.
+                            </p>
+                        </div>
+                        <div class="landing-chip bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
+                            <h4 class="font-bold text-gray-800 mb-2">Stack Technique Complète</h4>
+                            <p class="text-gray-600">
+                                Frontend : Angular, TypeScript, Tailwind CSS • Backend : Node.js, Express, Spring Boot, C#/.NET • 
+                                Mobile : SwiftUI, SwiftData, Flutter • Cloud : AWS, Docker • Bases de données : PostgreSQL, MySQL, MongoDB
+                            </p>
+                        </div>
+                    </div>
+                    <a href="#projets" class="btn-primary px-8 py-4 rounded-full flex items-center w-max text-white font-semibold hover:shadow-xl transition-all duration-300" @click="scrollTo('projets')">
+                        <i class="fas fa-code mr-3"></i>
+                        <span data-translate="landing.cta">Voir mes projets</span>
+                        <i class="fas fa-arrow-right ml-3"></i>
+                    </a>
+                </div>
+                <div class="landing-viewport relative section-enter">
+                    <div class="landing-grid"></div>
+                    <div class="absolute -top-10 -right-6 landing-planet"></div>
+                    <div class="absolute top-16 left-10 landing-chip">
+                        <h4>Angular • Tailwind</h4>
+                        <p data-translate="landing.layerFrontend">Interface 2D responsive multi-sections</p>
+                    </div>
+                    <div class="absolute bottom-16 right-10 landing-chip">
+                        <h4>SwiftUI • Firebase</h4>
+                        <p data-translate="landing.layerMobile">Composants 3D interactifs liés aux apps mobiles</p>
+                    </div>
+                    <div class="absolute bottom-8 left-12 landing-chip">
+                        <h4>Node.js • AWS</h4>
+                        <p data-translate="landing.layerBackend">Backend cloud visualisé en wireframe 3D</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -828,8 +1042,8 @@
             <!-- GitHub Button -->
             <div class="text-center mt-12 section-enter">
                 <a href="https://github.com/LeFab70" target="_blank" rel="noopener" class="inline-flex items-center bg-gray-900 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    <i class="fab fa-github-alt mr-3 text-2xl"></i>
-                    <span data-translate="projects.githubButton">Voir tous mes projets sur GitHub</span>
+                    <i class="fab fa-github-alt mr-3 text-2xl text-white"></i>
+                    <span class="text-white font-semibold" data-translate="projects.githubButton">Voir tous mes projets sur GitHub</span>
                 </a>
             </div>
         </div>
@@ -882,10 +1096,10 @@
         <div class="container mx-auto px-6">
             <div class="text-center mb-16 section-enter">
                 <div class="flex items-center justify-center mb-6">
-                    <i class="fas fa-envelope text-5xl text-white mr-4"></i>
-                    <h2 class="text-5xl font-bold text-white" data-translate="contact.title">Contactez-moi</h2>
+                    <i class="fas fa-envelope text-5xl text-blue-600 mr-4"></i>
+                    <h2 class="text-5xl font-bold text-gray-800" data-translate="contact.title">Contactez-moi</h2>
                 </div>
-                <div class="w-24 h-1 bg-white mx-auto rounded-full"></div>
+                <div class="w-24 h-1 bg-blue-500 mx-auto rounded-full"></div>
             </div>
             
             <div class="max-w-4xl mx-auto">
@@ -893,8 +1107,8 @@
                     <!-- Contact Info -->
                     <div class="space-y-8 section-enter">
                         <div class="text-center md:text-left">
-                            <h3 class="text-3xl font-bold text-white mb-6" data-translate="contact.subtitle">Parlons de votre projet</h3>
-                            <p class="text-xl text-white opacity-90 leading-relaxed" data-translate="contact.description">
+                            <h3 class="text-3xl font-bold text-gray-800 mb-6" data-translate="contact.subtitle">Parlons de votre projet</h3>
+                            <p class="text-xl text-gray-700 leading-relaxed" data-translate="contact.description">
                                 Je suis toujours intéressé par de nouveaux défis et opportunités. 
                                 N'hésitez pas à me contacter pour discuter de votre projet !
                             </p>
@@ -902,73 +1116,73 @@
                         
                         <div class="space-y-6">
                             <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-envelope text-white text-xl"></i>
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-envelope text-blue-600 text-xl"></i>
                                 </div>
                                 <div>
-                                    <p class="text-white font-semibold" data-translate="contact.email">Email</p>
-                                    <p class="text-white opacity-80">kouonang2002@gmail.com</p>
+                                    <p class="text-gray-800 font-semibold" data-translate="contact.email">Email</p>
+                                    <p class="text-gray-600">kouonang2002@gmail.com</p>
                                 </div>
                             </div>
                             
                             <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-phone text-white text-xl"></i>
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-phone text-blue-600 text-xl"></i>
                                 </div>
                                 <div>
-                                    <p class="text-white font-semibold" data-translate="contact.phone">Téléphone</p>
-                                    <p class="text-white opacity-80">438 985-5417</p>
+                                    <p class="text-gray-800 font-semibold" data-translate="contact.phone">Téléphone</p>
+                                    <p class="text-gray-600">438 985-5417</p>
                                 </div>
                             </div>
                             
                             <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-blue-600 text-xl"></i>
                                 </div>
                                 <div>
-                                    <p class="text-white font-semibold" data-translate="contact.location">Localisation</p>
-                                    <p class="text-white opacity-80">Campbellton, Nouveau-Brunswick</p>
+                                    <p class="text-gray-800 font-semibold" data-translate="contact.location">Localisation</p>
+                                    <p class="text-gray-600">Campbellton, Nouveau-Brunswick</p>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Social Links -->
                         <div class="flex space-x-4">
-                            <a href="#" class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110">
-                                <i class="fab fa-linkedin text-white text-xl"></i>
+                            <a href="#" class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-300 transform hover:scale-110">
+                                <i class="fab fa-linkedin text-blue-600 text-xl"></i>
                             </a>
-                            <a href="https://github.com/LeFab70" class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all duration-300 transform hover:scale-110" target="_blank" rel="noopener">
-                                <i class="fab fa-github-alt text-white text-xl"></i>
+                            <a href="https://github.com/LeFab70" class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-300 transform hover:scale-110" target="_blank" rel="noopener">
+                                <i class="fab fa-github-alt text-blue-600 text-xl"></i>
                             </a>
                         </div>
                     </div>
                     
                     <!-- Contact Form -->
-                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 card-enter">
+                    <div class="bg-white bg-opacity-90 backdrop-blur-sm rounded-2xl p-8 card-enter shadow-xl border border-blue-100">
                         <form id="contactForm" class="space-y-6">
                             <div>
-                                <label class="block text-white font-semibold mb-2" data-translate="contact.name">Nom</label>
+                                <label class="block text-gray-800 font-semibold mb-2" data-translate="contact.name">Nom</label>
                                 <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg form-input" placeholder="Votre nom" data-translate-placeholder="contact.namePlaceholder">
                             </div>
                             
                             <div>
-                                <label class="block text-white font-semibold mb-2" data-translate="contact.email">Email</label>
+                                <label class="block text-gray-800 font-semibold mb-2" data-translate="contact.email">Email</label>
                                 <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg form-input" placeholder="votre@email.com" data-translate-placeholder="contact.emailPlaceholder">
                             </div>
                             
                             <div>
-                                <label class="block text-white font-semibold mb-2" data-translate="contact.subject">Sujet</label>
+                                <label class="block text-gray-800 font-semibold mb-2" data-translate="contact.subject">Sujet</label>
                                 <input type="text" name="subject" required class="w-full px-4 py-3 rounded-lg form-input" placeholder="Sujet de votre message" data-translate-placeholder="contact.subjectPlaceholder">
                             </div>
                             
                             <div>
-                                <label class="block text-white font-semibold mb-2" data-translate="contact.message">Message</label>
+                                <label class="block text-gray-800 font-semibold mb-2" data-translate="contact.message">Message</label>
                                 <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-lg form-input resize-none" placeholder="Votre message..." data-translate-placeholder="contact.messagePlaceholder"></textarea>
                             </div>
                             
-                            <button type="submit" class="w-full bg-white text-blue-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
-                                <i class="fas fa-paper-plane mr-2"></i>
-                                <span data-translate="contact.sendButton">Envoyer le message</span>
+                            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center">
+                                <i class="fas fa-paper-plane mr-2 text-white"></i>
+                                <span class="text-white font-semibold" data-translate="contact.sendButton">Envoyer le message</span>
                             </button>
                         </form>
                     </div>
@@ -976,6 +1190,65 @@
             </div>
         </div>
     </section>
+
+    <!-- Chatbot Assistant -->
+    <div class="fixed bottom-6 left-6 z-40 space-y-3" x-cloak>
+        <button type="button" class="chatbot-trigger shadow-2xl" @click="chatbotOpen = !chatbotOpen"
+                :aria-expanded="chatbotOpen.toString()">
+            <i class="fas fa-comments"></i>
+            <span data-translate="chatbot.toggleOpen" x-show="!chatbotOpen">Assistant stack</span>
+            <span data-translate="chatbot.toggleClose" x-show="chatbotOpen">Fermer</span>
+        </button>
+    </div>
+
+    <div class="chatbot-panel" x-show="chatbotOpen" x-transition x-cloak>
+        <header class="flex items-center justify-between">
+            <div>
+                <p class="text-xs uppercase tracking-[0.4em] text-slate-400" data-translate="chatbot.badge">Realtime</p>
+                <h3 class="text-lg font-bold text-slate-900" data-translate="chatbot.title">Assistant Stack</h3>
+                <p class="text-sm text-slate-500" data-translate="chatbot.subtitle">
+                    Posez une question technique et obtenez une réponse alignée sur mes compétences.
+                </p>
+            </div>
+            <button class="text-slate-400 hover:text-slate-600" @click="chatbotOpen = false" aria-label="Fermer le chatbot">
+                <i class="fas fa-times"></i>
+            </button>
+        </header>
+        <div class="px-5 pt-4 space-y-2">
+            <p class="text-xs font-semibold uppercase text-slate-400" data-translate="chatbot.contextTitle">Technologies suivies</p>
+            <div class="flex flex-wrap">
+                <template x-for="tech in techContext" :key="'ctx-' + tech">
+                    <span class="chatbot-context-pill" x-text="tech"></span>
+                </template>
+            </div>
+        </div>
+        <div class="px-5 py-4 max-h-64 overflow-y-auto space-y-3" x-ref="chatMessages">
+            <template x-for="(message, index) in chatbotMessages" :key="'chat-' + index">
+                <div :class="message.role === 'user' ? 'text-right' : 'text-left'">
+                    <p class="inline-block px-4 py-3 rounded-2xl text-sm leading-relaxed"
+                       :class="message.role === 'user' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-700'"
+                       x-text="message.text"></p>
+                </div>
+            </template>
+            <p class="text-xs text-slate-400" x-show="!chatbotMessages.length" data-translate="chatbot.empty">
+                Posez une question (ex: “Comment sécurises-tu une API Node.js avec Keycloak ?”)
+            </p>
+        </div>
+        <div class="px-5 pb-5 space-y-4">
+            <form class="space-y-3" @submit.prevent="sendChat">
+                <label class="text-sm font-semibold text-slate-600" data-translate="chatbot.promptLabel">Question</label>
+                <textarea name="chatbot-message" class="w-full px-4 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-200"
+                          rows="3" x-model="chatbotInput" placeholder="Décrivez votre besoin technique..."></textarea>
+                <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2">
+                    <i class="fas fa-paper-plane text-sm"></i>
+                    <span data-translate="chatbot.send">Envoyer</span>
+                </button>
+            </form>
+            <p class="text-[11px] text-slate-400" data-translate="chatbot.disclaimer">
+                Les réponses générées utilisent uniquement le contexte de mon CV (compétences & projets) pour rester pertinentes.
+            </p>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
@@ -1031,12 +1304,40 @@
             return {
                 showNav: false,
                 mobileMenuOpen: false,
+                mobileQuickNavOpen: false,
+                activeSection: 'accueil',
+                scrollProgress: 0,
+                showSummary: true,
+                showBackToTop: false,
+                chatbotOpen: false,
+                chatbotInput: '',
+                chatbotMessages: [],
+                sections: [
+                    { id: 'accueil', label: 'Accueil', translationKey: 'nav.home', icon: 'fas fa-home' },
+                    { id: 'apropos', label: 'À propos', translationKey: 'nav.about', icon: 'fas fa-user' },
+                    { id: 'competences', label: 'Compétences', translationKey: 'nav.skills', icon: 'fas fa-cogs' },
+                    { id: 'formation', label: 'Formation', translationKey: 'nav.education', icon: 'fas fa-graduation-cap' },
+                    { id: 'experience', label: 'Expérience', translationKey: 'nav.experience', icon: 'fas fa-briefcase' },
+                    { id: 'projets', label: 'Projets', translationKey: 'nav.projects', icon: 'fas fa-project-diagram' },
+                    { id: 'benevolat', label: 'Bénévolat', translationKey: 'nav.volunteer', icon: 'fas fa-heart' },
+                    { id: 'contact', label: 'Contact', translationKey: 'nav.contact', icon: 'fas fa-envelope' }
+                ],
+                techContext: [
+                    'Angular', 'Tailwind CSS', 'TypeScript', 'Node.js', 'Spring Boot',
+                    'SwiftUI', 'Firebase', 'PostgreSQL', 'MongoDB', 'AWS', 'Docker', 'Keycloak'
+                ],
                 
                 init() {
+                    this.updateProgress();
+                    this.setActiveSectionFromHash();
                     // Show nav on scroll
                     window.addEventListener('scroll', () => {
                         this.showNav = window.scrollY > 100;
+                        this.updateProgress();
                     });
+                    window.addEventListener('hashchange', () => this.setActiveSectionFromHash());
+                    
+                    this.initSectionObserver();
                     
                     // Initialize AOS
                     AOS.init({
@@ -1050,6 +1351,96 @@
                     window.languageManager = new LanguageManager();
                 },
                 
+                updateProgress() {
+                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                    this.scrollProgress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+                    this.showBackToTop = window.scrollY > 400;
+                    // Mettre à jour la section active lors du scroll (fallback pour garantir la mise à jour)
+                    this.updateActiveSectionFallback();
+                },
+                
+                initSectionObserver() {
+                    if (!('IntersectionObserver' in window)) {
+                        this.updateActiveSectionFallback();
+                        return;
+                    }
+                    
+                    const observer = new IntersectionObserver((entries) => {
+                        // Trouver la section la plus visible
+                        let mostVisible = null;
+                        let maxRatio = 0;
+                        
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+                                maxRatio = entry.intersectionRatio;
+                                mostVisible = entry.target.id;
+                            }
+                        });
+                        
+                        // Si une section est visible, la mettre à jour
+                        if (mostVisible) {
+                            this.activeSection = mostVisible;
+                        }
+                    }, {
+                        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0],
+                        rootMargin: '-20% 0px -60% 0px'
+                    });
+                    
+                    this.sections.forEach(section => {
+                        const el = document.getElementById(section.id);
+                        if (el) {
+                            observer.observe(el);
+                        }
+                    });
+                },
+                
+                updateActiveSectionFallback() {
+                    let closestSection = this.activeSection;
+                    let minDistance = Number.POSITIVE_INFINITY;
+                    const viewportTop = window.scrollY + 150; // Offset pour la navigation
+                    
+                    this.sections.forEach(section => {
+                        const el = document.getElementById(section.id);
+                        if (!el) return;
+                        const rect = el.getBoundingClientRect();
+                        const sectionTop = window.scrollY + rect.top;
+                        
+                        // Vérifier si la section est dans la zone visible
+                        if (sectionTop <= viewportTop && sectionTop + rect.height > viewportTop) {
+                            const distance = Math.abs(sectionTop - viewportTop);
+                            if (distance < minDistance) {
+                                minDistance = distance;
+                                closestSection = section.id;
+                            }
+                        }
+                    });
+                    
+                    // Si aucune section n'est trouvée, utiliser la première visible
+                    if (closestSection === this.activeSection && minDistance === Number.POSITIVE_INFINITY) {
+                        this.sections.forEach(section => {
+                            const el = document.getElementById(section.id);
+                            if (!el) return;
+                            const rect = el.getBoundingClientRect();
+                            const sectionTop = window.scrollY + rect.top;
+                            
+                            if (sectionTop <= viewportTop + 200) {
+                                closestSection = section.id;
+                            }
+                        });
+                    }
+                    
+                    if (closestSection !== this.activeSection) {
+                        this.activeSection = closestSection;
+                    }
+                },
+                
+                setActiveSectionFromHash() {
+                    const hash = window.location.hash.replace('#', '');
+                    if (hash && this.sections.some(section => section.id === hash)) {
+                        this.activeSection = hash;
+                    }
+                },
+                
                 scrollTo(elementId) {
                     const element = document.getElementById(elementId);
                     if (element) {
@@ -1057,8 +1448,234 @@
                             behavior: 'smooth',
                             block: 'start'
                         });
+                        this.activeSection = elementId;
+                        if (window.history && window.history.replaceState) {
+                            window.history.replaceState(null, '', `#${elementId}`);
+                        } else {
+                            window.location.hash = elementId;
+                        }
                     }
                     this.mobileMenuOpen = false;
+                    this.mobileQuickNavOpen = false;
+                    if (elementId === 'accueil') {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                },
+
+                getCurrentLanguage() {
+                    return window.languageManager?.currentLanguage || 'fr';
+                },
+
+                sendChat() {
+                    const content = this.chatbotInput.trim();
+                    if (!content) return;
+                    this.chatbotMessages.push({ role: 'user', text: content });
+                    const lowerContent = content.toLowerCase();
+                    
+                    // Vérifier si la question est liée aux technologies du CV
+                    const techKeywords = [
+                        'angular', 'typescript', 'javascript', 'html', 'css', 'tailwind', 'react', 'vue',
+                        'node', 'express', 'spring', 'boot', 'c#', 'dotnet', '.net', 'api', 'rest',
+                        'swift', 'swiftui', 'swiftdata', 'ios', 'android', 'flutter', 'mobile',
+                        'postgresql', 'mysql', 'mongodb', 'oracle', 'database', 'sql',
+                        'aws', 'azure', 'cloud', 'docker', 'keycloak', 'jwt', 'firebase', 'firestore',
+                        'git', 'github', 'gitlab', 'deploy', 'backend', 'frontend', 'fullstack',
+                        'mailbox', 'gymapp', 'swiftdataexpenses', 'projet', 'project', 'application',
+                        'développement', 'development', 'code', 'programming', 'programmation',
+                        'sécurité', 'security', 'auth', 'authentification', 'ml', 'machine learning',
+                        'mobilenet', 'geolocation', 'camera', 'notification', 'push'
+                    ];
+                    
+                    const isTechRelated = techKeywords.some(keyword => lowerContent.includes(keyword));
+                    
+                    if (!isTechRelated) {
+                        // Rediriger vers la section contact
+                        const lang = this.getCurrentLanguage();
+                        const response = lang === 'fr' 
+                            ? `Merci pour votre question ! Pour des informations plus détaillées ou des questions spécifiques qui ne concernent pas directement mes technologies, je vous invite à me contacter via la section "Contact" ci-dessous. Je serai ravi de discuter de votre projet en détail !`
+                            : `Thank you for your question! For more detailed information or specific questions that don't directly relate to my technologies, I invite you to contact me via the "Contact" section below. I'd be happy to discuss your project in detail!`;
+                        
+                        this.chatbotMessages.push({ role: 'assistant', text: response });
+                        this.chatbotInput = '';
+                        
+                        // Scroll vers la section contact après un court délai
+                        setTimeout(() => {
+                            this.scrollTo('contact');
+                        }, 1500);
+                        
+                        this.$nextTick(() => {
+                            const panel = this.$refs.chatMessages;
+                            if (panel) {
+                                panel.scrollTop = panel.scrollHeight;
+                            }
+                        });
+                        return;
+                    }
+                    
+                    const related = this.techContext.filter(tech => lowerContent.includes(tech.toLowerCase()));
+                    const focus = related.length ? related : this.techContext.slice(0, 3);
+                    const response = this.buildChatbotResponse(content, focus);
+                    this.chatbotMessages.push({ role: 'assistant', text: response });
+                    this.chatbotInput = '';
+                    this.$nextTick(() => {
+                        const panel = this.$refs.chatMessages;
+                        if (panel) {
+                            panel.scrollTop = panel.scrollHeight;
+                        }
+                    });
+                },
+
+                buildChatbotResponse(prompt, focus) {
+                    const lang = this.getCurrentLanguage();
+                    const lowerPrompt = prompt.toLowerCase();
+                    
+                    // Détecter le type de besoin
+                    const isMobile = lowerPrompt.includes('mobile') || lowerPrompt.includes('ios') || lowerPrompt.includes('android') || lowerPrompt.includes('swift') || lowerPrompt.includes('flutter');
+                    const isBackend = lowerPrompt.includes('backend') || lowerPrompt.includes('api') || lowerPrompt.includes('server') || lowerPrompt.includes('node') || lowerPrompt.includes('express') || lowerPrompt.includes('database');
+                    const isFrontend = lowerPrompt.includes('frontend') || lowerPrompt.includes('angular') || lowerPrompt.includes('interface') || lowerPrompt.includes('ui') || lowerPrompt.includes('ux');
+                    const isSecurity = lowerPrompt.includes('sécurité') || lowerPrompt.includes('security') || lowerPrompt.includes('keycloak') || lowerPrompt.includes('auth');
+                    const isCloud = lowerPrompt.includes('cloud') || lowerPrompt.includes('aws') || lowerPrompt.includes('azure') || lowerPrompt.includes('deploy');
+                    const isProject = lowerPrompt.includes('projet') || lowerPrompt.includes('project') || lowerPrompt.includes('mailbox') || lowerPrompt.includes('gymapp');
+                    
+                    // Variantes de réponses pour plus de diversité
+                    const getRandomIntro = (lang) => {
+                        const introsFr = [
+                            `Excellent ! Avec mes compétences en ${focus.join(', ')}, `,
+                            `Parfait ! Grâce à mon expertise en ${focus.join(', ')}, `,
+                            `Très bien ! En utilisant ${focus.join(', ')}, `,
+                            `D'accord ! Basé sur mes connaissances en ${focus.join(', ')}, `
+                        ];
+                        const introsEn = [
+                            `Great! With my skills in ${focus.join(', ')}, `,
+                            `Perfect! Thanks to my expertise in ${focus.join(', ')}, `,
+                            `Excellent! Using ${focus.join(', ')}, `,
+                            `Alright! Based on my knowledge in ${focus.join(', ')}, `
+                        ];
+                        const intros = lang === 'fr' ? introsFr : introsEn;
+                        return intros[Math.floor(Math.random() * intros.length)];
+                    };
+                    
+                    let response = getRandomIntro(lang);
+                    
+                    if (lang === 'fr') {
+                        if (isMobile) {
+                            const variants = [
+                                `je crée des applications mobiles natives iOS avec SwiftUI et SwiftData, ainsi que des apps cross-platform avec Flutter. J'intègre la géolocalisation, la caméra, Firebase/Firestore, et des modèles de machine learning comme MobileNetV2 pour la reconnaissance d'images.`,
+                                `mon expertise mobile couvre le développement iOS natif (SwiftUI/SwiftData) et Flutter. J'ai notamment intégré dans mes projets la géolocalisation, l'accès caméra, Firebase/Firestore, et des capacités ML avec MobileNetV2.`,
+                                `je développe des solutions mobiles natives iOS et cross-platform. Dans mes projets, j'ai implémenté la géolocalisation, l'utilisation de la caméra, l'intégration Firebase/Firestore, et des fonctionnalités de reconnaissance d'images avec MobileNetV2.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        } else if (isBackend) {
+                            const variants = [
+                                `je conçois et développe des APIs REST robustes avec Node.js/Express, Spring Boot, ou C#/.NET. Pour les bases de données, j'utilise PostgreSQL, MySQL, MongoDB, ou Oracle selon les besoins du projet. La sécurité est assurée via Keycloak et JWT.`,
+                                `mon approche backend inclut la création d'APIs REST avec Node.js/Express, Spring Boot, ou C#/.NET. Je travaille avec diverses bases de données (PostgreSQL, MySQL, MongoDB, Oracle) et j'implémente l'authentification avec Keycloak et JWT.`,
+                                `je construis des backends performants avec Node.js/Express, Spring Boot, ou C#/.NET. J'utilise PostgreSQL, MySQL, MongoDB, ou Oracle pour le stockage, et j'assure la sécurité avec Keycloak et JWT.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        } else if (isFrontend) {
+                            const variants = [
+                                `je développe des interfaces utilisateur modernes et réactives avec Angular, TypeScript, Tailwind CSS, HTML5 et CSS3. Mon objectif est de créer des expériences utilisateur fluides, responsives et visuellement attrayantes.`,
+                                `mon expertise frontend se concentre sur Angular, TypeScript, Tailwind CSS, HTML5/CSS3. Je privilégie l'expérience utilisateur, la performance, la responsivité et des animations soignées.`,
+                                `je crée des interfaces web modernes avec Angular et TypeScript, en utilisant Tailwind CSS pour le styling. Je m'assure que chaque interface soit responsive, performante et offre une excellente expérience utilisateur.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        } else if (isSecurity) {
+                            const variants = [
+                                `j'implémente des systèmes d'authentification sécurisés avec Keycloak et JWT. Je sécurise les APIs, gère les permissions utilisateur, et applique les meilleures pratiques de sécurité dans tous mes projets.`,
+                                `la sécurité est une priorité dans mes développements. J'utilise Keycloak pour l'authentification, JWT pour les tokens, et je m'assure que toutes les APIs sont protégées avec des permissions appropriées.`,
+                                `je mets en place des mécanismes de sécurité robustes avec Keycloak et JWT. Je sécurise les endpoints API, gère les rôles et permissions, et applique les standards de sécurité les plus récents.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        } else if (isCloud) {
+                            const variants = [
+                                `je déploie des applications sur AWS (je suis certifié Cloud Practitioner) et je prépare la certification Azure Developer Associate. J'utilise Docker pour la containerisation et j'optimise les déploiements cloud.`,
+                                `mon expertise cloud inclut AWS (certifié Cloud Practitioner) et la préparation pour Azure Developer Associate. Je containerise avec Docker et j'optimise les architectures cloud pour la performance et le coût.`,
+                                `je travaille avec AWS (certifié Cloud Practitioner) et prépare Azure Developer Associate. J'utilise Docker pour la containerisation et je conçois des architectures cloud scalables et efficaces.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        } else if (isProject) {
+                            const variants = [
+                                `mes projets récents incluent MailBox (système de messagerie avec Node.js/Express/MySQL), SwiftDataExpensesSave (app iOS avec Firebase), et GymApp (SwiftUI avec ML). Chaque projet intègre un backend complet, une interface moderne, l'authentification et des bases de données.`,
+                                `j'ai développé plusieurs projets : MailBox (Node.js/Express/MySQL), SwiftDataExpensesSave (iOS/Firebase), et GymApp (SwiftUI/ML). Tous incluent des fonctionnalités complètes : backend, frontend, authentification et gestion de données.`,
+                                `parmi mes réalisations : MailBox (messagerie web avec Node.js/Express/MySQL), SwiftDataExpensesSave (application iOS avec Firebase), et GymApp (SwiftUI avec reconnaissance d'images). Chaque projet démontre une stack complète et fonctionnelle.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        } else {
+                            const variants = [
+                                `je peux vous accompagner sur un projet full-stack complet. Je combine frontend (Angular), backend (Node.js/Express ou Spring Boot), mobile (iOS/Flutter), et cloud (AWS) pour créer des solutions complètes.`,
+                                `mon expertise couvre tout le spectre du développement : frontend avec Angular, backend avec Node.js/Express ou Spring Boot, mobile iOS/Flutter, et déploiement cloud sur AWS.`,
+                                `je développe des solutions full-stack complètes en combinant Angular pour le frontend, Node.js/Express ou Spring Boot pour le backend, SwiftUI/Flutter pour le mobile, et AWS pour le cloud.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        }
+                        
+                        const endings = [
+                            ` Avez-vous des questions spécifiques sur l'un de ces aspects ?`,
+                            ` Souhaitez-vous plus de détails sur un point particulier ?`,
+                            ` N'hésitez pas si vous avez besoin de précisions !`
+                        ];
+                        response += endings[Math.floor(Math.random() * endings.length)];
+                    } else {
+                        if (isMobile) {
+                            const variants = [
+                                `I create native iOS mobile applications with SwiftUI and SwiftData, as well as cross-platform apps with Flutter. I integrate geolocation, camera, Firebase/Firestore, and machine learning models like MobileNetV2 for image recognition.`,
+                                `my mobile expertise covers native iOS development (SwiftUI/SwiftData) and Flutter. I've integrated geolocation, camera access, Firebase/Firestore, and ML capabilities with MobileNetV2 in my projects.`,
+                                `I develop native iOS and cross-platform mobile solutions. In my projects, I've implemented geolocation, camera usage, Firebase/Firestore integration, and image recognition features with MobileNetV2.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        } else if (isBackend) {
+                            const variants = [
+                                `I design and develop robust REST APIs with Node.js/Express, Spring Boot, or C#/.NET. For databases, I use PostgreSQL, MySQL, MongoDB, or Oracle depending on project needs. Security is ensured via Keycloak and JWT.`,
+                                `my backend approach includes creating REST APIs with Node.js/Express, Spring Boot, or C#/.NET. I work with various databases (PostgreSQL, MySQL, MongoDB, Oracle) and implement authentication with Keycloak and JWT.`,
+                                `I build performant backends with Node.js/Express, Spring Boot, or C#/.NET. I use PostgreSQL, MySQL, MongoDB, or Oracle for storage, and ensure security with Keycloak and JWT.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        } else if (isFrontend) {
+                            const variants = [
+                                `I develop modern and reactive user interfaces with Angular, TypeScript, Tailwind CSS, HTML5 and CSS3. My goal is to create smooth, responsive and visually appealing user experiences.`,
+                                `my frontend expertise focuses on Angular, TypeScript, Tailwind CSS, HTML5/CSS3. I prioritize user experience, performance, responsiveness and polished animations.`,
+                                `I create modern web interfaces with Angular and TypeScript, using Tailwind CSS for styling. I ensure every interface is responsive, performant and offers an excellent user experience.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        } else if (isSecurity) {
+                            const variants = [
+                                `I implement secure authentication systems with Keycloak and JWT. I secure APIs, manage user permissions, and apply security best practices in all my projects.`,
+                                `security is a priority in my developments. I use Keycloak for authentication, JWT for tokens, and ensure all APIs are protected with appropriate permissions.`,
+                                `I set up robust security mechanisms with Keycloak and JWT. I secure API endpoints, manage roles and permissions, and apply the latest security standards.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        } else if (isCloud) {
+                            const variants = [
+                                `I deploy applications on AWS (I'm Cloud Practitioner certified) and I'm preparing for Azure Developer Associate certification. I use Docker for containerization and optimize cloud deployments.`,
+                                `my cloud expertise includes AWS (Cloud Practitioner certified) and preparation for Azure Developer Associate. I containerize with Docker and optimize cloud architectures for performance and cost.`,
+                                `I work with AWS (Cloud Practitioner certified) and preparing for Azure Developer Associate. I use Docker for containerization and design scalable and efficient cloud architectures.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        } else if (isProject) {
+                            const variants = [
+                                `my recent projects include MailBox (messaging system with Node.js/Express/MySQL), SwiftDataExpensesSave (iOS app with Firebase), and GymApp (SwiftUI with ML). Each project integrates a complete backend, modern interface, authentication and databases.`,
+                                `I've developed several projects: MailBox (Node.js/Express/MySQL), SwiftDataExpensesSave (iOS/Firebase), and GymApp (SwiftUI/ML). All include complete features: backend, frontend, authentication and data management.`,
+                                `among my achievements: MailBox (web messaging with Node.js/Express/MySQL), SwiftDataExpensesSave (iOS application with Firebase), and GymApp (SwiftUI with image recognition). Each project demonstrates a complete and functional stack.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        } else {
+                            const variants = [
+                                `I can assist you with a complete full-stack project. I combine frontend (Angular), backend (Node.js/Express or Spring Boot), mobile (iOS/Flutter), and cloud (AWS) to create complete solutions.`,
+                                `my expertise covers the full development spectrum: frontend with Angular, backend with Node.js/Express or Spring Boot, iOS/Flutter mobile, and cloud deployment on AWS.`,
+                                `I develop complete full-stack solutions by combining Angular for frontend, Node.js/Express or Spring Boot for backend, SwiftUI/Flutter for mobile, and AWS for cloud.`
+                            ];
+                            response += variants[Math.floor(Math.random() * variants.length)];
+                        }
+                        
+                        const endings = [
+                            ` Do you have specific questions about any of these aspects?`,
+                            ` Would you like more details on a particular point?`,
+                            ` Feel free to ask if you need clarification!`
+                        ];
+                        response += endings[Math.floor(Math.random() * endings.length)];
+                    }
+                    
+                    return response;
                 }
             }
         }

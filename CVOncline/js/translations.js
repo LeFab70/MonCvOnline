@@ -14,6 +14,17 @@ const TRANSLATIONS = {
             french: "FR",
             english: "EN"
         },
+
+        // UI helpers
+        ui: {
+            summaryTitle: "Sommaire",
+            hideSummary: "Masquer",
+            showSummary: "Afficher le sommaire",
+            sections: "Sections",
+            browseSections: "Parcourir les sections",
+            backToTop: "Haut de page",
+            menuTitle: "Menu"
+        },
         
         // Hero Section
         hero: {
@@ -160,6 +171,36 @@ const TRANSLATIONS = {
             button: "Télécharger le CV PDF",
             info: "Format PDF • Optimisé pour l'impression",
             note: "💡 Conseil : Gardez cette page ouverte pour une expérience interactive complète !"
+        },
+
+        // Landing section
+        landing: {
+            badge: "Portfolio Projects",
+            title: "Découvrez mes réalisations techniques",
+            subtitle: "Explorez une collection de projets concrets qui démontrent mon expertise en développement full-stack, applications mobiles iOS, et solutions cloud. Chaque projet illustre ma capacité à combiner créativité, performance et meilleures pratiques pour créer des expériences numériques exceptionnelles.",
+            chipWebTitle: "Applications Web Full-Stack",
+            chipWebDesc: "MailBox : Système de messagerie avec API REST Node.js/Express, authentification JWT, interface moderne Tailwind CSS. Architecture scalable et sécurisée.",
+            chip3dTitle: "Applications Mobiles iOS",
+            chip3dDesc: "SwiftDataExpensesSave et GymApp : Applications natives iOS développées en SwiftUI avec SwiftData, intégration Firebase/Firestore, géolocalisation, reconnaissance d'images (MobileNetV2), et notifications push. Expérience utilisateur fluide et moderne.",
+            layerFrontend: "Interface 2D responsive multi-sections",
+            layerMobile: "Composants 3D interactifs liés aux apps mobiles",
+            layerBackend: "Backend cloud visualisé en wireframe 3D",
+            cta: "Voir mes projets"
+        },
+
+        // Chatbot assistant
+        chatbot: {
+            badge: "Realtime",
+            title: "Assistant Stack",
+            subtitle: "Posez une question technique et obtenez une réponse alignée sur mes compétences.",
+            contextTitle: "Technologies suivies",
+            empty: "Posez une question (ex : « Comment sécurises-tu une API Node.js avec Keycloak ? »)",
+            promptLabel: "Question",
+            placeholder: "Décrivez votre besoin technique...",
+            send: "Envoyer",
+            disclaimer: "Les réponses générées utilisent uniquement le contexte de mon CV (compétences & projets) pour rester pertinentes.",
+            toggleOpen: "Assistant stack",
+            toggleClose: "Fermer"
         }
     },
     
@@ -176,6 +217,17 @@ const TRANSLATIONS = {
             contact: "Contact",
             french: "FR",
             english: "EN"
+        },
+
+        // UI helpers
+        ui: {
+            summaryTitle: "Summary",
+            hideSummary: "Hide",
+            showSummary: "Show summary",
+            sections: "Sections",
+            browseSections: "Browse sections",
+            backToTop: "Back to top",
+            menuTitle: "Menu"
         },
         
         // Hero Section
@@ -323,6 +375,36 @@ const TRANSLATIONS = {
             button: "Download CV PDF",
             info: "PDF Format • Print Optimized",
             note: "💡 Tip: Keep this page open for a complete interactive experience!"
+        },
+
+        // Landing section
+        landing: {
+            badge: "Portfolio Projects",
+            title: "Discover my technical achievements",
+            subtitle: "Explore a collection of concrete projects that demonstrate my expertise in full-stack development, iOS mobile applications, and cloud solutions. Each project illustrates my ability to combine creativity, performance, and best practices to create exceptional digital experiences.",
+            chipWebTitle: "Full-Stack Web Applications",
+            chipWebDesc: "MailBox: Messaging system with Node.js/Express REST API, JWT authentication, modern Tailwind CSS interface. Scalable and secure architecture.",
+            chip3dTitle: "iOS Mobile Applications",
+            chip3dDesc: "SwiftDataExpensesSave and GymApp: Native iOS applications developed in SwiftUI with SwiftData, Firebase/Firestore integration, geolocation, image recognition (MobileNetV2), and push notifications. Smooth and modern user experience.",
+            layerFrontend: "Responsive multi-section 2D interface",
+            layerMobile: "3D-inspired components linked to mobile apps",
+            layerBackend: "Cloud backend visualised as a 3D wireframe",
+            cta: "View my projects"
+        },
+
+        // Chatbot assistant
+        chatbot: {
+            badge: "Realtime",
+            title: "Stack Assistant",
+            subtitle: "Ask a technical question and get an answer aligned with the skills listed in my resume.",
+            contextTitle: "Tracked technologies",
+            empty: "Ask something (e.g. “How would you secure a Node.js API with Keycloak?”)",
+            promptLabel: "Question",
+            placeholder: "Describe your technical need...",
+            send: "Send",
+            disclaimer: "Responses only leverage the CV context (skills & projects) to stay relevant.",
+            toggleOpen: "Stack assistant",
+            toggleClose: "Close"
         }
     }
 };
@@ -356,6 +438,17 @@ class LanguageManager {
         this.updateText('[data-translate="nav.projects"]', t.nav.projects);
         this.updateText('[data-translate="nav.volunteer"]', t.nav.volunteer);
         this.updateText('[data-translate="nav.contact"]', t.nav.contact);
+
+        // Update global UI labels
+        if (t.ui) {
+            this.updateText('[data-translate="ui.summaryTitle"]', t.ui.summaryTitle);
+            this.updateText('[data-translate="ui.hideSummary"]', t.ui.hideSummary);
+            this.updateText('[data-translate="ui.showSummary"]', t.ui.showSummary);
+            this.updateText('[data-translate="ui.sections"]', t.ui.sections);
+            this.updateText('[data-translate="ui.browseSections"]', t.ui.browseSections);
+            this.updateText('[data-translate="ui.backToTop"]', t.ui.backToTop);
+            this.updateText('[data-translate="ui.menuTitle"]', t.ui.menuTitle);
+        }
         
         // Update hero section
         this.updateText('[data-translate="hero.name"]', t.hero.name);
@@ -481,6 +574,35 @@ class LanguageManager {
         this.updateText('[data-translate="download.button"]', t.download.button);
         this.updateText('[data-translate="download.info"]', t.download.info);
         this.updateText('[data-translate="download.note"]', t.download.note);
+
+        // Update landing showcase
+        if (t.landing) {
+            this.updateText('[data-translate="landing.badge"]', t.landing.badge);
+            this.updateText('[data-translate="landing.title"]', t.landing.title);
+            this.updateText('[data-translate="landing.subtitle"]', t.landing.subtitle);
+            this.updateText('[data-translate="landing.chipWebTitle"]', t.landing.chipWebTitle);
+            this.updateText('[data-translate="landing.chipWebDesc"]', t.landing.chipWebDesc);
+            this.updateText('[data-translate="landing.chip3dTitle"]', t.landing.chip3dTitle);
+            this.updateText('[data-translate="landing.chip3dDesc"]', t.landing.chip3dDesc);
+            this.updateText('[data-translate="landing.layerFrontend"]', t.landing.layerFrontend);
+            this.updateText('[data-translate="landing.layerMobile"]', t.landing.layerMobile);
+            this.updateText('[data-translate="landing.layerBackend"]', t.landing.layerBackend);
+            this.updateText('[data-translate="landing.cta"]', t.landing.cta);
+        }
+
+        // Update chatbot labels
+        if (t.chatbot) {
+            this.updateText('[data-translate="chatbot.badge"]', t.chatbot.badge);
+            this.updateText('[data-translate="chatbot.title"]', t.chatbot.title);
+            this.updateText('[data-translate="chatbot.subtitle"]', t.chatbot.subtitle);
+            this.updateText('[data-translate="chatbot.contextTitle"]', t.chatbot.contextTitle);
+            this.updateText('[data-translate="chatbot.empty"]', t.chatbot.empty);
+            this.updateText('[data-translate="chatbot.promptLabel"]', t.chatbot.promptLabel);
+            this.updateText('[data-translate="chatbot.send"]', t.chatbot.send);
+            this.updateText('[data-translate="chatbot.disclaimer"]', t.chatbot.disclaimer);
+            this.updateText('[data-translate="chatbot.toggleOpen"]', t.chatbot.toggleOpen);
+            this.updateText('[data-translate="chatbot.toggleClose"]', t.chatbot.toggleClose);
+        }
         
         // Update document title
         document.title = `${t.hero.name} - ${t.hero.title}`;
@@ -507,11 +629,13 @@ class LanguageManager {
         const emailInput = document.querySelector('input[name="email"]');
         const subjectInput = document.querySelector('input[name="subject"]');
         const messageTextarea = document.querySelector('textarea[name="message"]');
+        const chatbotTextarea = document.querySelector('textarea[name="chatbot-message"]');
         
         if (nameInput) nameInput.placeholder = t.contact.namePlaceholder;
         if (emailInput) emailInput.placeholder = t.contact.emailPlaceholder;
         if (subjectInput) subjectInput.placeholder = t.contact.subjectPlaceholder;
         if (messageTextarea) messageTextarea.placeholder = t.contact.messagePlaceholder;
+        if (chatbotTextarea && t.chatbot?.placeholder) chatbotTextarea.placeholder = t.chatbot.placeholder;
     }
     
     updateLanguageFlags() {
