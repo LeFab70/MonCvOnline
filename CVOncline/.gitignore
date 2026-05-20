@@ -16,8 +16,9 @@ js/env.js
 # CV folder - contains personal documents
 CV/
 
-# Exception: Allow public CV PDF in documents folder
+# Exception: Allow public CV in documents folder
 !documents/*.pdf
+!documents/*.docx
 
 # Exception: Allow simple public README in documents folder
 !documents/README.md

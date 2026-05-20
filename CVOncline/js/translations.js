@@ -90,6 +90,10 @@ const TRANSLATIONS = {
             tutorPeriod: "Depuis septembre 2025",
             tutorCompany: "CCNB Bathurst",
             tutorDesc: "Offrir du soutien à l'apprentissage aux étudiants d'analyse de données.",
+            ccnbStudent: "Emploi étudiant – Projet de migration Android",
+            ccnbStudentPeriod: "Janvier 2026 – Juin 2026",
+            ccnbStudentCompany: "CCNB",
+            ccnbStudentDesc: "Participation à un projet de migration d'une application Android existante vers une architecture moderne, en collaboration avec l'équipe TI du collège.",
             tech: "Technicien TI",
             techPeriod: "Février 2024 - Juin 2024",
             techCompany: "CCNB Campbellton",
@@ -113,6 +117,9 @@ const TRANSLATIONS = {
         projects: {
             title: "Projets Scolaires",
             subtitle: "Projets développés dans le cadre de mes études en programmation mobile et applications",
+            proconnect: "ProConnect NB",
+            proconnectDesc: "Santé connectée – Nouveau-Brunswick",
+            proconnectDetail: "Projet scolaire : application mobile Flutter et API .NET pour la gestion et le suivi de la prise de médication ainsi que le suivi des rendez-vous médicaux au Nouveau-Brunswick.",
             mailbox: "MailBox",
             mailboxDesc: "Système de gestion de messagerie",
             mailboxDetail: "Développement d'un système web de gestion de messagerie avec backend Node.js/Express/MySQL et interface moderne en HTML/Tailwind CSS/JavaScript. API REST complète avec authentification JWT.",
@@ -167,9 +174,9 @@ const TRANSLATIONS = {
         // Download Section
         download: {
             title: "Téléchargez mon CV",
-            subtitle: "Consultez ma version PDF complète pour une vue d'ensemble détaillée de mon parcours professionnel",
-            button: "Télécharger le CV PDF",
-            info: "Format PDF • Optimisé pour l'impression",
+            subtitle: "Consultez ma version Word complète pour une vue d'ensemble détaillée de mon parcours professionnel",
+            button: "Télécharger le CV (Word)",
+            info: "Format Word (.docx) • Dernière version",
             note: "💡 Conseil : Gardez cette page ouverte pour une expérience interactive complète !"
         },
 
@@ -294,6 +301,10 @@ const TRANSLATIONS = {
             tutorPeriod: "Since September 2025",
             tutorCompany: "CCNB Bathurst",
             tutorDesc: "Provide learning support to data analysis students.",
+            ccnbStudent: "Student job – Android migration project",
+            ccnbStudentPeriod: "January 2026 – June 2026",
+            ccnbStudentCompany: "CCNB",
+            ccnbStudentDesc: "Contributed to migrating an existing Android application to a modern architecture, in collaboration with the college IT team.",
             tech: "IT Technician",
             techPeriod: "February 2024 - June 2024",
             techCompany: "CCNB Campbellton",
@@ -317,6 +328,9 @@ const TRANSLATIONS = {
         projects: {
             title: "Academic Projects",
             subtitle: "Projects developed as part of my studies in mobile programming and applications",
+            proconnect: "ProConnect NB",
+            proconnectDesc: "Connected health – New Brunswick",
+            proconnectDetail: "Academic project: Flutter mobile app and .NET API for medication intake tracking and management, plus medical appointment follow-up in New Brunswick.",
             mailbox: "MailBox",
             mailboxDesc: "Email management system",
             mailboxDetail: "Development of a web email management system with Node.js/Express/MySQL backend and modern interface in HTML/Tailwind CSS/JavaScript. Complete REST API with JWT authentication.",
@@ -371,9 +385,9 @@ const TRANSLATIONS = {
         // Download Section
         download: {
             title: "Download my CV",
-            subtitle: "View my complete PDF version for a detailed overview of my professional journey",
-            button: "Download CV PDF",
-            info: "PDF Format • Print Optimized",
+            subtitle: "View my complete Word version for a detailed overview of my professional journey",
+            button: "Download CV (Word)",
+            info: "Word format (.docx) • Latest version",
             note: "💡 Tip: Keep this page open for a complete interactive experience!"
         },
 
@@ -505,6 +519,10 @@ class LanguageManager {
         this.updateText('[data-translate="experience.tutorPeriod"]', t.experience.tutorPeriod);
         this.updateText('[data-translate="experience.tutorCompany"]', t.experience.tutorCompany);
         this.updateText('[data-translate="experience.tutorDesc"]', t.experience.tutorDesc);
+        this.updateText('[data-translate="experience.ccnbStudent"]', t.experience.ccnbStudent);
+        this.updateText('[data-translate="experience.ccnbStudentPeriod"]', t.experience.ccnbStudentPeriod);
+        this.updateText('[data-translate="experience.ccnbStudentCompany"]', t.experience.ccnbStudentCompany);
+        this.updateText('[data-translate="experience.ccnbStudentDesc"]', t.experience.ccnbStudentDesc);
         this.updateText('[data-translate="experience.tech"]', t.experience.tech);
         this.updateText('[data-translate="experience.techPeriod"]', t.experience.techPeriod);
         this.updateText('[data-translate="experience.techCompany"]', t.experience.techCompany);
@@ -526,6 +544,9 @@ class LanguageManager {
         // Update projects section
         this.updateText('[data-translate="projects.title"]', t.projects.title);
         this.updateText('[data-translate="projects.subtitle"]', t.projects.subtitle);
+        this.updateText('[data-translate="projects.proconnect"]', t.projects.proconnect);
+        this.updateText('[data-translate="projects.proconnectDesc"]', t.projects.proconnectDesc);
+        this.updateText('[data-translate="projects.proconnectDetail"]', t.projects.proconnectDetail);
         this.updateText('[data-translate="projects.mailbox"]', t.projects.mailbox);
         this.updateText('[data-translate="projects.mailboxDesc"]', t.projects.mailboxDesc);
         this.updateText('[data-translate="projects.mailboxDetail"]', t.projects.mailboxDetail);
