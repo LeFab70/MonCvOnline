@@ -90,6 +90,10 @@ const TRANSLATIONS = {
             tutorPeriod: "Depuis septembre 2025",
             tutorCompany: "CCNB Bathurst",
             tutorDesc: "Offrir du soutien à l'apprentissage aux étudiants d'analyse de données.",
+            ccnbInnov: "Stagiaire – Démonstrateur OpenVLA",
+            ccnbInnovPeriod: "Depuis janvier 2026",
+            ccnbInnovCompany: "CCNB Innov",
+            ccnbInnovDesc: "Développement d'un démonstrateur OpenVLA pour robot collaboratif UR et vision 2D ou 3D Zivid, dans le cadre d'un projet d'innovation en robotique et vision industrielle.",
             ccnbStudent: "Emploi étudiant – Projet de migration",
             ccnbStudentPeriod: "Janvier 2026 – Juin 2026",
             ccnbStudentCompany: "CCNB",
@@ -301,6 +305,10 @@ const TRANSLATIONS = {
             tutorPeriod: "Since September 2025",
             tutorCompany: "CCNB Bathurst",
             tutorDesc: "Provide learning support to data analysis students.",
+            ccnbInnov: "Intern – OpenVLA demonstrator",
+            ccnbInnovPeriod: "Since January 2026",
+            ccnbInnovCompany: "CCNB Innov",
+            ccnbInnovDesc: "Development of an OpenVLA demonstrator for collaborative UR robot and 2D or 3D Zivid vision, as part of an innovation project in robotics and industrial vision.",
             ccnbStudent: "Student job – Migration project",
             ccnbStudentPeriod: "January 2026 – June 2026",
             ccnbStudentCompany: "CCNB",
@@ -519,6 +527,10 @@ class LanguageManager {
         this.updateText('[data-translate="experience.tutorPeriod"]', t.experience.tutorPeriod);
         this.updateText('[data-translate="experience.tutorCompany"]', t.experience.tutorCompany);
         this.updateText('[data-translate="experience.tutorDesc"]', t.experience.tutorDesc);
+        this.updateText('[data-translate="experience.ccnbInnov"]', t.experience.ccnbInnov);
+        this.updateText('[data-translate="experience.ccnbInnovPeriod"]', t.experience.ccnbInnovPeriod);
+        this.updateText('[data-translate="experience.ccnbInnovCompany"]', t.experience.ccnbInnovCompany);
+        this.updateText('[data-translate="experience.ccnbInnovDesc"]', t.experience.ccnbInnovDesc);
         this.updateText('[data-translate="experience.ccnbStudent"]', t.experience.ccnbStudent);
         this.updateText('[data-translate="experience.ccnbStudentPeriod"]', t.experience.ccnbStudentPeriod);
         this.updateText('[data-translate="experience.ccnbStudentCompany"]', t.experience.ccnbStudentCompany);
