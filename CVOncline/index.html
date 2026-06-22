@@ -1,1755 +1,1138 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fabrice Kouonang - Développeur Full Stack</title>
-    
-    <!-- External Libraries -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E💼%3C/text%3E%3C/svg%3E">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-    
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fabrice Kouonang — Full Stack Developer</title>
+<meta name="description" content="Portfolio et CV en ligne de Fabrice Orgrick Kouonang, développeur full stack Angular · Node.js · Spring Boot · Flutter · Azure">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚀%3C/text%3E%3C/svg%3E">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        navy: { 900:'#0F172A', 800:'#1E293B', 700:'#334155' },
+        electric: { 500:'#3B82F6', 400:'#60A5FA', 300:'#93C5FD' },
+        accent: '#10B981'
+      },
+      fontFamily: { sans: ['Inter','ui-sans-serif','system-ui'] }
+    }
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<style>
+  :root { --navy: #0F172A; --electric: #3B82F6; --accent: #10B981; }
+  * { font-family: 'Inter', sans-serif; }
+  html { scroll-behavior: smooth; }
+
+  /* Gradient hero */
+  .hero-bg {
+    background: linear-gradient(135deg, #0F172A 0%, #1a2744 40%, #0e2a44 70%, #0F172A 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+    top: -100px; right: -100px; border-radius: 50%;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 70%);
+    bottom: -50px; left: -50px; border-radius: 50%;
+  }
+
+  /* Glass card */
+  .glass {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* Section title underline */
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 60px; height: 4px;
+    background: linear-gradient(90deg, #3B82F6, #10B981);
+    border-radius: 2px;
+    margin: 12px auto 0;
+  }
+
+  /* Skill badge */
+  .skill-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(59,130,246,0.1);
+    border: 1px solid rgba(59,130,246,0.25);
+    color: #93C5FD;
+    padding: 5px 12px; border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .skill-badge:hover { background: rgba(59,130,246,0.2); border-color: #3B82F6; color:#fff; transform: translateY(-1px); }
+  .skill-badge.green { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.25); color: #6EE7B7; }
+  .skill-badge.green:hover { background: rgba(16,185,129,0.2); border-color: #10B981; color:#fff; }
+  .skill-badge.purple { background: rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.25); color: #C4B5FD; }
+  .skill-badge.amber { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.25); color: #FCD34D; }
+
+  /* Timeline */
+  .timeline-line {
+    position: absolute; left: 20px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, #3B82F6, #10B981, #3B82F6);
+  }
+  .timeline-dot {
+    position: absolute; left: 12px; top: 24px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #3B82F6; border: 3px solid #0F172A;
+    box-shadow: 0 0 0 2px #3B82F6;
+  }
+
+  /* Project card */
+  .project-card {
+    background: #1E293B;
+    border: 1px solid rgba(59,130,246,0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s;
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover { transform: translateY(-6px); border-color: rgba(59,130,246,0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+  .project-card-header {
+    height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .project-card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+  .tech-tag {
+    display: inline-block;
+    background: rgba(16,185,129,0.1); color: #6EE7B7;
+    border: 1px solid rgba(16,185,129,0.2);
+    padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+
+  /* Stat card */
+  .stat-card {
+    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(16,185,129,0.05));
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 16px; padding: 28px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .stat-card:hover { transform: translateY(-4px); border-color: rgba(59,130,246,0.4); }
+
+  /* Nav link active */
+  .nav-link { color: rgba(255,255,255,0.7); transition: color 0.2s; }
+  .nav-link:hover, .nav-link.active { color: #60A5FA; }
+
+  /* Scroll progress */
+  #scroll-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #3B82F6, #10B981); z-index: 10000; transition: width 0.1s; }
+
+  /* Fade-in animation */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* Typing cursor */
+  .typed-cursor { color: #3B82F6; animation: blink 1s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* Avatar ring */
+  .avatar-ring {
+    width: 160px; height: 160px; border-radius: 50%;
+    background: linear-gradient(135deg, #3B82F6, #10B981);
+    padding: 3px; margin: 0 auto;
+  }
+  .avatar-inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: #1E293B;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Education card */
+  .edu-card {
+    background: #1E293B; border-radius: 12px;
+    border-left: 4px solid #3B82F6;
+    padding: 20px 24px;
+    transition: all 0.2s;
+  }
+  .edu-card:hover { transform: translateX(4px); border-left-color: #10B981; }
+
+  /* Contact link */
+  .contact-link {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 16px 20px;
+    color: rgba(255,255,255,0.8); transition: all 0.2s;
+    text-decoration: none;
+  }
+  .contact-link:hover { background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.3); color: #fff; transform: translateX(4px); }
+
+  /* Mobile menu */
+  .mobile-menu { transform: translateX(100%); transition: transform 0.3s; }
+  .mobile-menu.open { transform: translateX(0); }
+
+  /* Lang button */
+  .lang-btn { padding: 4px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+  .lang-btn.active { background: #3B82F6; color: #fff; }
+  .lang-btn:not(.active) { color: rgba(255,255,255,0.6); }
+  .lang-btn:not(.active):hover { color: #fff; }
+
+  /* Volunteer card */
+  .vol-card {
+    background: #1E293B; border-radius: 12px; padding: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.2s;
+  }
+  .vol-card:hover { border-color: rgba(16,185,129,0.3); transform: translateY(-2px); }
+</style>
 </head>
-<body class="min-h-screen" x-data="cvApp()">
-    <!-- Scroll Progress Indicator -->
-    <div class="fixed top-0 left-0 h-1 w-full bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-600 z-[10000] transition-[width] duration-200 ease-out" :style="{ width: scrollProgress + '%' }" aria-hidden="true"></div>
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-[9999] glass-effect" x-show="showNav" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="-translate-y-full" x-transition:enter-end="translate-y-0" style="z-index: 9999;">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold text-white drop-shadow-lg" data-translate="hero.name">Fabrice Kouonang</div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#accueil" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
-                       @click="scrollTo('accueil')" :class="{'text-yellow-300': activeSection === 'accueil'}"
-                       :aria-current="activeSection === 'accueil' ? 'page' : null">
-                        <i class="fas fa-home mr-2"></i><span data-translate="nav.home">Accueil</span>
-                    </a>
-                    <a href="#apropos" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
-                       @click="scrollTo('apropos')" :class="{'text-yellow-300': activeSection === 'apropos'}"
-                       :aria-current="activeSection === 'apropos' ? 'page' : null">
-                        <i class="fas fa-user mr-2"></i><span data-translate="nav.about">À propos</span>
-                    </a>
-                    <a href="#competences" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
-                       @click="scrollTo('competences')" :class="{'text-yellow-300': activeSection === 'competences'}"
-                       :aria-current="activeSection === 'competences' ? 'page' : null">
-                        <i class="fas fa-cogs mr-2"></i><span data-translate="nav.skills">Compétences</span>
-                    </a>
-                    <a href="#formation" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
-                       @click="scrollTo('formation')" :class="{'text-yellow-300': activeSection === 'formation'}"
-                       :aria-current="activeSection === 'formation' ? 'page' : null">
-                        <i class="fas fa-graduation-cap mr-2"></i><span data-translate="nav.education">Formation</span>
-                    </a>
-                    <a href="#experience" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
-                       @click="scrollTo('experience')" :class="{'text-yellow-300': activeSection === 'experience'}"
-                       :aria-current="activeSection === 'experience' ? 'page' : null">
-                        <i class="fas fa-briefcase mr-2"></i><span data-translate="nav.experience">Expérience</span>
-                    </a>
-                    <a href="#projets" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
-                       @click="scrollTo('projets')" :class="{'text-yellow-300': activeSection === 'projets'}"
-                       :aria-current="activeSection === 'projets' ? 'page' : null">
-                        <i class="fas fa-project-diagram mr-2"></i><span data-translate="nav.projects">Projets</span>
-                    </a>
-                    <a href="#benevolat" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
-                       @click="scrollTo('benevolat')" :class="{'text-yellow-300': activeSection === 'benevolat'}"
-                       :aria-current="activeSection === 'benevolat' ? 'page' : null">
-                        <i class="fas fa-heart mr-2"></i><span data-translate="nav.volunteer">Bénévolat</span>
-                    </a>
-                    <a href="#contact" class="text-white hover:text-yellow-300 transition-colors duration-300 flex items-center font-medium hover:scale-110 transform"
-                       @click="scrollTo('contact')" :class="{'text-yellow-300': activeSection === 'contact'}"
-                       :aria-current="activeSection === 'contact' ? 'page' : null">
-                        <i class="fas fa-envelope mr-2"></i><span data-translate="nav.contact">Contact</span>
-                    </a>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <!-- Language Switcher -->
-                    <div class="flex space-x-2">
-                        <button class="language-switcher bg-white bg-opacity-20 hover:bg-opacity-30 px-3 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2" data-lang="fr" title="Français">
-                            <span class="language-flag text-lg active" data-lang="fr">🇫🇷</span>
-                            <span class="text-white font-medium text-sm" data-translate="nav.french">FR</span>
-                        </button>
-                        <button class="language-switcher bg-white bg-opacity-20 hover:bg-opacity-30 px-3 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2" data-lang="en" title="English">
-                            <span class="language-flag text-lg" data-lang="en">🇬🇧</span>
-                            <span class="text-white font-medium text-sm" data-translate="nav.english">EN</span>
-                        </button>
-                    </div>
-                    <button class="md:hidden text-white hover:text-yellow-300 transition-colors duration-300" @click="mobileMenuOpen = !mobileMenuOpen" :aria-expanded="mobileMenuOpen.toString()" aria-label="Ouvrir le menu mobile">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Desktop Summary Navigation -->
-    <aside class="hidden xl:block fixed bottom-32 right-6 z-40 w-64" aria-label="Sommaire de navigation"
-           x-show="showSummary" x-transition.opacity x-transition.scale.origin-bottom-right>
-        <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/60 p-5 space-y-3">
-            <div class="flex items-center justify-between">
-                <p class="text-xs font-semibold text-gray-500 uppercase tracking-[0.3em]" data-translate="ui.summaryTitle">Sommaire</p>
-                <button type="button" class="text-[11px] font-semibold text-blue-600 hover:text-blue-800"
-                        @click="showSummary = false" data-translate="ui.hideSummary">
-                    Masquer
-                </button>
-            </div>
-            <div class="space-y-2">
-                <template x-for="section in sections" :key="section.id">
-                    <button
-                        type="button"
-                        class="w-full flex items-center rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
-                        @click="scrollTo(section.id)"
-                        :class="activeSection === section.id ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'bg-white/0 text-gray-600 hover:bg-white hover:text-blue-600'">
-                        <i class="text-base" :class="section.icon" aria-hidden="true"></i>
-                        <span class="ml-3" :data-translate="section.translationKey" x-init="$el.textContent = section.label"></span>
-                        <span class="ml-auto w-2 h-2 rounded-full" :class="activeSection === section.id ? 'bg-white' : 'bg-gray-300'"></span>
-                    </button>
-                </template>
-            </div>
-        </div>
-    </aside>
-    <button type="button" class="hidden xl:flex fixed bottom-32 right-6 z-30 items-center space-x-2 bg-white/90 border border-white/60 backdrop-blur px-4 py-2 rounded-full shadow-lg text-sm font-semibold text-gray-700 hover:text-blue-600 transition"
-            x-show="!showSummary" x-transition.opacity
-            @click="showSummary = true">
-        <i class="fas fa-list-ul text-blue-600"></i>
-        <span data-translate="ui.showSummary">Afficher le sommaire</span>
-    </button>
+<body class="bg-navy-900 text-gray-100 antialiased" x-data="app()" @scroll.window="onScroll()">
 
-    <!-- Mobile Navigation Drawer -->
-    <div class="md:hidden fixed inset-0 z-[9998]" x-show="mobileMenuOpen" x-transition.opacity>
-        <div class="absolute inset-0 bg-black/60" @click="mobileMenuOpen = false" aria-hidden="true"></div>
-        <div class="absolute top-0 right-0 h-full w-72 bg-white shadow-2xl p-6 flex flex-col"
-             x-transition:enter="transition transform duration-300"
-             x-transition:enter-start="translate-x-full"
-             x-transition:enter-end="translate-x-0"
-             x-transition:leave="transition transform duration-300"
-             x-transition:leave-start="translate-x-0"
-             x-transition:leave-end="translate-x-full"
-             role="dialog" aria-modal="true" aria-label="Navigation mobile">
-            <div class="flex items-center justify-between mb-6">
-                <span class="text-lg font-semibold text-gray-800" data-translate="ui.menuTitle">Menu</span>
-                <button class="text-gray-500 hover:text-gray-700" @click="mobileMenuOpen = false" aria-label="Fermer le menu">
-                    <i class="fas fa-times text-2xl"></i>
-                </button>
+<!-- Scroll progress -->
+<div id="scroll-bar" :style="{ width: scrollPct + '%' }"></div>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="fixed top-0 w-full z-50 bg-navy-900/90 backdrop-blur-md border-b border-white/5" x-show="showNav" x-transition>
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#hero" class="text-white font-bold text-lg tracking-tight">FK<span class="text-electric-400">.</span></a>
+
+    <div class="hidden md:flex items-center gap-8">
+      <template x-for="s in sections" :key="s.id">
+        <a :href="'#'+s.id" class="nav-link text-sm font-medium" :class="{active: active===s.id}" x-text="t(s.key)"></a>
+      </template>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <div class="flex gap-1">
+        <button class="lang-btn" :class="{active: lang==='fr'}" @click="setLang('fr')">FR</button>
+        <button class="lang-btn" :class="{active: lang==='en'}" @click="setLang('en')">EN</button>
+      </div>
+      <button class="md:hidden text-white" @click="menuOpen=!menuOpen"><i class="fas fa-bars text-xl"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="fixed inset-0 z-40 md:hidden" x-show="menuOpen" x-transition.opacity>
+  <div class="absolute inset-0 bg-black/60" @click="menuOpen=false"></div>
+  <div class="mobile-menu absolute right-0 top-0 h-full w-72 bg-navy-800 p-6 flex flex-col gap-4" :class="{open:menuOpen}">
+    <div class="flex justify-between items-center mb-4">
+      <span class="font-bold text-white">Menu</span>
+      <button @click="menuOpen=false" class="text-gray-400"><i class="fas fa-times text-xl"></i></button>
+    </div>
+    <template x-for="s in sections" :key="'m'+s.id">
+      <a :href="'#'+s.id" class="nav-link font-medium py-2 border-b border-white/5" @click="menuOpen=false" x-text="t(s.key)"></a>
+    </template>
+  </div>
+</div>
+
+<!-- Back to top -->
+<button x-show="scrollPct>10" x-transition @click="scrollTo('hero')"
+  class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-electric-500 text-white shadow-lg hover:bg-electric-400 transition flex items-center justify-center">
+  <i class="fas fa-arrow-up text-sm"></i>
+</button>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero" class="hero-bg min-h-screen flex items-center pt-20">
+  <div class="max-w-6xl mx-auto px-6 py-20 w-full">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Text -->
+      <div class="fade-in">
+        <div class="inline-flex items-center gap-2 bg-electric-500/10 border border-electric-500/30 text-electric-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
+          <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+          <span x-text="t('hero.available')">Disponible pour de nouvelles opportunités</span>
+        </div>
+
+        <h1 class="text-5xl md:text-6xl font-black text-white leading-tight mb-4">
+          Fabrice<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-electric-400 to-accent">Kouonang</span>
+        </h1>
+
+        <div class="text-xl md:text-2xl text-gray-300 font-medium mb-6 h-8">
+          <span id="typed-el"></span>
+        </div>
+
+        <p class="text-gray-400 text-lg leading-relaxed mb-8 max-w-xl" x-text="t('hero.desc')">
+          Développeur full stack avec 14+ ans d'expérience. Angular · Node.js · Spring Boot · Flutter · Azure.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <a href="#projects" class="inline-flex items-center gap-2 bg-electric-500 hover:bg-electric-400 text-white px-6 py-3 rounded-full font-semibold transition-all hover:shadow-lg hover:shadow-electric-500/30 hover:-translate-y-0.5">
+            <i class="fas fa-rocket text-sm"></i>
+            <span x-text="t('hero.cta1')">Voir mes projets</span>
+          </a>
+          <a href="#contact" class="inline-flex items-center gap-2 border border-white/20 hover:border-electric-500/50 text-white px-6 py-3 rounded-full font-semibold transition-all hover:-translate-y-0.5">
+            <i class="fas fa-envelope text-sm"></i>
+            <span x-text="t('hero.cta2')">Me contacter</span>
+          </a>
+          <a href="documents/CV_Fabrice_Kouonang.docx" download class="inline-flex items-center gap-2 border border-white/20 hover:border-accent/50 text-white px-6 py-3 rounded-full font-semibold transition-all hover:-translate-y-0.5">
+            <i class="fas fa-download text-sm"></i>
+            <span x-text="t('hero.download')">Télécharger CV</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Avatar + stats -->
+      <div class="fade-in flex flex-col items-center gap-8">
+        <div class="avatar-ring">
+          <div class="avatar-inner">
+            <i class="fas fa-user text-6xl text-electric-400/60"></i>
+          </div>
+        </div>
+
+        <!-- Quick stats -->
+        <div class="grid grid-cols-3 gap-4 w-full">
+          <div class="stat-card">
+            <div class="text-3xl font-black text-electric-400">14+</div>
+            <div class="text-xs text-gray-400 mt-1" x-text="t('stat.years')">ans d'expérience</div>
+          </div>
+          <div class="stat-card">
+            <div class="text-3xl font-black text-accent">5+</div>
+            <div class="text-xs text-gray-400 mt-1" x-text="t('stat.projects')">projets majeurs</div>
+          </div>
+          <div class="stat-card">
+            <div class="text-3xl font-black text-purple-400">3</div>
+            <div class="text-xs text-gray-400 mt-1" x-text="t('stat.certs')">certifications</div>
+          </div>
+        </div>
+
+        <!-- Social links -->
+        <div class="flex gap-4">
+          <a href="https://github.com/LeFab70" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition hover:-translate-y-1">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/fabrice-kouonang/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-blue-600 flex items-center justify-center text-white transition hover:-translate-y-1">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="mailto:kouonang2002@gmail.com" class="w-10 h-10 rounded-full bg-white/10 hover:bg-electric-500 flex items-center justify-center text-white transition hover:-translate-y-1">
+            <i class="fas fa-envelope text-sm"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about" class="py-24 bg-navy-800">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-black text-white text-center section-title mb-16 fade-in" x-text="t('about.title')">À propos</h2>
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="fade-in space-y-5">
+        <p class="text-gray-300 text-lg leading-relaxed" x-text="t('about.p1')">
+          Développeur full stack passionné avec plus de 14 ans d'expérience en conception et développement d'applications web, mobiles et d'API. Diplômé du CCNB Bathurst (2026) et admis au Baccalauréat en informatique à l'Université Laval pour septembre 2026.
+        </p>
+        <p class="text-gray-300 text-lg leading-relaxed" x-text="t('about.p2')">
+          Mon parcours allie une solide expérience professionnelle acquise sur 14 ans chez Clear Solutions (Cameroun) à une formation récente au Québec et en Atlantique, me donnant une vision à la fois technique et humaine du développement logiciel.
+        </p>
+        <p class="text-gray-300 text-lg leading-relaxed" x-text="t('about.p3')">
+          Réserviste dans les Forces armées canadiennes, enseignant bénévole de français, et contributeur à des projets d'IA appliquée à la robotique — je crois que la technologie doit avoir un impact réel sur les communautés.
+        </p>
+      </div>
+      <div class="fade-in grid grid-cols-2 gap-4">
+        <div class="glass rounded-xl p-5">
+          <i class="fas fa-map-marker-alt text-electric-400 text-xl mb-3"></i>
+          <p class="text-white font-semibold" x-text="t('about.location')">Athoville, N.-B.</p>
+          <p class="text-gray-400 text-sm" x-text="t('about.remote')">Disponible en télétravail</p>
+        </div>
+        <div class="glass rounded-xl p-5">
+          <i class="fas fa-language text-accent text-xl mb-3"></i>
+          <p class="text-white font-semibold" x-text="t('about.fr')">Français — natif</p>
+          <p class="text-gray-400 text-sm" x-text="t('about.en')">Anglais — professionnel</p>
+        </div>
+        <div class="glass rounded-xl p-5">
+          <i class="fas fa-shield-alt text-purple-400 text-xl mb-3"></i>
+          <p class="text-white font-semibold" x-text="t('about.military')">Réserviste FAC</p>
+          <p class="text-gray-400 text-sm" x-text="t('about.since')">Depuis sept. 2025</p>
+        </div>
+        <div class="glass rounded-xl p-5">
+          <i class="fas fa-graduation-cap text-amber-400 text-xl mb-3"></i>
+          <p class="text-white font-semibold" x-text="t('about.laval')">Bac informatique</p>
+          <p class="text-gray-400 text-sm">Université Laval · 2026</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills" class="py-24 bg-navy-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-black text-white text-center section-title mb-16 fade-in" x-text="t('skills.title')">Compétences</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 fade-in">
+
+      <!-- Frontend -->
+      <div class="glass rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-lg bg-electric-500/20 flex items-center justify-center"><i class="fas fa-desktop text-electric-400"></i></div>
+          <h3 class="font-bold text-white" x-text="t('skills.frontend')">Frontend</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-badge">Angular</span>
+          <span class="skill-badge">HTML5</span>
+          <span class="skill-badge">CSS3</span>
+          <span class="skill-badge">TypeScript</span>
+          <span class="skill-badge">JavaScript</span>
+          <span class="skill-badge">Tailwind CSS</span>
+        </div>
+      </div>
+
+      <!-- Backend -->
+      <div class="glass rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center"><i class="fas fa-server text-accent"></i></div>
+          <h3 class="font-bold text-white" x-text="t('skills.backend')">Backend</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-badge green">Node.js</span>
+          <span class="skill-badge green">Express</span>
+          <span class="skill-badge green">Spring Boot</span>
+          <span class="skill-badge green">C# / .NET</span>
+          <span class="skill-badge green">Java</span>
+          <span class="skill-badge green">API REST</span>
+        </div>
+      </div>
+
+      <!-- Mobile -->
+      <div class="glass rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center"><i class="fas fa-mobile-alt text-purple-400"></i></div>
+          <h3 class="font-bold text-white" x-text="t('skills.mobile')">Mobile</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-badge purple">Flutter (Dart)</span>
+          <span class="skill-badge purple">SwiftUI</span>
+          <span class="skill-badge purple">SwiftData</span>
+          <span class="skill-badge purple">iOS</span>
+        </div>
+      </div>
+
+      <!-- Databases -->
+      <div class="glass rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center"><i class="fas fa-database text-amber-400"></i></div>
+          <h3 class="font-bold text-white" x-text="t('skills.db')">Bases de données</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-badge amber">MySQL</span>
+          <span class="skill-badge amber">PostgreSQL</span>
+          <span class="skill-badge amber">MongoDB</span>
+          <span class="skill-badge amber">SQLite</span>
+          <span class="skill-badge amber">Oracle</span>
+        </div>
+      </div>
+
+      <!-- Cloud & DevOps -->
+      <div class="glass rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-lg bg-sky-500/20 flex items-center justify-center"><i class="fas fa-cloud text-sky-400"></i></div>
+          <h3 class="font-bold text-white" x-text="t('skills.cloud')">Cloud & DevOps</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-badge" style="color:#60A5FA">Azure</span>
+          <span class="skill-badge" style="color:#60A5FA">AWS ☁️ certifié</span>
+          <span class="skill-badge" style="color:#60A5FA">Firebase</span>
+          <span class="skill-badge" style="color:#60A5FA">Docker</span>
+          <span class="skill-badge" style="color:#60A5FA">GitHub Actions</span>
+          <span class="skill-badge" style="color:#60A5FA">Git</span>
+        </div>
+      </div>
+
+      <!-- Other -->
+      <div class="glass rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-lg bg-rose-500/20 flex items-center justify-center"><i class="fas fa-cogs text-rose-400"></i></div>
+          <h3 class="font-bold text-white" x-text="t('skills.tools')">Outils & IA</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-badge" style="color:#FDA4AF">n8n</span>
+          <span class="skill-badge" style="color:#FDA4AF">OpenVLA</span>
+          <span class="skill-badge" style="color:#FDA4AF">SCORM / H5P</span>
+          <span class="skill-badge" style="color:#FDA4AF">Swagger</span>
+          <span class="skill-badge" style="color:#FDA4AF">Postman</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience" class="py-24 bg-navy-800">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-4xl font-black text-white text-center section-title mb-16 fade-in" x-text="t('exp.title')">Expérience</h2>
+    <div class="relative pl-12 fade-in">
+      <div class="timeline-line"></div>
+
+      <template x-for="(job, i) in jobs" :key="i">
+        <div class="relative mb-10">
+          <div class="timeline-dot" :style="i%2===0 ? 'background:#3B82F6' : 'background:#10B981'"></div>
+          <div class="glass rounded-xl p-6 hover:border-electric-500/30 transition-all">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+              <div>
+                <h3 class="font-bold text-white text-lg" x-text="t(job.title)"></h3>
+                <p class="text-electric-400 font-medium text-sm" x-text="t(job.org)"></p>
+              </div>
+              <span class="text-xs text-gray-400 bg-white/5 px-3 py-1 rounded-full whitespace-nowrap" x-text="t(job.date)"></span>
             </div>
-            <div class="space-y-4 flex-1 overflow-y-auto">
-                <template x-for="section in sections" :key="'mobile-' + section.id">
-                    <button
-                        type="button"
-                        class="w-full flex items-center justify-between text-left px-4 py-3 rounded-xl border border-gray-100 text-gray-700 font-medium hover:border-blue-300 hover:text-blue-600 transition-colors"
-                        @click="scrollTo(section.id)"
-                        :class="activeSection === section.id ? 'bg-blue-50 border-blue-200 text-blue-700' : ''">
-                        <div class="flex items-center space-x-3">
-                            <i class="text-base" :class="section.icon" aria-hidden="true"></i>
-                            <span :data-translate="section.translationKey" x-init="$el.textContent = section.label"></span>
-                        </div>
-                        <i class="fas fa-chevron-right text-xs"></i>
-                    </button>
-                </template>
+            <ul class="mt-3 space-y-1">
+              <template x-for="(bullet, bi) in job.bullets" :key="bi">
+                <li class="text-gray-400 text-sm flex gap-2">
+                  <span class="text-electric-400 mt-0.5">▸</span>
+                  <span x-text="t(bullet)"></span>
+                </li>
+              </template>
+            </ul>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <template x-for="tag in job.tags" :key="tag">
+                <span class="tech-tag" x-text="tag"></span>
+              </template>
             </div>
-            <div class="mt-6 space-y-4">
-                <div class="flex space-x-3">
-                    <button class="language-switcher flex-1 bg-gray-100 hover:bg-gray-200 px-4 py-3 rounded-xl flex items-center justify-center space-x-2" data-lang="fr">
-                        <span class="language-flag text-lg" data-lang="fr">🇫🇷</span>
-                        <span class="font-semibold text-gray-800" data-translate="nav.french">FR</span>
-                    </button>
-                    <button class="language-switcher flex-1 bg-gray-100 hover:bg-gray-200 px-4 py-3 rounded-xl flex items-center justify-center space-x-2" data-lang="en">
-                        <span class="language-flag text-lg" data-lang="en">🇬🇧</span>
-                        <span class="font-semibold text-gray-800" data-translate="nav.english">EN</span>
-                    </button>
-                </div>
-                <a href="#contact" @click="mobileMenuOpen = false"
-                   class="inline-flex items-center justify-center w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-500 transition-colors">
-                    <i class="fas fa-paper-plane mr-2"></i>
-                    <span data-translate="hero.contact">Me contacter</span>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS (PORTFOLIO) ═══ -->
+<section id="projects" class="py-24 bg-navy-900">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-black text-white text-center section-title mb-4 fade-in" x-text="t('proj.title')">Portfolio</h2>
+    <p class="text-gray-400 text-center mb-16 fade-in" x-text="t('proj.subtitle')">Projets sélectionnés — code source disponible sur GitHub</p>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
+      <template x-for="p in projects" :key="p.id">
+        <div class="project-card">
+          <div class="project-card-header" :style="'background:'+p.gradient">
+            <i :class="p.icon" class="text-5xl text-white/80"></i>
+          </div>
+          <div class="project-card-body">
+            <div class="flex flex-wrap gap-1 mb-3">
+              <template x-for="tag in p.tags" :key="tag">
+                <span class="tech-tag" x-text="tag"></span>
+              </template>
+            </div>
+            <h3 class="text-white font-bold text-lg mb-2" x-text="t(p.titleKey)"></h3>
+            <p class="text-gray-400 text-sm leading-relaxed flex-1" x-text="t(p.descKey)"></p>
+            <div class="flex gap-3 mt-5">
+              <a :href="p.github" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white text-sm py-2 rounded-lg transition border border-white/10">
+                <i class="fab fa-github"></i> GitHub
+              </a>
+              <template x-if="p.demo">
+                <a :href="p.demo" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-electric-500/20 hover:bg-electric-500/30 text-electric-400 text-sm py-2 rounded-lg transition">
+                  <i class="fas fa-external-link-alt text-xs"></i> Demo
                 </a>
+              </template>
             </div>
+          </div>
         </div>
+      </template>
     </div>
+  </div>
+</section>
 
-    <!-- Floating Actions -->
-    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end space-y-3">
-        <button type="button"
-                class="bg-gray-900/90 text-white px-4 py-2 rounded-full shadow-2xl flex items-center space-x-2 text-sm font-semibold hover:bg-gray-900 transition focus:outline-none focus:ring-2 focus:ring-white/60"
-                x-show="showBackToTop"
-                x-transition
-                @click="scrollTo('accueil')"
-                aria-label="Revenir en haut de page">
-            <i class="fas fa-arrow-up"></i>
-            <span data-translate="ui.backToTop">Haut de page</span>
-        </button>
-        <button type="button" class="bg-white/90 backdrop-blur shadow-2xl rounded-full px-5 py-3 text-sm font-semibold text-gray-800 flex items-center space-x-2 border border-white/60 md:hidden"
-                @click="mobileQuickNavOpen = true" aria-label="Ouvrir la liste des sections">
-            <i class="fas fa-list text-blue-600"></i>
-            <span data-translate="ui.sections">Sections</span>
-        </button>
-    </div>
-
-    <!-- Mobile Quick Sections Sheet -->
-    <div class="md:hidden fixed inset-0 z-40" x-show="mobileQuickNavOpen" x-transition.opacity>
-        <div class="absolute inset-0 bg-black/50" aria-hidden="true" @click="mobileQuickNavOpen = false"></div>
-        <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 shadow-2xl"
-             x-transition:enter="transition transform duration-300"
-             x-transition:enter-start="translate-y-full"
-             x-transition:enter-end="translate-y-0"
-             x-transition:leave="transition transform duration-300"
-             x-transition:leave-start="translate-y-0"
-             x-transition:leave-end="translate-y-full">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-800" data-translate="ui.browseSections">Parcourir les sections</h3>
-                <button class="text-gray-500 hover:text-gray-700" @click="mobileQuickNavOpen = false" aria-label="Fermer la liste des sections">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="grid gap-3">
-                <template x-for="section in sections" :key="'sheet-' + section.id">
-                    <button
-                        type="button"
-                        class="w-full flex items-center px-4 py-3 rounded-2xl border border-gray-100 text-left font-semibold text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors"
-                        @click="scrollTo(section.id); mobileQuickNavOpen = false"
-                        :class="activeSection === section.id ? 'bg-blue-50 border-blue-200 text-blue-700' : ''">
-                        <i class="text-base" :class="section.icon" aria-hidden="true"></i>
-                        <span class="ml-3" :data-translate="section.translationKey" x-init="$el.textContent = section.label"></span>
-                    </button>
-                </template>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <section id="accueil" class="min-h-screen gradient-bg flex items-center justify-center relative overflow-hidden">
-        <!-- Animated Background Elements -->
-        <div class="absolute inset-0">
-            <div class="floating absolute top-20 left-10 w-20 h-20 bg-white bg-opacity-10 rounded-full"></div>
-            <div class="floating delay-1s absolute top-40 right-20 w-16 h-16 bg-white bg-opacity-10 rounded-full"></div>
-            <div class="floating delay-2s absolute bottom-40 left-20 w-24 h-24 bg-white bg-opacity-10 rounded-full"></div>
-            <div class="floating delay-05s absolute bottom-20 right-10 w-12 h-12 bg-white bg-opacity-10 rounded-full"></div>
-        </div>
-        
-        <div class="container mx-auto px-6 text-center text-white relative z-10">
-            <div class="mb-8 section-enter">
-                <div class="w-48 h-48 mx-auto mb-8 relative">
-                    <div class="w-full h-full rounded-full bg-white bg-opacity-20 backdrop-blur-sm border-4 border-white border-opacity-30 flex items-center justify-center pulse-slow">
-                        <i class="fas fa-user text-6xl text-white"></i>
-                    </div>
-                    <div class="absolute -top-2 -right-2 w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center bounce-slow">
-                        <i class="fas fa-code text-2xl text-gray-800"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <h1 class="text-6xl md:text-8xl font-bold mb-6 typing-animation section-enter" data-translate="hero.name">
-                Fabrice Kouonang
-            </h1>
-            
-            <div class="text-2xl md:text-4xl mb-8 opacity-90 section-enter">
-                <span class="inline-block mr-4" data-translate="hero.title">Développeur</span>
-                <span class="inline-block mr-4 text-yellow-300" data-translate="hero.title">Full Stack</span>
-                <span class="inline-block" data-translate="hero.title">Passionné</span>
-            </div>
-            
-            <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto opacity-80 section-enter" data-translate="hero.subtitle">
-                Créateur d'expériences numériques exceptionnelles avec une expertise en développement web et mobile moderne
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-6 justify-center section-enter">
-                <button class="btn-primary px-8 py-4 rounded-full text-lg font-semibold text-white hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg" @click="scrollTo('apropos')">
-                    <i class="fas fa-user mr-2 text-white"></i>
-                    <span class="text-white" data-translate="hero.discover">Découvrir mon profil</span>
-                </button>
-                <button class="btn-secondary px-8 py-4 rounded-full text-lg font-semibold text-white border-2 border-white hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105" @click="scrollTo('contact')">
-                    <i class="fas fa-envelope mr-2"></i>
-                    <span data-translate="hero.contact">Me contacter</span>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i class="fas fa-chevron-down text-2xl text-white opacity-70"></i>
-        </div>
-    </section>
-
-    <!-- Landing Showcase Section -->
-    <section id="landing" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6 section-enter">
-                    <p class="text-sm font-semibold uppercase tracking-[0.4em] text-sky-500" data-translate="landing.badge">Portfolio Projects</p>
-                    <h2 class="text-5xl font-bold text-gray-900 leading-tight" data-translate="landing.title">Découvrez mes réalisations techniques</h2>
-                    <p class="text-lg text-gray-600 leading-relaxed" data-translate="landing.subtitle">
-                        Explorez une collection de projets concrets qui démontrent mon expertise en développement full-stack, 
-                        applications mobiles iOS, et solutions cloud. Chaque projet illustre ma capacité à combiner créativité, 
-                        performance et meilleures pratiques pour créer des expériences numériques exceptionnelles.
-                    </p>
-                    <div class="space-y-4">
-                        <div class="landing-chip bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
-                            <h4 class="font-bold text-gray-800 mb-2" data-translate="landing.chipWebTitle">Applications Web Full-Stack</h4>
-                            <p class="text-gray-600" data-translate="landing.chipWebDesc">
-                                MailBox : Système de messagerie avec API REST Node.js/Express, authentification JWT, 
-                                interface moderne Tailwind CSS. Architecture scalable et sécurisée.
-                            </p>
-                        </div>
-                        <div class="landing-chip bg-purple-50 border-l-4 border-purple-500 p-4 rounded-lg">
-                            <h4 class="font-bold text-gray-800 mb-2" data-translate="landing.chip3dTitle">Applications Mobiles iOS</h4>
-                            <p class="text-gray-600" data-translate="landing.chip3dDesc">
-                                SwiftDataExpensesSave et GymApp : Applications natives iOS développées en SwiftUI avec SwiftData, 
-                                intégration Firebase/Firestore, géolocalisation, reconnaissance d'images (MobileNetV2), 
-                                et notifications push. Expérience utilisateur fluide et moderne.
-                            </p>
-                        </div>
-                        <div class="landing-chip bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
-                            <h4 class="font-bold text-gray-800 mb-2">Stack Technique Complète</h4>
-                            <p class="text-gray-600">
-                                Frontend : Angular, TypeScript, Tailwind CSS • Backend : Node.js, Express, Spring Boot, C#/.NET • 
-                                Mobile : SwiftUI, SwiftData, Flutter • Cloud : AWS, Docker • Bases de données : PostgreSQL, MySQL, MongoDB
-                            </p>
-                        </div>
-                    </div>
-                    <a href="#projets" class="btn-primary px-8 py-4 rounded-full flex items-center w-max text-white font-semibold hover:shadow-xl transition-all duration-300" @click="scrollTo('projets')">
-                        <i class="fas fa-code mr-3"></i>
-                        <span data-translate="landing.cta">Voir mes projets</span>
-                        <i class="fas fa-arrow-right ml-3"></i>
-                    </a>
-                </div>
-                <div class="landing-viewport relative section-enter">
-                    <div class="landing-grid"></div>
-                    <div class="absolute -top-10 -right-6 landing-planet"></div>
-                    <div class="absolute top-16 left-10 landing-chip">
-                        <h4>Angular • Tailwind</h4>
-                        <p data-translate="landing.layerFrontend">Interface 2D responsive multi-sections</p>
-                    </div>
-                    <div class="absolute bottom-16 right-10 landing-chip">
-                        <h4>SwiftUI • Firebase</h4>
-                        <p data-translate="landing.layerMobile">Composants 3D interactifs liés aux apps mobiles</p>
-                    </div>
-                    <div class="absolute bottom-8 left-12 landing-chip">
-                        <h4>Node.js • AWS</h4>
-                        <p data-translate="landing.layerBackend">Backend cloud visualisé en wireframe 3D</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CV Download Section -->
-    <section class="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div class="container mx-auto px-6 text-center">
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-3xl p-8 shadow-2xl">
-                    <div class="flex items-center justify-center mb-6">
-                        <i class="fas fa-download text-4xl text-white mr-4"></i>
-                        <h2 class="text-4xl font-bold text-white" data-translate="download.title">Téléchargez mon CV</h2>
-                    </div>
-                    
-                    <p class="text-xl text-white opacity-90 mb-8 leading-relaxed" data-translate="download.subtitle">
-                        Consultez ma version Word complète pour une vue d'ensemble détaillée de mon parcours professionnel
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                        <a href="documents/CV_Fabrice_Kouonang.docx" 
-                           download="CV_Fabrice_Kouonang.docx"
-                           class="inline-flex items-center bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                            <i class="fas fa-file-word text-2xl mr-3 text-blue-700"></i>
-                            <span data-translate="download.button">Télécharger le CV (Word)</span>
-                        </a>
-                        
-                        <div class="flex items-center text-white opacity-80">
-                            <i class="fas fa-info-circle mr-2"></i>
-                            <span class="text-sm" data-translate="download.info">Format Word (.docx) • Dernière version</span>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-8 pt-6 border-t border-white border-opacity-20">
-                        <p class="text-white opacity-70 text-sm" data-translate="download.note">
-                            💡 Conseil : Gardez cette page ouverte pour une expérience interactive complète !
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- À propos Section -->
-    <section id="apropos" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 section-enter">
-                <div class="flex items-center justify-center mb-6">
-                    <i class="fas fa-user text-5xl text-blue-600 mr-4"></i>
-                    <h2 class="text-5xl font-bold text-gray-800" data-translate="about.title">À propos de moi</h2>
-                </div>
-                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6 section-enter">
-                    <h3 class="text-3xl font-bold text-gray-800 mb-6" data-translate="about.subtitle">Passionné par l'innovation technologique</h3>
-                    <p class="text-lg text-gray-600 leading-relaxed" data-translate="about.description1">
-                        Développeur full-stack avec une passion pour créer des solutions numériques innovantes. 
-                        Je combine créativité et expertise technique pour transformer des idées en applications 
-                        web et mobile performantes et élégantes.
-                    </p>
-                    <p class="text-lg text-gray-600 leading-relaxed" data-translate="about.description2">
-                        Mon approche se concentre sur l'expérience utilisateur, la performance et la maintenabilité 
-                        du code. J'aime relever de nouveaux défis et apprendre continuellement les dernières 
-                        technologies.
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-6 mt-8">
-                        <div class="text-center p-6 bg-blue-50 rounded-xl card-hover card-enter">
-                            <i class="fas fa-code text-4xl text-blue-600 mb-4"></i>
-                            <h4 class="font-semibold text-gray-800" data-translate="about.development">Développement</h4>
-                            <p class="text-sm text-gray-600" data-translate="about.developmentSub">Web & Mobile</p>
-                        </div>
-                        <div class="text-center p-6 bg-purple-50 rounded-xl card-hover card-enter">
-                            <i class="fas fa-server text-4xl text-purple-600 mb-4"></i>
-                            <h4 class="font-semibold text-gray-800" data-translate="about.backend">Backend</h4>
-                            <p class="text-sm text-gray-600" data-translate="about.backendSub">API & Services</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative section-enter">
-                    <div class="w-full h-96 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="text-center text-white relative z-10">
-                            <i class="fas fa-laptop-code text-8xl mb-4 floating"></i>
-                            <h4 class="text-2xl font-bold" data-translate="about.innovation">Innovation & Créativité</h4>
-                        </div>
-                        
-                        <!-- Floating code elements -->
-                        <div class="absolute top-4 left-4 text-white text-xs opacity-60 floating delay-05s">
-                            &lt;div&gt;Code&lt;/div&gt;
-                        </div>
-                        <div class="absolute top-8 right-8 text-white text-xs opacity-60 floating delay-1s">
-                            function() {}
-                        </div>
-                        <div class="absolute bottom-8 left-8 text-white text-xs opacity-60 floating delay-15s">
-                            .css { }
-                        </div>
-                        <div class="absolute bottom-4 right-4 text-white text-xs opacity-60 floating delay-2s">
-                            &lt;/html&gt;
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Compétences Section -->
-    <section id="competences" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 section-enter">
-                <div class="flex items-center justify-center mb-6">
-                    <i class="fas fa-cogs text-5xl text-blue-600 mr-4"></i>
-                    <h2 class="text-5xl font-bold text-gray-800" data-translate="skills.title">Compétences Techniques</h2>
-                </div>
-                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Frontend -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover card-enter hover-lift">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-paint-brush text-5xl text-blue-600 mb-4 pulse-glow"></i>
-                        <h3 class="text-2xl font-bold text-gray-800" data-translate="skills.frontend">Frontend</h3>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fab fa-html5 text-2xl text-orange-500 mr-3 scale-hover"></i>
-                                <span class="font-medium">HTML5</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="95%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fab fa-css3-alt text-2xl text-blue-500 mr-3"></i>
-                                <span class="font-medium">CSS3</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="90%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fab fa-js-square text-2xl text-yellow-500 mr-3"></i>
-                                <span class="font-medium">JavaScript</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="85%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fab fa-angular text-2xl text-red-600 mr-3"></i>
-                                <span class="font-medium">Angular</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="75%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fas fa-code text-2xl text-blue-700 mr-3"></i>
-                                <span class="font-medium">TypeScript</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="80%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fab fa-css3-alt text-2xl text-cyan-500 mr-3"></i>
-                                <span class="font-medium">Tailwind CSS</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="85%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Backend -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover card-enter hover-lift">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-server text-5xl text-green-600 mb-4 pulse-glow"></i>
-                        <h3 class="text-2xl font-bold text-gray-800" data-translate="skills.backend">Backend</h3>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fas fa-code text-2xl text-indigo-600 mr-3"></i>
-                                <span class="font-medium">C# / .NET</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="75%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fas fa-code text-2xl text-gray-700 mr-3"></i>
-                                <span class="font-medium">C++</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="70%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fab fa-node-js text-2xl text-green-600 mr-3"></i>
-                                <span class="font-medium">Node.js</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="75%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fas fa-leaf text-2xl text-green-700 mr-3"></i>
-                                <span class="font-medium">Spring Boot</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="75%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fas fa-database text-2xl text-orange-500 mr-3"></i>
-                                <span class="font-medium">MySQL</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="85%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fas fa-database text-2xl text-blue-500 mr-3"></i>
-                                <span class="font-medium">PostgreSQL</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="70%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fas fa-database text-2xl text-green-500 mr-3"></i>
-                                <span class="font-medium">MongoDB</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="70%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fas fa-database text-2xl text-red-500 mr-3"></i>
-                                <span class="font-medium">Oracle</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="70%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fas fa-key text-2xl text-blue-600 mr-3"></i>
-                                <span class="font-medium">Keycloak</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="75%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mobile & Frameworks -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover card-enter hover-lift">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-mobile-alt text-5xl text-purple-600 mb-4 pulse-glow"></i>
-                        <h3 class="text-2xl font-bold text-gray-800" data-translate="skills.mobile">Mobile & Frameworks</h3>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fab fa-swift text-2xl text-orange-500 mr-3"></i>
-                                <span class="font-medium">SwiftUI</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="75%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fab fa-android text-2xl text-green-500 mr-3"></i>
-                                <span class="font-medium">Android</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="50%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fas fa-mobile-alt text-2xl text-green-500 mr-3"></i>
-                                <span class="font-medium">Flutter</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="65%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Outils & Technologies -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover card-enter hover-lift">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-tools text-5xl text-purple-600 mb-4 pulse-glow"></i>
-                        <h3 class="text-2xl font-bold text-gray-800" data-translate="skills.tools">Outils & Tech</h3>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fab fa-git-alt text-2xl text-orange-500 mr-3"></i>
-                                <span class="font-medium">Git</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="85%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fab fa-docker text-2xl text-blue-500 mr-3"></i>
-                                <span class="font-medium">Docker</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="70%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fab fa-github-alt text-2xl text-gray-800 mr-3"></i>
-                                <span class="font-medium">GitHub</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="85%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fab fa-gitlab text-2xl text-orange-600 mr-3"></i>
-                                <span class="font-medium">GitLab</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="75%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fas fa-diagram-project text-2xl text-indigo-500 mr-3"></i>
-                                <span class="font-medium">n8n (Automatisation)</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="60%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fab fa-aws text-2xl text-orange-500 mr-3"></i>
-                                <span class="font-medium">AWS</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="65%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fas fa-mobile-alt text-2xl text-green-500 mr-3"></i>
-                                <span class="font-medium">Responsive</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="90%"></div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <i class="fas fa-chart-line text-2xl text-purple-500 mr-3"></i>
-                                <span class="font-medium">Analytics</span>
-                            </div>
-                            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="skill-bar skill-bar-animate" data-width="75%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Expérience Section -->
-    <section id="formation" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 section-enter">
-                <div class="flex items-center justify-center mb-6">
-                    <i class="fas fa-graduation-cap text-5xl text-blue-600 mr-4"></i>
-                    <h2 class="text-5xl font-bold text-gray-800" data-translate="education.title">Formation</h2>
-                </div>
-                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
-            </div>
-            <div class="max-w-4xl mx-auto space-y-6">
-                <div class="bg-white rounded-2xl p-6 shadow card-enter">
-                    <div class="flex items-start">
-                        <i class="fas fa-graduation-cap text-2xl text-blue-600 mr-4 mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800" data-translate="education.diploma1">Diplôme en programmation mobile et applications</h3>
-                            <p class="text-gray-600" data-translate="education.diploma1School">Collège communautaire du Nouveau-Brunswick • diplôme prévu en juin 2026</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow card-enter">
-                    <div class="flex items-start">
-                        <i class="fas fa-mobile-alt text-2xl text-green-600 mr-4 mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800" data-translate="education.diploma2">AEC en programmation des applications mobiles</h3>
-                            <p class="text-gray-600" data-translate="education.diploma2School">Collège Gérald-Godin • diplôme obtenu en octobre 2025</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow card-enter">
-                    <div class="flex items-start">
-                        <i class="fas fa-university text-2xl text-purple-600 mr-4 mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800" data-translate="education.master">Master en informatique</h3>
-                            <p class="text-gray-600" data-translate="education.masterSchool">ISTDI/CS2I (Cameroun) • études incomplètes (2006 à 2008)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow card-enter">
-                    <div class="flex items-start">
-                        <i class="fab fa-google text-2xl text-red-600 mr-4 mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800" data-translate="education.google">Certificat professionnel en soutien TI – Google</h3>
-                            <p class="text-gray-600" data-translate="education.googleDate">Juillet 2023</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow card-enter">
-                    <div class="flex items-start">
-                        <i class="fab fa-aws text-2xl text-orange-600 mr-4 mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800" data-translate="education.aws">AWS Certified Cloud Practitioner</h3>
-                            <p class="text-gray-600" data-translate="education.awsDate">Octobre 2022</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow card-enter">
-                    <div class="flex items-start">
-                        <i class="fab fa-microsoft text-2xl text-blue-600 mr-4 mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800" data-translate="education.azure">Préparation – Microsoft Azure Developer Associate</h3>
-                            <p class="text-gray-600" data-translate="education.azureDate">Prévu en décembre 2025</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow card-enter">
-                    <div class="flex items-start">
-                        <i class="fas fa-tools text-2xl text-indigo-600 mr-4 mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800" data-translate="education.technician">Brevet de technicien en maintenance informatique</h3>
-                            <p class="text-gray-600" data-translate="education.technicianSchool">ISTDI/CS2I (Cameroun) • octobre 2004 à juillet 2006</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Expérience Section -->
-    <section id="experience" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 section-enter">
-                <div class="flex items-center justify-center mb-6">
-                    <i class="fas fa-briefcase text-5xl text-blue-600 mr-4"></i>
-                    <h2 class="text-5xl font-bold text-gray-800" data-translate="experience.title">Expérience Professionnelle</h2>
-                </div>
-                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
-            </div>
-            
-            <div class="max-w-4xl mx-auto">
-                <div class="relative">
-                    <!-- Timeline line -->
-                    <div class="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-purple-600 rounded-full"></div>
-                    
-                    <!-- CCNB Innov – Stage OpenVLA -->
-                    <div class="relative mb-12 pl-20 timeline-item">
-                        <div class="absolute left-6 w-4 h-4 bg-orange-500 rounded-full border-4 border-white shadow-lg"></div>
-                        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center">
-                                    <i class="fas fa-robot text-2xl text-orange-600 mr-3"></i>
-                                    <h3 class="text-2xl font-bold text-gray-800" data-translate="experience.ccnbInnov">Stagiaire – Démonstrateur OpenVLA</h3>
-                                </div>
-                                <span class="bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium" data-translate="experience.ccnbInnovPeriod">Depuis mai 2026</span>
-                            </div>
-                            <h4 class="text-xl text-gray-600 mb-4" data-translate="experience.ccnbInnovCompany">CCNB Innov</h4>
-                            <p class="text-gray-600 leading-relaxed mb-4" data-translate="experience.ccnbInnovDesc">
-                                Développement d'un démonstrateur OpenVLA pour robot collaboratif UR et vision 2D ou 3D Zivid, dans le cadre d'un projet d'innovation en robotique et vision industrielle.
-                            </p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">OpenVLA</span>
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Python</span>
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Zivid</span>
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Robot UR</span>
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Vision 2D/3D</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CCNB Emploi étudiant – Migration web -->
-                    <div class="relative mb-12 pl-20 timeline-item">
-                        <div class="absolute left-6 w-4 h-4 bg-teal-500 rounded-full border-4 border-white shadow-lg"></div>
-                        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center">
-                                    <i class="fas fa-code text-2xl text-teal-600 mr-3"></i>
-                                    <h3 class="text-2xl font-bold text-gray-800" data-translate="experience.ccnbStudent">Emploi étudiant – Projet de migration</h3>
-                                </div>
-                                <span class="bg-teal-100 text-teal-800 px-4 py-2 rounded-full text-sm font-medium" data-translate="experience.ccnbStudentPeriod">Janvier 2026 – Juin 2026</span>
-                            </div>
-                            <h4 class="text-xl text-gray-600 mb-4" data-translate="experience.ccnbStudentCompany">CCNB</h4>
-                            <p class="text-gray-600 leading-relaxed mb-4" data-translate="experience.ccnbStudentDesc">
-                                Participation à un projet de migration de contenu web (Moodle, Brikspace, Ardoise), en collaboration avec l'équipe TI du collège.
-                            </p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Git</span>
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">HTML</span>
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">CSS</span>
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">JavaScript</span>
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">H5P</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FAC Réserviste -->
-                    <div class="relative mb-12 pl-20 timeline-item">
-                        <div class="absolute left-6 w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow-lg"></div>
-                        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center">
-                                    <i class="fas fa-shield-alt text-2xl text-blue-600 mr-3"></i>
-                                    <h3 class="text-2xl font-bold text-gray-800" data-translate="experience.fac">Forces armées canadiennes – Réserviste</h3>
-                                </div>
-                                <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium" data-translate="experience.facPeriod">Depuis septembre 2025</span>
-                            </div>
-                            <h4 class="text-xl text-gray-600 mb-4" data-translate="experience.facLocation">Canada</h4>
-                        </div>
-                    </div>
-
-                    <!-- CCNB Bathurst Tuteur -->
-                    <div class="relative mb-12 pl-20 timeline-item">
-                        <div class="absolute left-6 w-4 h-4 bg-green-500 rounded-full border-4 border-white shadow-lg"></div>
-                        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center">
-                                    <i class="fas fa-chalkboard-teacher text-2xl text-green-600 mr-3"></i>
-                                    <h3 class="text-2xl font-bold text-gray-800" data-translate="experience.tutor">Tuteur</h3>
-                                </div>
-                                <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium" data-translate="experience.tutorPeriod">Depuis septembre 2025</span>
-                            </div>
-                            <h4 class="text-xl text-gray-600 mb-4" data-translate="experience.tutorCompany">CCNB Bathurst</h4>
-                            <p class="text-gray-600 leading-relaxed mb-4" data-translate="experience.tutorDesc">
-                                Offrir du soutien à l'apprentissage aux étudiants d'analyse de données.
-                            </p>
-                            <div class="flex flex-wrap gap-2"></div>
-                        </div>
-                    </div>
-
-                    <!-- Ultraspec GuestHub -->
-                    <div class="relative mb-12 pl-20 timeline-item">
-                        <div class="absolute left-6 w-4 h-4 bg-purple-500 rounded-full border-4 border-white shadow-lg"></div>
-                        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center">
-                                    <i class="fas fa-laptop-code text-2xl text-purple-600 mr-3"></i>
-                                    <h3 class="text-2xl font-bold text-gray-800" data-translate="experience.guesthub">Développeur – Projet GuestHub</h3>
-                                </div>
-                                <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium" data-translate="experience.guesthubPeriod">Septembre 2025 - Octobre 2025</span>
-                            </div>
-                            <h4 class="text-xl text-gray-600 mb-4" data-translate="experience.guesthubCompany">Ultraspec</h4>
-                            <p class="text-gray-600 leading-relaxed mb-4" data-translate="experience.guesthubDesc">
-                                Concevoir une application de gestion de visiteurs. Angular pour le tableau de bord, iOS (Swift) pour le mobile et Node.js/Express + PostgreSQL pour le backend.
-                            </p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Angular</span>
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Swift</span>
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Node.js</span>
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Express</span>
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">PostgreSQL</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CCNB Campbellton Technicien TI -->
-                    <div class="relative mb-12 pl-20 timeline-item">
-                        <div class="absolute left-6 w-4 h-4 bg-indigo-500 rounded-full border-4 border-white shadow-lg"></div>
-                        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center">
-                                    <i class="fas fa-tools text-2xl text-indigo-600 mr-3"></i>
-                                    <h3 class="text-2xl font-bold text-gray-800">Technicien TI</h3>
-                                </div>
-                                <span class="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm font-medium">Février 2024 - Juin 2024</span>
-                            </div>
-                            <h4 class="text-xl text-gray-600 mb-4">CCNB Campbellton</h4>
-                            <ul class="list-disc ml-5 text-gray-600 leading-relaxed mb-4">
-                                <li>Maintenir l’inventaire des équipements et des logiciels.</li>
-                                <li>Apporter un soutien aux usagers du CCNB.</li>
-                                <li>Installer et configurer les salles Flex.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Blessing and Service Responsable TI -->
-                    <div class="relative mb-12 pl-20 timeline-item">
-                        <div class="absolute left-6 w-4 h-4 bg-yellow-500 rounded-full border-4 border-white shadow-lg"></div>
-                        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center">
-                                    <i class="fas fa-server text-2xl text-yellow-600 mr-3"></i>
-                                    <h3 class="text-2xl font-bold text-gray-800">Responsable TI</h3>
-                                </div>
-                                <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium">Octobre 2022 - Janvier 2023</span>
-                            </div>
-                            <h4 class="text-xl text-gray-600 mb-4">Blessing and Service, Cameroun</h4>
-                            <ul class="list-disc ml-5 text-gray-600 leading-relaxed mb-4">
-                                <li>Installer, configurer, sécuriser et mettre à jour un parc de 20+ ordinateurs.</li>
-                                <li>Diagnostiquer et résoudre les problèmes de connectivité, d’imprimantes et de périphériques réseau.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Clear Solutions Développeur FullStack -->
-                    <div class="relative mb-12 pl-20 timeline-item">
-                        <div class="absolute left-6 w-4 h-4 bg-rose-500 rounded-full border-4 border-white shadow-lg"></div>
-                        <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center">
-                                    <i class="fas fa-code text-2xl text-rose-600 mr-3"></i>
-                                    <h3 class="text-2xl font-bold text-gray-800">Développeur FullStack</h3>
-                                </div>
-                                <span class="bg-rose-100 text-rose-800 px-4 py-2 rounded-full text-sm font-medium">Mai 2008 - Mai 2022</span>
-                            </div>
-                            <h4 class="text-xl text-gray-600 mb-4">Clear Solutions, Cameroun</h4>
-                            <ul class="list-disc ml-5 text-gray-600 leading-relaxed mb-4">
-                                <li>Former le personnel à l'utilisation des solutions logicielles déployées.</li>
-                                <li>Maintenir, mettre à jour et documenter les API REST et solutions logicielles.</li>
-                                <li>Identifier les besoins des clients et recueillir leurs exigences.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projets Section -->
-    <section id="projets" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 section-enter">
-                <div class="flex items-center justify-center mb-6">
-                    <i class="fas fa-project-diagram text-5xl text-blue-600 mr-4"></i>
-                    <h2 class="text-5xl font-bold text-gray-800" data-translate="projects.title">Projets Scolaires</h2>
-                </div>
-                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
-                <p class="text-xl text-gray-600 mt-6 max-w-3xl mx-auto" data-translate="projects.subtitle">
-                    Projets développés dans le cadre de mes études en programmation mobile et applications
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-                <!-- ProConnect NB Project -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover card-enter">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-heartbeat text-5xl text-teal-600 mb-4"></i>
-                        <h3 class="text-2xl font-bold text-gray-800" data-translate="projects.proconnect">ProConnect NB</h3>
-                        <p class="text-gray-600" data-translate="projects.proconnectDesc">Santé connectée – Nouveau-Brunswick</p>
-                    </div>
-                    <p class="text-gray-600 leading-relaxed mb-6" data-translate="projects.proconnectDetail">
-                        Projet scolaire : application mobile Flutter et API .NET pour la gestion et le suivi de la prise de médication ainsi que le suivi des rendez-vous médicaux au Nouveau-Brunswick. Déploiement sur Azure et pipeline CI/CD avec GitHub Actions.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm">Flutter</span>
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Dart</span>
-                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">.NET</span>
-                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">C#</span>
-                        <span class="bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm">Azure</span>
-                        <span class="bg-gray-800 text-white px-3 py-1 rounded-full text-sm">GitHub Actions</span>
-                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Santé</span>
-                    </div>
-                </div>
-
-                <!-- MailBox Project -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover card-enter">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-envelope text-5xl text-blue-600 mb-4"></i>
-                        <h3 class="text-2xl font-bold text-gray-800" data-translate="projects.mailbox">MailBox</h3>
-                        <p class="text-gray-600" data-translate="projects.mailboxDesc">Système de gestion de messagerie</p>
-                    </div>
-                    <p class="text-gray-600 leading-relaxed mb-6" data-translate="projects.mailboxDetail">
-                        Développement d'un système web de gestion de messagerie avec backend Node.js/Express/MySQL 
-                        et interface moderne en HTML/Tailwind CSS/JavaScript. API REST complète avec authentification JWT.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Node.js</span>
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Express</span>
-                        <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">MySQL</span>
-                        <span class="bg-cyan-100 text-cyan-800 px-3 py-1 rounded-full text-sm">Tailwind CSS</span>
-                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">JavaScript</span>
-                        <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">JWT</span>
-                    </div>
-                    <div class="text-center">
-                        <a href="https://github.com/LeFab70/ProjetMaiBox" target="_blank" rel="noopener" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
-                            <i class="fab fa-github-alt mr-2"></i>
-                            <span data-translate="projects.githubLink">Voir sur GitHub</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- ExpenseApp Project -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover card-enter">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-mobile-alt text-5xl text-green-600 mb-4"></i>
-                        <h3 class="text-2xl font-bold text-gray-800" data-translate="projects.expense">SwiftDataExpensesSave</h3>
-                        <p class="text-gray-600" data-translate="projects.expenseDesc">Application iOS de gestion des dépenses</p>
-                    </div>
-                    <p class="text-gray-600 leading-relaxed mb-6" data-translate="projects.expenseDetail">
-                        Application iOS développée en SwiftUI avec SwiftData, intégrant la gestion des images, 
-                        la caméra et la géolocalisation, connectée à un backend Firebase/Firestore.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">SwiftUI</span>
-                        <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">SwiftData</span>
-                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">Firebase</span>
-                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">Firestore</span>
-                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">iOS</span>
-                    </div>
-                    <div class="text-center">
-                        <a href="https://github.com/LeFab70/SwiftDataExpensesSave" target="_blank" rel="noopener" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
-                            <i class="fab fa-github-alt mr-2"></i>
-                            <span data-translate="projects.githubLink">Voir sur GitHub</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- GymApp Project -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover card-enter">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-dumbbell text-5xl text-purple-600 mb-4"></i>
-                        <h3 class="text-2xl font-bold text-gray-800" data-translate="projects.gym">GymApp</h3>
-                        <p class="text-gray-600" data-translate="projects.gymDesc">Application interactive de partage sportif</p>
-                    </div>
-                    <p class="text-gray-600 leading-relaxed mb-6" data-translate="projects.gymDetail">
-                        Application iOS interactive favorisant le partage d'activités sportives entre utilisateurs, 
-                        avec intégration de la reconnaissance d'images (MobileNetV2), des notifications push et du partage de scores en ligne.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">SwiftUI</span>
-                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">iOS</span>
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">MobileNetV2</span>
-                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Push Notifications</span>
-                        <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">Social Sharing</span>
-                    </div>
-                    <div class="text-center">
-                        <a href="https://github.com/LeFab70/GymApp" target="_blank" rel="noopener" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
-                            <i class="fab fa-github-alt mr-2"></i>
-                            <span data-translate="projects.githubLink">Voir sur GitHub</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- GitHub Button -->
-            <div class="text-center mt-12 section-enter">
-                <a href="https://github.com/LeFab70" target="_blank" rel="noopener" class="inline-flex items-center bg-gray-900 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    <i class="fab fa-github-alt mr-3 text-2xl text-white"></i>
-                    <span class="text-white font-semibold" data-translate="projects.githubButton">Voir tous mes projets sur GitHub</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Implication sociale -->
-    <section id="benevolat" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 section-enter">
-                <div class="flex items-center justify-center mb-6">
-                    <i class="fas fa-heart text-5xl text-blue-600 mr-4"></i>
-                    <h2 class="text-5xl font-bold text-gray-800" data-translate="volunteer.title">Implication sociale</h2>
-                </div>
-                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
-            </div>
-            <div class="max-w-4xl mx-auto space-y-6">
-                <div class="bg-white rounded-2xl p-6 shadow card-enter">
-                    <div class="flex items-start">
-                        <i class="fas fa-code text-2xl text-blue-600 mr-4 mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800" data-translate="volunteer.devVolunteer">Développeur bénévole FullStack – Carrefour Parent Enfant, Montréal</h3>
-                            <p class="text-gray-600" data-translate="volunteer.devVolunteerPeriod">Avril à décembre 2023</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow card-enter">
-                    <div class="flex items-start">
-                        <i class="fas fa-chalkboard-teacher text-2xl text-green-600 mr-4 mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800" data-translate="volunteer.teacherVolunteer">Enseignant bénévole de Français – Maison de l'Amitié, Montréal</h3>
-                            <p class="text-gray-600" data-translate="volunteer.teacherVolunteerPeriod">Avril à décembre 2023</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow card-enter">
-                    <div class="flex items-start">
-                        <i class="fas fa-book text-2xl text-purple-600 mr-4 mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800" data-translate="volunteer.author">Auteur d'un livret d'informatique (niveau 1 à 6)</h3>
-                            <p class="text-gray-600" data-translate="volunteer.authorDetail">Utilisé dans plus de 30 écoles à Douala – Septembre 2020</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 gradient-bg">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 section-enter">
-                <div class="flex items-center justify-center mb-6">
-                    <i class="fas fa-envelope text-5xl text-blue-600 mr-4"></i>
-                    <h2 class="text-5xl font-bold text-gray-800" data-translate="contact.title">Contactez-moi</h2>
-                </div>
-                <div class="w-24 h-1 bg-blue-500 mx-auto rounded-full"></div>
-            </div>
-            
-            <div class="max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-12">
-                    <!-- Contact Info -->
-                    <div class="space-y-8 section-enter">
-                        <div class="text-center md:text-left">
-                            <h3 class="text-3xl font-bold text-gray-800 mb-6" data-translate="contact.subtitle">Parlons de votre projet</h3>
-                            <p class="text-xl text-gray-700 leading-relaxed" data-translate="contact.description">
-                                Je suis toujours intéressé par de nouveaux défis et opportunités. 
-                                N'hésitez pas à me contacter pour discuter de votre projet !
-                            </p>
-                        </div>
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-envelope text-blue-600 text-xl"></i>
-                                </div>
-                                <div>
-                                    <p class="text-gray-800 font-semibold" data-translate="contact.email">Email</p>
-                                    <p class="text-gray-600">kouonang2002@gmail.com</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-phone text-blue-600 text-xl"></i>
-                                </div>
-                                <div>
-                                    <p class="text-gray-800 font-semibold" data-translate="contact.phone">Téléphone</p>
-                                    <p class="text-gray-600">438 985-5417</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-map-marker-alt text-blue-600 text-xl"></i>
-                                </div>
-                                <div>
-                                    <p class="text-gray-800 font-semibold" data-translate="contact.location">Localisation</p>
-                                    <p class="text-gray-600">Campbellton, Nouveau-Brunswick</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Social Links -->
-                        <div class="flex space-x-4">
-                            <a href="#" class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-300 transform hover:scale-110">
-                                <i class="fab fa-linkedin text-blue-600 text-xl"></i>
-                            </a>
-                            <a href="https://github.com/LeFab70" class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-300 transform hover:scale-110" target="_blank" rel="noopener">
-                                <i class="fab fa-github-alt text-blue-600 text-xl"></i>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Contact Form -->
-                    <div class="bg-white bg-opacity-90 backdrop-blur-sm rounded-2xl p-8 card-enter shadow-xl border border-blue-100">
-                        <form id="contactForm" class="space-y-6">
-                            <div>
-                                <label class="block text-gray-800 font-semibold mb-2" data-translate="contact.name">Nom</label>
-                                <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg form-input" placeholder="Votre nom" data-translate-placeholder="contact.namePlaceholder">
-                            </div>
-                            
-                            <div>
-                                <label class="block text-gray-800 font-semibold mb-2" data-translate="contact.email">Email</label>
-                                <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg form-input" placeholder="votre@email.com" data-translate-placeholder="contact.emailPlaceholder">
-                            </div>
-                            
-                            <div>
-                                <label class="block text-gray-800 font-semibold mb-2" data-translate="contact.subject">Sujet</label>
-                                <input type="text" name="subject" required class="w-full px-4 py-3 rounded-lg form-input" placeholder="Sujet de votre message" data-translate-placeholder="contact.subjectPlaceholder">
-                            </div>
-                            
-                            <div>
-                                <label class="block text-gray-800 font-semibold mb-2" data-translate="contact.message">Message</label>
-                                <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-lg form-input resize-none" placeholder="Votre message..." data-translate-placeholder="contact.messagePlaceholder"></textarea>
-                            </div>
-                            
-                            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center">
-                                <i class="fas fa-paper-plane mr-2 text-white"></i>
-                                <span class="text-white font-semibold" data-translate="contact.sendButton">Envoyer le message</span>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Chatbot Assistant -->
-    <div class="fixed bottom-6 left-6 z-40 space-y-3" x-cloak>
-        <button type="button" class="chatbot-trigger shadow-2xl" @click="chatbotOpen = !chatbotOpen"
-                :aria-expanded="chatbotOpen.toString()">
-            <i class="fas fa-comments"></i>
-            <span data-translate="chatbot.toggleOpen" x-show="!chatbotOpen">Assistant stack</span>
-            <span data-translate="chatbot.toggleClose" x-show="chatbotOpen">Fermer</span>
-        </button>
-    </div>
-
-    <div class="chatbot-panel" x-show="chatbotOpen" x-transition x-cloak>
-        <header class="flex items-center justify-between">
+<!-- ═══ EDUCATION ═══ -->
+<section id="education" class="py-24 bg-navy-800">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-4xl font-black text-white text-center section-title mb-16 fade-in" x-text="t('edu.title')">Formation</h2>
+    <div class="space-y-4 fade-in">
+      <template x-for="(e, i) in education" :key="i">
+        <div class="edu-card" :style="i%2===0?'border-left-color:#3B82F6':'border-left-color:#10B981'">
+          <div class="flex flex-wrap items-start justify-between gap-2">
             <div>
-                <p class="text-xs uppercase tracking-[0.4em] text-slate-400" data-translate="chatbot.badge">Realtime</p>
-                <h3 class="text-lg font-bold text-slate-900" data-translate="chatbot.title">Assistant Stack</h3>
-                <p class="text-sm text-slate-500" data-translate="chatbot.subtitle">
-                    Posez une question technique et obtenez une réponse alignée sur mes compétences.
-                </p>
+              <h3 class="text-white font-bold" x-text="t(e.degreeKey)"></h3>
+              <p class="text-electric-400 text-sm font-medium mt-1" x-text="t(e.school)"></p>
             </div>
-            <button class="text-slate-400 hover:text-slate-600" @click="chatbotOpen = false" aria-label="Fermer le chatbot">
-                <i class="fas fa-times"></i>
-            </button>
-        </header>
-        <div class="px-5 pt-4 space-y-2">
-            <p class="text-xs font-semibold uppercase text-slate-400" data-translate="chatbot.contextTitle">Technologies suivies</p>
-            <div class="flex flex-wrap">
-                <template x-for="tech in techContext" :key="'ctx-' + tech">
-                    <span class="chatbot-context-pill" x-text="tech"></span>
-                </template>
+            <span class="text-xs text-gray-400 bg-white/5 px-3 py-1 rounded-full whitespace-nowrap" x-text="e.date"></span>
+          </div>
+          <template x-if="e.noteKey">
+            <p class="text-gray-400 text-sm mt-2" x-text="t(e.noteKey)"></p>
+          </template>
+          <template x-if="e.honour">
+            <div class="inline-flex items-center gap-1.5 mt-3 bg-amber-500/10 border border-amber-500/30 text-amber-400 px-3 py-1 rounded-full text-xs font-semibold">
+              <i class="fas fa-medal text-xs"></i>
+              <span x-text="t('edu.honour')">Mention d'honneur</span>
             </div>
+          </template>
         </div>
-        <div class="px-5 py-4 max-h-64 overflow-y-auto space-y-3" x-ref="chatMessages">
-            <template x-for="(message, index) in chatbotMessages" :key="'chat-' + index">
-                <div :class="message.role === 'user' ? 'text-right' : 'text-left'">
-                    <p class="inline-block px-4 py-3 rounded-2xl text-sm leading-relaxed"
-                       :class="message.role === 'user' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-700'"
-                       x-text="message.text"></p>
-                </div>
+      </template>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VOLUNTEER ═══ -->
+<section id="volunteer" class="py-24 bg-navy-900">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-4xl font-black text-white text-center section-title mb-16 fade-in" x-text="t('vol.title')">Bénévolat & Engagement</h2>
+    <div class="grid md:grid-cols-2 gap-6 fade-in">
+      <div class="vol-card">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center"><i class="fas fa-chalkboard-teacher text-accent"></i></div>
+          <div>
+            <h3 class="text-white font-semibold text-sm" x-text="t('vol.teacher')">Enseignant bénévole de français</h3>
+            <p class="text-gray-400 text-xs" x-text="t('vol.teacher.org')">Maison de l'Amitié · Montréal</p>
+          </div>
+        </div>
+        <p class="text-gray-400 text-sm" x-text="t('vol.teacher.desc')">Enseignement du français langue seconde à des immigrants nouvellement arrivés au Canada.</p>
+        <p class="text-electric-400 text-xs mt-3">Avr. – Déc. 2023</p>
+      </div>
+      <div class="vol-card">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-full bg-electric-500/20 flex items-center justify-center"><i class="fas fa-code text-electric-400"></i></div>
+          <div>
+            <h3 class="text-white font-semibold text-sm" x-text="t('vol.dev')">Développeur bénévole FullStack</h3>
+            <p class="text-gray-400 text-xs" x-text="t('vol.dev.org')">Carrefour Parent Enfant · Montréal</p>
+          </div>
+        </div>
+        <p class="text-gray-400 text-sm" x-text="t('vol.dev.desc')">Développement de solutions web pour un organisme communautaire de soutien aux familles.</p>
+        <p class="text-electric-400 text-xs mt-3">Avr. – Déc. 2023</p>
+      </div>
+      <div class="vol-card md:col-span-2">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center"><i class="fas fa-book text-amber-400"></i></div>
+          <div>
+            <h3 class="text-white font-semibold text-sm" x-text="t('vol.author')">Auteur d'un livret pédagogique en informatique</h3>
+            <p class="text-gray-400 text-xs">Douala, Cameroun · 2020</p>
+          </div>
+        </div>
+        <p class="text-gray-400 text-sm" x-text="t('vol.author.desc')">Livret en 6 niveaux adopté dans plus de 30 établissements scolaires à Douala.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact" class="py-24 bg-navy-800">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="text-4xl font-black text-white text-center section-title mb-4 fade-in" x-text="t('contact.title')">Contact</h2>
+    <p class="text-gray-400 text-center mb-16 fade-in" x-text="t('contact.subtitle')">Je suis ouvert aux opportunités — n'hésitez pas à me contacter.</p>
+
+    <div class="grid md:grid-cols-2 gap-12 fade-in">
+
+      <!-- Left: links -->
+      <div class="space-y-4">
+        <p class="text-gray-300 font-semibold mb-6" x-text="t('contact.reach')">Retrouvez-moi ici</p>
+        <a href="mailto:kouonang2002@gmail.com" class="contact-link">
+          <div class="w-10 h-10 rounded-lg bg-electric-500/20 flex items-center justify-center shrink-0"><i class="fas fa-envelope text-electric-400"></i></div>
+          <div class="text-left">
+            <p class="text-white font-medium text-sm">Email</p>
+            <p class="text-gray-400 text-sm">kouonang2002@gmail.com</p>
+          </div>
+          <i class="fas fa-arrow-right ml-auto text-gray-500"></i>
+        </a>
+        <a href="tel:+14389855417" class="contact-link">
+          <div class="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center shrink-0"><i class="fas fa-phone text-accent"></i></div>
+          <div class="text-left">
+            <p class="text-white font-medium text-sm">Téléphone</p>
+            <p class="text-gray-400 text-sm">(438) 985-5417</p>
+          </div>
+          <i class="fas fa-arrow-right ml-auto text-gray-500"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/fabrice-kouonang/" target="_blank" class="contact-link">
+          <div class="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center shrink-0"><i class="fab fa-linkedin-in text-blue-400"></i></div>
+          <div class="text-left">
+            <p class="text-white font-medium text-sm">LinkedIn</p>
+            <p class="text-gray-400 text-sm">linkedin.com/in/fabrice-kouonang</p>
+          </div>
+          <i class="fas fa-arrow-right ml-auto text-gray-500"></i>
+        </a>
+        <a href="https://github.com/LeFab70" target="_blank" class="contact-link">
+          <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0"><i class="fab fa-github text-white"></i></div>
+          <div class="text-left">
+            <p class="text-white font-medium text-sm">GitHub</p>
+            <p class="text-gray-400 text-sm">github.com/LeFab70</p>
+          </div>
+          <i class="fas fa-arrow-right ml-auto text-gray-500"></i>
+        </a>
+      </div>
+
+      <!-- Right: contact form -->
+      <div class="glass rounded-2xl p-8">
+        <p class="text-gray-300 font-semibold mb-6" x-text="t('contact.form.title')">Envoyer un message</p>
+        <form @submit.prevent="sendEmail" class="space-y-4" x-show="!formSent">
+          <div>
+            <label class="text-gray-400 text-sm block mb-1" x-text="t('contact.form.name')">Nom</label>
+            <input type="text" x-model="form.name" required
+              class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electric-500/50 transition text-sm"
+              :placeholder="t('contact.form.name.ph')">
+          </div>
+          <div>
+            <label class="text-gray-400 text-sm block mb-1" x-text="t('contact.form.email')">Courriel</label>
+            <input type="email" x-model="form.email" required
+              class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electric-500/50 transition text-sm"
+              :placeholder="t('contact.form.email.ph')">
+          </div>
+          <div>
+            <label class="text-gray-400 text-sm block mb-1" x-text="t('contact.form.subject')">Objet</label>
+            <input type="text" x-model="form.subject"
+              class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electric-500/50 transition text-sm"
+              :placeholder="t('contact.form.subject.ph')">
+          </div>
+          <div>
+            <label class="text-gray-400 text-sm block mb-1" x-text="t('contact.form.message')">Message</label>
+            <textarea x-model="form.message" rows="4" required
+              class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electric-500/50 transition text-sm resize-none"
+              :placeholder="t('contact.form.message.ph')"></textarea>
+          </div>
+          <button type="submit" :disabled="formSending"
+            class="w-full flex items-center justify-center gap-2 bg-electric-500 hover:bg-electric-400 disabled:opacity-50 text-white font-semibold py-3 rounded-xl transition">
+            <template x-if="!formSending">
+              <span class="flex items-center gap-2"><i class="fas fa-paper-plane text-sm"></i><span x-text="t('contact.form.send')">Envoyer</span></span>
             </template>
-            <p class="text-xs text-slate-400" x-show="!chatbotMessages.length" data-translate="chatbot.empty">
-                Posez une question (ex: “Comment sécurises-tu une API Node.js avec Keycloak ?”)
-            </p>
+            <template x-if="formSending">
+              <span class="flex items-center gap-2"><i class="fas fa-spinner fa-spin text-sm"></i><span x-text="t('contact.form.sending')">Envoi en cours...</span></span>
+            </template>
+          </button>
+          <template x-if="formError">
+            <p class="text-red-400 text-sm text-center" x-text="t('contact.form.error')">Une erreur est survenue. Réessayez ou écrivez-moi directement.</p>
+          </template>
+        </form>
+        <div x-show="formSent" class="text-center py-8">
+          <div class="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-check-circle text-3xl text-accent"></i>
+          </div>
+          <p class="text-white font-semibold text-lg" x-text="t('contact.form.success')">Message envoyé !</p>
+          <p class="text-gray-400 text-sm mt-2" x-text="t('contact.form.success2')">Je vous répondrai dans les plus brefs délais.</p>
+          <button @click="formSent=false;form={name:'',email:'',subject:'',message:''}" class="mt-4 text-electric-400 text-sm hover:text-electric-300">
+            <span x-text="t('contact.form.another')">Envoyer un autre message</span>
+          </button>
         </div>
-        <div class="px-5 pb-5 space-y-4">
-            <form class="space-y-3" @submit.prevent="sendChat">
-                <label class="text-sm font-semibold text-slate-600" data-translate="chatbot.promptLabel">Question</label>
-                <textarea name="chatbot-message" class="w-full px-4 py-3 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-200"
-                          rows="3" x-model="chatbotInput" placeholder="Décrivez votre besoin technique..."></textarea>
-                <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2">
-                    <i class="fas fa-paper-plane text-sm"></i>
-                    <span data-translate="chatbot.send">Envoyer</span>
-                </button>
-            </form>
-            <p class="text-[11px] text-slate-400" data-translate="chatbot.disclaimer">
-                Les réponses générées utilisent uniquement le contexte de mon CV (compétences & projets) pour rester pertinentes.
-            </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHATBOT ═══ -->
+<div class="fixed bottom-20 right-6 z-50" x-data>
+
+  <!-- Toggle button -->
+  <button @click="$dispatch('toggle-chat')"
+    class="w-14 h-14 rounded-full bg-electric-500 hover:bg-electric-400 shadow-xl shadow-electric-500/30 flex items-center justify-center text-white transition-all hover:scale-110"
+    aria-label="Ouvrir le chatbot">
+    <i class="fas fa-comment-dots text-xl"></i>
+  </button>
+
+  <!-- Badge -->
+  <span class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-accent text-white text-xs flex items-center justify-center font-bold">?</span>
+</div>
+
+<!-- Chat panel -->
+<div class="fixed bottom-40 right-6 z-50 w-80 md:w-96" x-show="chatOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" @toggle-chat.window="chatOpen=!chatOpen">
+  <div class="bg-navy-800 border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
+    <!-- Header -->
+    <div class="flex items-center justify-between px-5 py-4 bg-electric-500/10 border-b border-white/10">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-electric-500 flex items-center justify-center"><i class="fas fa-robot text-white text-sm"></i></div>
+        <div>
+          <p class="text-white font-semibold text-sm" x-text="t('chat.title')">Assistant FK</p>
+          <p class="text-accent text-xs flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-accent inline-block"></span><span x-text="t('chat.online')">En ligne</span></p>
         </div>
+      </div>
+      <button @click="chatOpen=false" class="text-gray-400 hover:text-white transition"><i class="fas fa-times"></i></button>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-6 text-center">
-            <div class="mb-8">
-                <h3 class="text-2xl font-bold mb-4" data-translate="footer.name">Fabrice Orgrick Kouonang</h3>
-                <p class="text-gray-400" data-translate="footer.subtitle">Développeur Full Stack Passionné</p>
-            </div>
-            
-            <div class="flex justify-center space-x-8 mb-8">
-                <a href="#accueil" class="text-gray-400 hover:text-white transition-colors duration-300" data-translate="nav.home">Accueil</a>
-                <a href="#apropos" class="text-gray-400 hover:text-white transition-colors duration-300" data-translate="nav.about">À propos</a>
-                <a href="#competences" class="text-gray-400 hover:text-white transition-colors duration-300" data-translate="nav.skills">Compétences</a>
-                <a href="#projets" class="text-gray-400 hover:text-white transition-colors duration-300" data-translate="nav.projects">Projets</a>
-                <a href="#experience" class="text-gray-400 hover:text-white transition-colors duration-300" data-translate="nav.experience">Expérience</a>
-                <a href="#contact" class="text-gray-400 hover:text-white transition-colors duration-300" data-translate="nav.contact">Contact</a>
-            </div>
-            
-            <!-- Language Switcher in Footer -->
-            <div class="flex justify-center space-x-4 mb-8">
-                <button class="language-switcher bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2" data-lang="fr" title="Français">
-                    <span class="language-flag text-xl active" data-lang="fr">🇫🇷</span>
-                    <span class="text-white font-medium" data-translate="nav.french">Français</span>
-                </button>
-                <button class="language-switcher bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2" data-lang="en" title="English">
-                    <span class="language-flag text-xl" data-lang="en">🇬🇧</span>
-                    <span class="text-white font-medium" data-translate="nav.english">English</span>
-                </button>
-            </div>
-            
-            <div class="border-t border-gray-800 pt-8">
-                <p class="text-gray-400">&copy; 2024 <span data-translate="footer.name">Fabrice Orgrick Kouonang</span>. <span data-translate="footer.copyright">Tous droits réservés.</span></p>
-            </div>
+    <!-- Messages -->
+    <div class="p-4 h-56 overflow-y-auto space-y-3" x-ref="chatMsgs">
+      <template x-if="chatMessages.length===0">
+        <p class="text-gray-500 text-sm text-center pt-4" x-text="t('chat.empty')">Posez une question sur mes compétences ou projets...</p>
+      </template>
+      <template x-for="(m,i) in chatMessages" :key="i">
+        <div :class="m.role==='user' ? 'text-right' : 'text-left'">
+          <p class="inline-block px-4 py-2 rounded-2xl text-sm max-w-[85%]"
+            :class="m.role==='user' ? 'bg-electric-500 text-white' : 'bg-navy-700 text-gray-200'"
+            x-text="m.text"></p>
         </div>
-    </footer>
+      </template>
+    </div>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <!-- Inline ENV for production hosting (non-sensitive EmailJS identifiers) -->
-    <script>
-        window.ENV = window.ENV || {
-            EMAILJS_SERVICE_ID: 'service_1xzcin8',
-            EMAILJS_TEMPLATE_ID: 'template_60wvkxw',
-            EMAILJS_PUBLIC_KEY: 't0s2lAoINc5OJqR1c'
-        };
-    </script>
-    <script src="js/translations.js"></script>
-    <script src="js/animations.js"></script>
-    <script src="js/email.js"></script>
-    
-    <script>
-        function cvApp() {
-            return {
-                showNav: false,
-                mobileMenuOpen: false,
-                mobileQuickNavOpen: false,
-                activeSection: 'accueil',
-                scrollProgress: 0,
-                showSummary: true,
-                showBackToTop: false,
-                chatbotOpen: false,
-                chatbotInput: '',
-                chatbotMessages: [],
-                sections: [
-                    { id: 'accueil', label: 'Accueil', translationKey: 'nav.home', icon: 'fas fa-home' },
-                    { id: 'apropos', label: 'À propos', translationKey: 'nav.about', icon: 'fas fa-user' },
-                    { id: 'competences', label: 'Compétences', translationKey: 'nav.skills', icon: 'fas fa-cogs' },
-                    { id: 'formation', label: 'Formation', translationKey: 'nav.education', icon: 'fas fa-graduation-cap' },
-                    { id: 'experience', label: 'Expérience', translationKey: 'nav.experience', icon: 'fas fa-briefcase' },
-                    { id: 'projets', label: 'Projets', translationKey: 'nav.projects', icon: 'fas fa-project-diagram' },
-                    { id: 'benevolat', label: 'Bénévolat', translationKey: 'nav.volunteer', icon: 'fas fa-heart' },
-                    { id: 'contact', label: 'Contact', translationKey: 'nav.contact', icon: 'fas fa-envelope' }
-                ],
-                techContext: [
-                    'Angular', 'Tailwind CSS', 'TypeScript', 'Node.js', 'Spring Boot',
-                    'SwiftUI', 'Firebase', 'PostgreSQL', 'MongoDB', 'AWS', 'Docker', 'Keycloak'
-                ],
-                
-                init() {
-                    this.updateProgress();
-                    this.setActiveSectionFromHash();
-                    // Show nav on scroll
-                    window.addEventListener('scroll', () => {
-                        this.showNav = window.scrollY > 100;
-                        this.updateProgress();
-                    });
-                    window.addEventListener('hashchange', () => this.setActiveSectionFromHash());
-                    
-                    this.initSectionObserver();
-                    
-                    // Initialize AOS
-                    AOS.init({
-                        duration: 800,
-                        easing: 'ease-in-out',
-                        once: true,
-                        offset: 100
-                    });
-                    
-                    // Initialize Language Manager
-                    window.languageManager = new LanguageManager();
-                },
-                
-                updateProgress() {
-                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-                    this.scrollProgress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
-                    this.showBackToTop = window.scrollY > 400;
-                    // Mettre à jour la section active lors du scroll (fallback pour garantir la mise à jour)
-                    this.updateActiveSectionFallback();
-                },
-                
-                initSectionObserver() {
-                    if (!('IntersectionObserver' in window)) {
-                        this.updateActiveSectionFallback();
-                        return;
-                    }
-                    
-                    const observer = new IntersectionObserver((entries) => {
-                        // Trouver la section la plus visible
-                        let mostVisible = null;
-                        let maxRatio = 0;
-                        
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
-                                maxRatio = entry.intersectionRatio;
-                                mostVisible = entry.target.id;
-                            }
-                        });
-                        
-                        // Si une section est visible, la mettre à jour
-                        if (mostVisible) {
-                            this.activeSection = mostVisible;
-                        }
-                    }, {
-                        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0],
-                        rootMargin: '-20% 0px -60% 0px'
-                    });
-                    
-                    this.sections.forEach(section => {
-                        const el = document.getElementById(section.id);
-                        if (el) {
-                            observer.observe(el);
-                        }
-                    });
-                },
-                
-                updateActiveSectionFallback() {
-                    let closestSection = this.activeSection;
-                    let minDistance = Number.POSITIVE_INFINITY;
-                    const viewportTop = window.scrollY + 150; // Offset pour la navigation
-                    
-                    this.sections.forEach(section => {
-                        const el = document.getElementById(section.id);
-                        if (!el) return;
-                        const rect = el.getBoundingClientRect();
-                        const sectionTop = window.scrollY + rect.top;
-                        
-                        // Vérifier si la section est dans la zone visible
-                        if (sectionTop <= viewportTop && sectionTop + rect.height > viewportTop) {
-                            const distance = Math.abs(sectionTop - viewportTop);
-                            if (distance < minDistance) {
-                                minDistance = distance;
-                                closestSection = section.id;
-                            }
-                        }
-                    });
-                    
-                    // Si aucune section n'est trouvée, utiliser la première visible
-                    if (closestSection === this.activeSection && minDistance === Number.POSITIVE_INFINITY) {
-                        this.sections.forEach(section => {
-                            const el = document.getElementById(section.id);
-                            if (!el) return;
-                            const rect = el.getBoundingClientRect();
-                            const sectionTop = window.scrollY + rect.top;
-                            
-                            if (sectionTop <= viewportTop + 200) {
-                                closestSection = section.id;
-                            }
-                        });
-                    }
-                    
-                    if (closestSection !== this.activeSection) {
-                        this.activeSection = closestSection;
-                    }
-                },
-                
-                setActiveSectionFromHash() {
-                    const hash = window.location.hash.replace('#', '');
-                    if (hash && this.sections.some(section => section.id === hash)) {
-                        this.activeSection = hash;
-                    }
-                },
-                
-                scrollTo(elementId) {
-                    const element = document.getElementById(elementId);
-                    if (element) {
-                        element.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                        this.activeSection = elementId;
-                        if (window.history && window.history.replaceState) {
-                            window.history.replaceState(null, '', `#${elementId}`);
-                        } else {
-                            window.location.hash = elementId;
-                        }
-                    }
-                    this.mobileMenuOpen = false;
-                    this.mobileQuickNavOpen = false;
-                    if (elementId === 'accueil') {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
-                },
+    <!-- Input -->
+    <div class="px-4 pb-4 border-t border-white/10 pt-3">
+      <form @submit.prevent="sendChat" class="flex gap-2">
+        <input type="text" x-model="chatInput"
+          class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-electric-500/50 transition"
+          :placeholder="t('chat.placeholder')" autocomplete="off">
+        <button type="submit" class="w-10 h-10 rounded-xl bg-electric-500 hover:bg-electric-400 text-white flex items-center justify-center transition shrink-0">
+          <i class="fas fa-paper-plane text-sm"></i>
+        </button>
+      </form>
+      <p class="text-gray-600 text-xs mt-2 text-center" x-text="t('chat.hint')">Basé uniquement sur mon profil</p>
+    </div>
+  </div>
+</div>
 
-                getCurrentLanguage() {
-                    return window.languageManager?.currentLanguage || 'fr';
-                },
+<!-- Footer -->
+<footer class="bg-navy-900 border-t border-white/5 py-8">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <p class="text-gray-500 text-sm">© 2026 Fabrice Orgrick Kouonang · Athoville, N.-B.</p>
+    <p class="text-gray-600 text-xs" x-text="t('footer.made')">Fait avec passion · Angular · Node.js · Flutter · Azure</p>
+  </div>
+</footer>
 
-                sendChat() {
-                    const content = this.chatbotInput.trim();
-                    if (!content) return;
-                    this.chatbotMessages.push({ role: 'user', text: content });
-                    const lowerContent = content.toLowerCase();
-                    
-                    // Vérifier si la question est liée aux technologies du CV
-                    const techKeywords = [
-                        'angular', 'typescript', 'javascript', 'html', 'css', 'tailwind', 'react', 'vue',
-                        'node', 'express', 'spring', 'boot', 'c#', 'dotnet', '.net', 'api', 'rest',
-                        'swift', 'swiftui', 'swiftdata', 'ios', 'android', 'flutter', 'mobile',
-                        'postgresql', 'mysql', 'mongodb', 'oracle', 'database', 'sql',
-                        'aws', 'azure', 'cloud', 'docker', 'keycloak', 'jwt', 'firebase', 'firestore',
-                        'git', 'github', 'gitlab', 'deploy', 'backend', 'frontend', 'fullstack',
-                        'mailbox', 'gymapp', 'swiftdataexpenses', 'projet', 'project', 'application',
-                        'développement', 'development', 'code', 'programming', 'programmation',
-                        'sécurité', 'security', 'auth', 'authentification', 'ml', 'machine learning',
-                        'mobilenet', 'geolocation', 'camera', 'notification', 'push'
-                    ];
-                    
-                    const isTechRelated = techKeywords.some(keyword => lowerContent.includes(keyword));
-                    
-                    if (!isTechRelated) {
-                        // Rediriger vers la section contact
-                        const lang = this.getCurrentLanguage();
-                        const response = lang === 'fr' 
-                            ? `Merci pour votre question ! Pour des informations plus détaillées ou des questions spécifiques qui ne concernent pas directement mes technologies, je vous invite à me contacter via la section "Contact" ci-dessous. Je serai ravi de discuter de votre projet en détail !`
-                            : `Thank you for your question! For more detailed information or specific questions that don't directly relate to my technologies, I invite you to contact me via the "Contact" section below. I'd be happy to discuss your project in detail!`;
-                        
-                        this.chatbotMessages.push({ role: 'assistant', text: response });
-                        this.chatbotInput = '';
-                        
-                        // Scroll vers la section contact après un court délai
-                        setTimeout(() => {
-                            this.scrollTo('contact');
-                        }, 1500);
-                        
-                        this.$nextTick(() => {
-                            const panel = this.$refs.chatMessages;
-                            if (panel) {
-                                panel.scrollTop = panel.scrollHeight;
-                            }
-                        });
-                        return;
-                    }
-                    
-                    const related = this.techContext.filter(tech => lowerContent.includes(tech.toLowerCase()));
-                    const focus = related.length ? related : this.techContext.slice(0, 3);
-                    const response = this.buildChatbotResponse(content, focus);
-                    this.chatbotMessages.push({ role: 'assistant', text: response });
-                    this.chatbotInput = '';
-                    this.$nextTick(() => {
-                        const panel = this.$refs.chatMessages;
-                        if (panel) {
-                            panel.scrollTop = panel.scrollHeight;
-                        }
-                    });
-                },
+<!-- Typed.js -->
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-                buildChatbotResponse(prompt, focus) {
-                    const lang = this.getCurrentLanguage();
-                    const lowerPrompt = prompt.toLowerCase();
-                    
-                    // Détecter le type de besoin
-                    const isMobile = lowerPrompt.includes('mobile') || lowerPrompt.includes('ios') || lowerPrompt.includes('android') || lowerPrompt.includes('swift') || lowerPrompt.includes('flutter');
-                    const isBackend = lowerPrompt.includes('backend') || lowerPrompt.includes('api') || lowerPrompt.includes('server') || lowerPrompt.includes('node') || lowerPrompt.includes('express') || lowerPrompt.includes('database');
-                    const isFrontend = lowerPrompt.includes('frontend') || lowerPrompt.includes('angular') || lowerPrompt.includes('interface') || lowerPrompt.includes('ui') || lowerPrompt.includes('ux');
-                    const isSecurity = lowerPrompt.includes('sécurité') || lowerPrompt.includes('security') || lowerPrompt.includes('keycloak') || lowerPrompt.includes('auth');
-                    const isCloud = lowerPrompt.includes('cloud') || lowerPrompt.includes('aws') || lowerPrompt.includes('azure') || lowerPrompt.includes('deploy');
-                    const isProject = lowerPrompt.includes('projet') || lowerPrompt.includes('project') || lowerPrompt.includes('mailbox') || lowerPrompt.includes('gymapp');
-                    
-                    // Variantes de réponses pour plus de diversité
-                    const getRandomIntro = (lang) => {
-                        const introsFr = [
-                            `Excellent ! Avec mes compétences en ${focus.join(', ')}, `,
-                            `Parfait ! Grâce à mon expertise en ${focus.join(', ')}, `,
-                            `Très bien ! En utilisant ${focus.join(', ')}, `,
-                            `D'accord ! Basé sur mes connaissances en ${focus.join(', ')}, `
-                        ];
-                        const introsEn = [
-                            `Great! With my skills in ${focus.join(', ')}, `,
-                            `Perfect! Thanks to my expertise in ${focus.join(', ')}, `,
-                            `Excellent! Using ${focus.join(', ')}, `,
-                            `Alright! Based on my knowledge in ${focus.join(', ')}, `
-                        ];
-                        const intros = lang === 'fr' ? introsFr : introsEn;
-                        return intros[Math.floor(Math.random() * intros.length)];
-                    };
-                    
-                    let response = getRandomIntro(lang);
-                    
-                    if (lang === 'fr') {
-                        if (isMobile) {
-                            const variants = [
-                                `je crée des applications mobiles natives iOS avec SwiftUI et SwiftData, ainsi que des apps cross-platform avec Flutter. J'intègre la géolocalisation, la caméra, Firebase/Firestore, et des modèles de machine learning comme MobileNetV2 pour la reconnaissance d'images.`,
-                                `mon expertise mobile couvre le développement iOS natif (SwiftUI/SwiftData) et Flutter. J'ai notamment intégré dans mes projets la géolocalisation, l'accès caméra, Firebase/Firestore, et des capacités ML avec MobileNetV2.`,
-                                `je développe des solutions mobiles natives iOS et cross-platform. Dans mes projets, j'ai implémenté la géolocalisation, l'utilisation de la caméra, l'intégration Firebase/Firestore, et des fonctionnalités de reconnaissance d'images avec MobileNetV2.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        } else if (isBackend) {
-                            const variants = [
-                                `je conçois et développe des APIs REST robustes avec Node.js/Express, Spring Boot, ou C#/.NET. Pour les bases de données, j'utilise PostgreSQL, MySQL, MongoDB, ou Oracle selon les besoins du projet. La sécurité est assurée via Keycloak et JWT.`,
-                                `mon approche backend inclut la création d'APIs REST avec Node.js/Express, Spring Boot, ou C#/.NET. Je travaille avec diverses bases de données (PostgreSQL, MySQL, MongoDB, Oracle) et j'implémente l'authentification avec Keycloak et JWT.`,
-                                `je construis des backends performants avec Node.js/Express, Spring Boot, ou C#/.NET. J'utilise PostgreSQL, MySQL, MongoDB, ou Oracle pour le stockage, et j'assure la sécurité avec Keycloak et JWT.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        } else if (isFrontend) {
-                            const variants = [
-                                `je développe des interfaces utilisateur modernes et réactives avec Angular, TypeScript, Tailwind CSS, HTML5 et CSS3. Mon objectif est de créer des expériences utilisateur fluides, responsives et visuellement attrayantes.`,
-                                `mon expertise frontend se concentre sur Angular, TypeScript, Tailwind CSS, HTML5/CSS3. Je privilégie l'expérience utilisateur, la performance, la responsivité et des animations soignées.`,
-                                `je crée des interfaces web modernes avec Angular et TypeScript, en utilisant Tailwind CSS pour le styling. Je m'assure que chaque interface soit responsive, performante et offre une excellente expérience utilisateur.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        } else if (isSecurity) {
-                            const variants = [
-                                `j'implémente des systèmes d'authentification sécurisés avec Keycloak et JWT. Je sécurise les APIs, gère les permissions utilisateur, et applique les meilleures pratiques de sécurité dans tous mes projets.`,
-                                `la sécurité est une priorité dans mes développements. J'utilise Keycloak pour l'authentification, JWT pour les tokens, et je m'assure que toutes les APIs sont protégées avec des permissions appropriées.`,
-                                `je mets en place des mécanismes de sécurité robustes avec Keycloak et JWT. Je sécurise les endpoints API, gère les rôles et permissions, et applique les standards de sécurité les plus récents.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        } else if (isCloud) {
-                            const variants = [
-                                `je déploie des applications sur AWS (je suis certifié Cloud Practitioner) et je prépare la certification Azure Developer Associate. J'utilise Docker pour la containerisation et j'optimise les déploiements cloud.`,
-                                `mon expertise cloud inclut AWS (certifié Cloud Practitioner) et la préparation pour Azure Developer Associate. Je containerise avec Docker et j'optimise les architectures cloud pour la performance et le coût.`,
-                                `je travaille avec AWS (certifié Cloud Practitioner) et prépare Azure Developer Associate. J'utilise Docker pour la containerisation et je conçois des architectures cloud scalables et efficaces.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        } else if (isProject) {
-                            const variants = [
-                                `mes projets récents incluent MailBox (système de messagerie avec Node.js/Express/MySQL), SwiftDataExpensesSave (app iOS avec Firebase), et GymApp (SwiftUI avec ML). Chaque projet intègre un backend complet, une interface moderne, l'authentification et des bases de données.`,
-                                `j'ai développé plusieurs projets : MailBox (Node.js/Express/MySQL), SwiftDataExpensesSave (iOS/Firebase), et GymApp (SwiftUI/ML). Tous incluent des fonctionnalités complètes : backend, frontend, authentification et gestion de données.`,
-                                `parmi mes réalisations : MailBox (messagerie web avec Node.js/Express/MySQL), SwiftDataExpensesSave (application iOS avec Firebase), et GymApp (SwiftUI avec reconnaissance d'images). Chaque projet démontre une stack complète et fonctionnelle.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        } else {
-                            const variants = [
-                                `je peux vous accompagner sur un projet full-stack complet. Je combine frontend (Angular), backend (Node.js/Express ou Spring Boot), mobile (iOS/Flutter), et cloud (AWS) pour créer des solutions complètes.`,
-                                `mon expertise couvre tout le spectre du développement : frontend avec Angular, backend avec Node.js/Express ou Spring Boot, mobile iOS/Flutter, et déploiement cloud sur AWS.`,
-                                `je développe des solutions full-stack complètes en combinant Angular pour le frontend, Node.js/Express ou Spring Boot pour le backend, SwiftUI/Flutter pour le mobile, et AWS pour le cloud.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        }
-                        
-                        const endings = [
-                            ` Avez-vous des questions spécifiques sur l'un de ces aspects ?`,
-                            ` Souhaitez-vous plus de détails sur un point particulier ?`,
-                            ` N'hésitez pas si vous avez besoin de précisions !`
-                        ];
-                        response += endings[Math.floor(Math.random() * endings.length)];
-                    } else {
-                        if (isMobile) {
-                            const variants = [
-                                `I create native iOS mobile applications with SwiftUI and SwiftData, as well as cross-platform apps with Flutter. I integrate geolocation, camera, Firebase/Firestore, and machine learning models like MobileNetV2 for image recognition.`,
-                                `my mobile expertise covers native iOS development (SwiftUI/SwiftData) and Flutter. I've integrated geolocation, camera access, Firebase/Firestore, and ML capabilities with MobileNetV2 in my projects.`,
-                                `I develop native iOS and cross-platform mobile solutions. In my projects, I've implemented geolocation, camera usage, Firebase/Firestore integration, and image recognition features with MobileNetV2.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        } else if (isBackend) {
-                            const variants = [
-                                `I design and develop robust REST APIs with Node.js/Express, Spring Boot, or C#/.NET. For databases, I use PostgreSQL, MySQL, MongoDB, or Oracle depending on project needs. Security is ensured via Keycloak and JWT.`,
-                                `my backend approach includes creating REST APIs with Node.js/Express, Spring Boot, or C#/.NET. I work with various databases (PostgreSQL, MySQL, MongoDB, Oracle) and implement authentication with Keycloak and JWT.`,
-                                `I build performant backends with Node.js/Express, Spring Boot, or C#/.NET. I use PostgreSQL, MySQL, MongoDB, or Oracle for storage, and ensure security with Keycloak and JWT.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        } else if (isFrontend) {
-                            const variants = [
-                                `I develop modern and reactive user interfaces with Angular, TypeScript, Tailwind CSS, HTML5 and CSS3. My goal is to create smooth, responsive and visually appealing user experiences.`,
-                                `my frontend expertise focuses on Angular, TypeScript, Tailwind CSS, HTML5/CSS3. I prioritize user experience, performance, responsiveness and polished animations.`,
-                                `I create modern web interfaces with Angular and TypeScript, using Tailwind CSS for styling. I ensure every interface is responsive, performant and offers an excellent user experience.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        } else if (isSecurity) {
-                            const variants = [
-                                `I implement secure authentication systems with Keycloak and JWT. I secure APIs, manage user permissions, and apply security best practices in all my projects.`,
-                                `security is a priority in my developments. I use Keycloak for authentication, JWT for tokens, and ensure all APIs are protected with appropriate permissions.`,
-                                `I set up robust security mechanisms with Keycloak and JWT. I secure API endpoints, manage roles and permissions, and apply the latest security standards.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        } else if (isCloud) {
-                            const variants = [
-                                `I deploy applications on AWS (I'm Cloud Practitioner certified) and I'm preparing for Azure Developer Associate certification. I use Docker for containerization and optimize cloud deployments.`,
-                                `my cloud expertise includes AWS (Cloud Practitioner certified) and preparation for Azure Developer Associate. I containerize with Docker and optimize cloud architectures for performance and cost.`,
-                                `I work with AWS (Cloud Practitioner certified) and preparing for Azure Developer Associate. I use Docker for containerization and design scalable and efficient cloud architectures.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        } else if (isProject) {
-                            const variants = [
-                                `my recent projects include MailBox (messaging system with Node.js/Express/MySQL), SwiftDataExpensesSave (iOS app with Firebase), and GymApp (SwiftUI with ML). Each project integrates a complete backend, modern interface, authentication and databases.`,
-                                `I've developed several projects: MailBox (Node.js/Express/MySQL), SwiftDataExpensesSave (iOS/Firebase), and GymApp (SwiftUI/ML). All include complete features: backend, frontend, authentication and data management.`,
-                                `among my achievements: MailBox (web messaging with Node.js/Express/MySQL), SwiftDataExpensesSave (iOS application with Firebase), and GymApp (SwiftUI with image recognition). Each project demonstrates a complete and functional stack.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        } else {
-                            const variants = [
-                                `I can assist you with a complete full-stack project. I combine frontend (Angular), backend (Node.js/Express or Spring Boot), mobile (iOS/Flutter), and cloud (AWS) to create complete solutions.`,
-                                `my expertise covers the full development spectrum: frontend with Angular, backend with Node.js/Express or Spring Boot, iOS/Flutter mobile, and cloud deployment on AWS.`,
-                                `I develop complete full-stack solutions by combining Angular for frontend, Node.js/Express or Spring Boot for backend, SwiftUI/Flutter for mobile, and AWS for cloud.`
-                            ];
-                            response += variants[Math.floor(Math.random() * variants.length)];
-                        }
-                        
-                        const endings = [
-                            ` Do you have specific questions about any of these aspects?`,
-                            ` Would you like more details on a particular point?`,
-                            ` Feel free to ask if you need clarification!`
-                        ];
-                        response += endings[Math.floor(Math.random() * endings.length)];
-                    }
-                    
-                    return response;
-                }
-            }
+<script>
+function app() {
+  return {
+    lang: 'fr',
+    scrollPct: 0,
+    showNav: false,
+    menuOpen: false,
+    active: 'hero',
+    chatOpen: false,
+    chatInput: '',
+    chatMessages: [],
+    form: { name:'', email:'', subject:'', message:'' },
+    formSending: false,
+    formSent: false,
+    formError: false,
+
+    sections: [
+      { id:'about', key:'nav.about' },
+      { id:'skills', key:'nav.skills' },
+      { id:'experience', key:'nav.exp' },
+      { id:'projects', key:'nav.proj' },
+      { id:'education', key:'nav.edu' },
+      { id:'contact', key:'nav.contact' }
+    ],
+
+    jobs: [
+      { title:'job.innov.title', org:'job.innov.org', date:'job.innov.date',
+        bullets:['job.innov.b1','job.innov.b2'],
+        tags:['OpenVLA','Python','Zivid 2D/3D','UR5','IA'] },
+      { title:'job.intern.title', org:'job.intern.org', date:'job.intern.date',
+        bullets:['job.intern.b1','job.intern.b2'],
+        tags:['LMS','SCORM','H5P','Moodle','Brikspace'] },
+      { title:'job.tutor.title', org:'job.tutor.org', date:'job.tutor.date',
+        bullets:['job.tutor.b1'],
+        tags:['Python','Analyse de données'] },
+      { title:'job.ultraspec.title', org:'job.ultraspec.org', date:'job.ultraspec.date',
+        bullets:['job.ultraspec.b1','job.ultraspec.b2'],
+        tags:['Angular','Node.js','Express','PostgreSQL','iOS','REST API'] },
+      { title:'job.fac.title', org:'job.fac.org', date:'job.fac.date', bullets:[], tags:['Réserve'] },
+      { title:'job.ccnb2.title', org:'job.ccnb2.org', date:'job.ccnb2.date',
+        bullets:['job.ccnb2.b1'],
+        tags:['Support TI','Windows','Réseau'] },
+      { title:'job.clear.title', org:'job.clear.org', date:'job.clear.date',
+        bullets:['job.clear.b1','job.clear.b2','job.clear.b3'],
+        tags:['Node.js','C#','.NET','Spring Boot','MySQL','PostgreSQL','Oracle','REST API'] },
+      { title:'job.libermann.title', org:'job.libermann.org', date:'job.libermann.date',
+        bullets:['job.libermann.b1'],
+        tags:['Informatique','Pédagogie'] }
+    ],
+
+    projects: [
+      { id:'robot', titleKey:'p.robot.title', descKey:'p.robot.desc',
+        icon:'fas fa-robot', gradient:'linear-gradient(135deg,#1e3a5f,#0e2a44)',
+        tags:['Python','OpenVLA','Zivid','IA','UR5'],
+        github:'https://github.com/LeFab70', demo:null },
+      { id:'proconnect', titleKey:'p.proconnect.title', descKey:'p.proconnect.desc',
+        icon:'fas fa-heartbeat', gradient:'linear-gradient(135deg,#1a2744,#1e293b)',
+        tags:['Flutter','ASP.NET','Azure','Firebase','GitHub Actions','CI/CD'],
+        github:'https://github.com/LeFab70', demo:null },
+      { id:'guesthub', titleKey:'p.guesthub.title', descKey:'p.guesthub.desc',
+        icon:'fas fa-users', gradient:'linear-gradient(135deg,#1B4332,#065F46)',
+        tags:['Angular','Node.js','PostgreSQL','iOS','REST API'],
+        github:'https://github.com/LeFab70', demo:null },
+      { id:'mailbox', titleKey:'p.mailbox.title', descKey:'p.mailbox.desc',
+        icon:'fas fa-envelope-open-text', gradient:'linear-gradient(135deg,#312e81,#1e1b4b)',
+        tags:['Node.js','Express','MySQL','Tailwind CSS','JavaScript'],
+        github:'https://github.com/LeFab70', demo:null },
+      { id:'expense', titleKey:'p.expense.title', descKey:'p.expense.desc',
+        icon:'fab fa-apple', gradient:'linear-gradient(135deg,#2d1b4e,#4a1d96)',
+        tags:['SwiftUI','SwiftData','Firebase','Firestore','Géolocalisation'],
+        github:'https://github.com/LeFab70', demo:null },
+      { id:'cv', titleKey:'p.cv.title', descKey:'p.cv.desc',
+        icon:'fas fa-globe', gradient:'linear-gradient(135deg,#1e3a5f,#155e75)',
+        tags:['HTML5','CSS3','JavaScript','Tailwind','Alpine.js'],
+        github:'https://github.com/LeFab70/MonCvOnline', demo:'https://lefab70.github.io/MonCvOnline/CVOncline/' }
+    ],
+
+    education: [
+      { degreeKey:'edu.laval', school:'edu.laval.school', date:'Sept. 2026', noteKey:'edu.laval.note' },
+      { degreeKey:'edu.ccnb', school:'edu.ccnb.school', date:'2024 – 2026', noteKey:'edu.ccnb.note', honour:true },
+      { degreeKey:'edu.godin', school:'edu.godin.school', date:'Oct. 2024 – Oct. 2025', noteKey:null },
+      { degreeKey:'edu.azure', school:'edu.azure.school', date:'En cours', noteKey:null },
+      { degreeKey:'edu.aws', school:'edu.aws.school', date:'Oct. 2022', noteKey:null },
+      { degreeKey:'edu.google', school:'edu.google.school', date:'Juil. 2023', noteKey:null }
+    ],
+
+    translations: {
+      fr: {
+        'nav.about':'À propos','nav.skills':'Compétences','nav.exp':'Expérience',
+        'nav.proj':'Projets','nav.edu':'Formation','nav.contact':'Contact',
+        'hero.available':'Disponible pour de nouvelles opportunités',
+        'hero.desc':'Développeur full stack avec 14+ ans d\'expérience — Angular · Node.js · Spring Boot · Flutter · Azure.',
+        'hero.cta1':'Voir mes projets','hero.cta2':'Me contacter','hero.download':'Télécharger CV',
+        'stat.years':'ans d\'expérience','stat.projects':'projets majeurs','stat.certs':'certifications cloud',
+        'about.title':'À propos',
+        'about.p1':'Développeur full stack passionné avec plus de 14 ans d\'expérience en conception et développement d\'applications web, mobiles et d\'API. Diplômé du CCNB Bathurst (2026) et admis au Baccalauréat en informatique à l\'Université Laval pour septembre 2026.',
+        'about.p2':'Mon parcours allie une solide expérience professionnelle acquise sur 14 ans chez Clear Solutions (Cameroun) à une formation récente au Québec et en Atlantique, me donnant une vision à la fois technique et humaine du développement logiciel.',
+        'about.p3':'Réserviste dans les Forces armées canadiennes, enseignant bénévole de français, et contributeur à des projets d\'IA appliquée à la robotique — je crois que la technologie doit avoir un impact réel sur les communautés.',
+        'about.location':'Athoville, N.-B.','about.remote':'Disponible en télétravail',
+        'about.fr':'Français — natif','about.en':'Anglais — professionnel',
+        'about.military':'Réserviste FAC','about.since':'Depuis sept. 2025',
+        'about.laval':'Bac informatique',
+        'skills.title':'Compétences','skills.frontend':'Frontend','skills.backend':'Backend',
+        'skills.mobile':'Mobile','skills.db':'Bases de données','skills.cloud':'Cloud & DevOps','skills.tools':'Outils & IA',
+        'exp.title':'Expérience professionnelle',
+        'job.innov.title':'Stagiaire INNOV','job.innov.org':'CCNB Bathurst','job.innov.date':'Mai 2026 – présent',
+        'job.innov.b1':'Développer un démonstrateur OpenVLA pour robot UR5 avec caméra Zivid 2D/3D — traitement de données multimodales et intégration IA embarquée.','job.innov.b2':'Veille technologique active sur les modèles vision-langage-action.',
+        'job.intern.title':'Stagiaire en programmation','job.intern.org':'CCNB Bathurst','job.intern.date':'Jan. – Juin 2026',
+        'job.intern.b1':'Migration de contenus pédagogiques Moodle → Brikspace/Ardoise : modules SCORM, H5P, activités d\'apprentissage.','job.intern.b2':'Documentation technique et collaboration avec les équipes pédagogiques.',
+        'job.tutor.title':'Tuteur','job.tutor.org':'CCNB Bathurst','job.tutor.date':'Oct. 2025 – Jan. 2026',
+        'job.tutor.b1':'Accompagnement d\'étudiants en analyse de données, mathématiques et Python.',
+        'job.ultraspec.title':'Développeur — Projet GuestHub','job.ultraspec.org':'Ultraspec','job.ultraspec.date':'Sept. – Nov. 2025',
+        'job.ultraspec.b1':'Développement complet d\'une application de gestion de visiteurs : dashboard Angular, API REST Node.js/Express, PostgreSQL, iOS.','job.ultraspec.b2':'Architecture client/serveur et déploiement en production.',
+        'job.fac.title':'Réserviste','job.fac.org':'Forces armées canadiennes','job.fac.date':'Depuis sept. 2025',
+        'job.ccnb2.title':'Technicien TI','job.ccnb2.org':'CCNB Campbellton','job.ccnb2.date':'Fév. – Juin 2024',
+        'job.ccnb2.b1':'Support technique, inventaire d\'équipements et résolution d\'incidents utilisateurs.',
+        'job.clear.title':'Développeur FullStack','job.clear.org':'Clear Solutions, Cameroun','job.clear.date':'Mai 2008 – Mai 2022',
+        'job.clear.b1':'14 ans de développement d\'applications web et d\'API REST sur mesure pour des clients entreprise.','job.clear.b2':'Conception d\'architectures backend, modélisation de bases de données relationnelles et intégrations tierces.','job.clear.b3':'Formation des utilisateurs finaux et documentation technique complète.',
+        'job.libermann.title':'Enseignant principal en informatique','job.libermann.org':'Collège catholique Libermann, Cameroun','job.libermann.date':'Fév. 2013 – Juil. 2022',
+        'job.libermann.b1':'Enseignement de l\'informatique au secondaire. Auteur d\'un livret pédagogique (niveaux 1-6) adopté dans 30+ établissements à Douala.',
+        'proj.title':'Portfolio','proj.subtitle':'Projets sélectionnés — code source disponible sur GitHub',
+        'p.robot.title':'OpenVLA Robot — INNOV','p.robot.desc':'Démonstrateur d\'intelligence artificielle embarquée pour robot UR5 industriel avec caméra Zivid 2D/3D. Modèle vision-langage-action en conditions réelles.',
+        'p.proconnect.title':'ProconnectNB','p.proconnect.desc':'Application médicale multiplateforme de gestion des rappels de médication et des rendez-vous médicaux. Pipeline CI/CD complet, notifications push, RBAC.',
+        'p.guesthub.title':'GuestHub (Ultraspec)','p.guesthub.desc':'Application web de gestion de visiteurs avec tableau de bord Angular, contrôle d\'accès par rôles, rapports et API REST Node.js/PostgreSQL.',
+        'p.mailbox.title':'MailBox','p.mailbox.desc':'Système web de gestion de messagerie avec interface moderne Tailwind CSS, authentification JWT et API REST Node.js/Express/MySQL.',
+        'p.expense.title':'ExpenseApp (iOS)','p.expense.desc':'Application iOS native en SwiftUI avec SwiftData — gestion de dépenses, géolocalisation, caméra et backend Firebase/Firestore.',
+        'p.cv.title':'CV en ligne (ce site)','p.cv.desc':'Portfolio et CV interactif bilingue FR/EN avec animations, sections dynamiques et expérience recruteuse optimisée.',
+        'edu.title':'Formation',
+        'edu.laval':'Baccalauréat en informatique','edu.laval.school':'Université Laval, Québec','edu.laval.note':'Admission confirmée — début septembre 2026.',
+        'edu.ccnb':'Diplôme en programmation mobile et applications','edu.ccnb.school':'CCNB Bathurst, N.-B.','edu.ccnb.note':'Diplôme obtenu juin 2026.',
+        'edu.godin':'AEC en programmation des applications mobiles','edu.godin.school':'Collège Gérald-Godin, Québec',
+        'edu.azure':'Microsoft Azure Developer Associate (en cours)','edu.azure.school':'Microsoft',
+        'edu.aws':'AWS Certified Cloud Practitioner','edu.aws.school':'Amazon Web Services',
+        'edu.google':'Certificat professionnel en soutien TI','edu.google.school':'Google',
+        'vol.title':'Bénévolat & Engagement',
+        'vol.teacher':'Enseignant bénévole de français','vol.teacher.org':'Maison de l\'Amitié · Montréal',
+        'vol.teacher.desc':'Enseignement du français langue seconde à des immigrants nouvellement arrivés au Canada.',
+        'vol.dev':'Développeur bénévole FullStack','vol.dev.org':'Carrefour Parent Enfant · Montréal',
+        'vol.dev.desc':'Développement de solutions web pour un organisme communautaire de soutien aux familles.',
+        'vol.author':'Auteur d\'un livret pédagogique en informatique',
+        'vol.author.desc':'Livret en 6 niveaux adopté dans plus de 30 établissements scolaires à Douala, Cameroun.',
+        'contact.title':'Me contacter','contact.subtitle':'Je suis ouvert aux opportunités — n\'hésitez pas à me contacter.',
+        'footer.made':'Conçu avec passion · Angular · Node.js · Flutter · Azure',
+        'edu.honour':'🏅 Mention d\'honneur',
+        'contact.reach':'Retrouvez-moi ici',
+        'contact.form.title':'Envoyer un message',
+        'contact.form.name':'Nom complet','contact.form.name.ph':'Votre nom',
+        'contact.form.email':'Courriel','contact.form.email.ph':'votre@email.com',
+        'contact.form.subject':'Objet','contact.form.subject.ph':'Ex : Opportunité de collaboration',
+        'contact.form.message':'Message','contact.form.message.ph':'Décrivez votre projet ou votre question...',
+        'contact.form.send':'Envoyer le message','contact.form.sending':'Envoi en cours...',
+        'contact.form.success':'Message envoyé avec succès !','contact.form.success2':'Je vous répondrai dans les plus brefs délais.',
+        'contact.form.another':'Envoyer un autre message','contact.form.error':'Erreur d\'envoi. Écrivez-moi directement à kouonang2002@gmail.com',
+        'chat.title':'Assistant FK','chat.online':'En ligne','chat.empty':'Posez une question sur mes compétences ou projets...',
+        'chat.placeholder':'Ex : Parle-moi de Spring Boot...','chat.hint':'Basé uniquement sur mon profil'
+      },
+      en: {
+        'nav.about':'About','nav.skills':'Skills','nav.exp':'Experience',
+        'nav.proj':'Projects','nav.edu':'Education','nav.contact':'Contact',
+        'hero.available':'Open to new opportunities',
+        'hero.desc':'Full stack developer with 14+ years of experience — Angular · Node.js · Spring Boot · Flutter · Azure.',
+        'hero.cta1':'View my projects','hero.cta2':'Contact me','hero.download':'Download CV',
+        'stat.years':'years of experience','stat.projects':'major projects','stat.certs':'cloud certifications',
+        'about.title':'About me',
+        'about.p1':'Passionate full stack developer with 14+ years of experience designing and developing web, mobile, and API applications. Graduate of CCNB Bathurst (2026) and admitted to the Bachelor of Computer Science at Université Laval starting September 2026.',
+        'about.p2':'My background combines 14 years of professional development experience at Clear Solutions (Cameroon) with recent training in Québec and Atlantic Canada, giving me both deep technical expertise and strong human-centred values.',
+        'about.p3':'Canadian Armed Forces Reservist, volunteer French teacher, and contributor to applied AI robotics projects — I believe technology must have a real impact on communities.',
+        'about.location':'Athoville, N.B.','about.remote':'Available for remote work',
+        'about.fr':'French — native','about.en':'English — professional',
+        'about.military':'CAF Reservist','about.since':'Since Sept. 2025',
+        'about.laval':'B.Sc. Computer Science',
+        'skills.title':'Skills','skills.frontend':'Frontend','skills.backend':'Backend',
+        'skills.mobile':'Mobile','skills.db':'Databases','skills.cloud':'Cloud & DevOps','skills.tools':'Tools & AI',
+        'exp.title':'Professional Experience',
+        'job.innov.title':'INNOV Research Intern','job.innov.org':'CCNB Bathurst','job.innov.date':'May 2026 – present',
+        'job.innov.b1':'Developing an OpenVLA demonstrator for a UR5 robot with a Zivid 2D/3D camera — multimodal data processing and embedded AI integration.','job.innov.b2':'Active technology watch on vision-language-action models.',
+        'job.intern.title':'Programming Intern','job.intern.org':'CCNB Bathurst','job.intern.date':'Jan. – June 2026',
+        'job.intern.b1':'Migrating pedagogical content from Moodle to Brikspace/Ardoise: SCORM modules, H5P, learning activities.','job.intern.b2':'Technical documentation and collaboration with pedagogical teams.',
+        'job.tutor.title':'Tutor','job.tutor.org':'CCNB Bathurst','job.tutor.date':'Oct. 2025 – Jan. 2026',
+        'job.tutor.b1':'Academic support for students in data analysis, mathematics, and Python.',
+        'job.ultraspec.title':'Developer — GuestHub Project','job.ultraspec.org':'Ultraspec','job.ultraspec.date':'Sept. – Nov. 2025',
+        'job.ultraspec.b1':'Full development of a visitor management application: Angular dashboard, Node.js/Express REST API, PostgreSQL, iOS.','job.ultraspec.b2':'Client/server architecture and production deployment.',
+        'job.fac.title':'Reservist','job.fac.org':'Canadian Armed Forces','job.fac.date':'Since Sept. 2025',
+        'job.ccnb2.title':'IT Technician','job.ccnb2.org':'CCNB Campbellton','job.ccnb2.date':'Feb. – June 2024',
+        'job.ccnb2.b1':'Technical support, equipment inventory, and user incident resolution.',
+        'job.clear.title':'FullStack Developer','job.clear.org':'Clear Solutions, Cameroon','job.clear.date':'May 2008 – May 2022',
+        'job.clear.b1':'14 years developing custom web applications and REST APIs for enterprise clients.','job.clear.b2':'Backend architecture design, relational database modelling, and third-party integrations.','job.clear.b3':'End-user training and full technical documentation.',
+        'job.libermann.title':'Lead IT Teacher','job.libermann.org':'Collège Catholique Libermann, Cameroon','job.libermann.date':'Feb. 2013 – Jul. 2022',
+        'job.libermann.b1':'Taught computer science at secondary level. Authored a 6-level IT textbook adopted in 30+ schools in Douala.',
+        'proj.title':'Portfolio','proj.subtitle':'Selected projects — source code available on GitHub',
+        'p.robot.title':'OpenVLA Robot — INNOV','p.robot.desc':'Embedded AI demonstrator for an industrial UR5 robot with Zivid 2D/3D camera. Vision-language-action model in real conditions.',
+        'p.proconnect.title':'ProconnectNB','p.proconnect.desc':'Multiplatform medical app for managing medication reminders and medical appointments. Full CI/CD pipeline, push notifications, RBAC.',
+        'p.guesthub.title':'GuestHub (Ultraspec)','p.guesthub.desc':'Visitor management web app with Angular dashboard, role-based access control, reports, and Node.js/PostgreSQL REST API.',
+        'p.mailbox.title':'MailBox','p.mailbox.desc':'Web-based messaging system with modern Tailwind CSS UI, JWT authentication, and Node.js/Express/MySQL REST API.',
+        'p.expense.title':'ExpenseApp (iOS)','p.expense.desc':'Native iOS app in SwiftUI with SwiftData — expense tracking, geolocation, camera, and Firebase/Firestore backend.',
+        'p.cv.title':'Online CV (this site)','p.cv.desc':'Bilingual FR/EN interactive portfolio and CV with animations, dynamic sections, and recruiter-optimised UX.',
+        'edu.title':'Education',
+        'edu.laval':'Bachelor of Computer Science','edu.laval.school':'Université Laval, Québec','edu.laval.note':'Admitted — starting September 2026.',
+        'edu.ccnb':'Diploma in Mobile & Application Programming','edu.ccnb.school':'CCNB Bathurst, N.B.','edu.ccnb.note':'Diploma obtained June 2026.',
+        'edu.godin':'AEC in Mobile Application Programming','edu.godin.school':'Collège Gérald-Godin, Québec',
+        'edu.azure':'Microsoft Azure Developer Associate (in progress)','edu.azure.school':'Microsoft',
+        'edu.aws':'AWS Certified Cloud Practitioner','edu.aws.school':'Amazon Web Services',
+        'edu.google':'Google IT Support Professional Certificate','edu.google.school':'Google',
+        'vol.title':'Volunteering & Community',
+        'vol.teacher':'Volunteer French Teacher','vol.teacher.org':'Maison de l\'Amitié · Montréal',
+        'vol.teacher.desc':'Teaching French as a second language to newly arrived immigrants in Canada.',
+        'vol.dev':'Volunteer FullStack Developer','vol.dev.org':'Carrefour Parent Enfant · Montréal',
+        'vol.dev.desc':'Web development for a community support organisation for families.',
+        'vol.author':'Author of an IT Pedagogical Booklet',
+        'vol.author.desc':'6-level IT workbook adopted in 30+ schools in Douala, Cameroon.',
+        'contact.title':'Get in touch','contact.subtitle':'I\'m open to opportunities — feel free to reach out.',
+        'footer.made':'Crafted with passion · Angular · Node.js · Flutter · Azure',
+        'edu.honour':'🏅 With Honours',
+        'contact.reach':'Find me here',
+        'contact.form.title':'Send a message',
+        'contact.form.name':'Full name','contact.form.name.ph':'Your name',
+        'contact.form.email':'Email','contact.form.email.ph':'your@email.com',
+        'contact.form.subject':'Subject','contact.form.subject.ph':'E.g. Collaboration opportunity',
+        'contact.form.message':'Message','contact.form.message.ph':'Describe your project or question...',
+        'contact.form.send':'Send message','contact.form.sending':'Sending...',
+        'contact.form.success':'Message sent!','contact.form.success2':'I\'ll get back to you as soon as possible.',
+        'contact.form.another':'Send another message','contact.form.error':'Send error. Email me directly at kouonang2002@gmail.com',
+        'chat.title':'FK Assistant','chat.online':'Online','chat.empty':'Ask me about my skills or projects...',
+        'chat.placeholder':'E.g. Tell me about Spring Boot...','chat.hint':'Based only on my profile'
+      }
+    },
+
+    t(key) {
+      return (this.translations[this.lang] && this.translations[this.lang][key]) || key;
+    },
+
+    setLang(l) {
+      this.lang = l;
+      document.documentElement.lang = l;
+    },
+
+    onScroll() {
+      const s = document.documentElement;
+      this.scrollPct = (window.scrollY / (s.scrollHeight - s.clientHeight)) * 100;
+      this.showNav = window.scrollY > 80;
+
+      // Active section
+      for (const sec of this.sections) {
+        const el = document.getElementById(sec.id);
+        if (el) {
+          const { top } = el.getBoundingClientRect();
+          if (top <= 120) this.active = sec.id;
         }
-    </script>
+      }
+
+      // Fade-in
+      document.querySelectorAll('.fade-in').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 60) el.classList.add('visible');
+      });
+    },
+
+    scrollTo(id) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    },
+
+    sendEmail() {
+      this.formSending = true;
+      this.formError = false;
+      if (window.emailjs) {
+        emailjs.init('t0s2lAoINc5OJqR1c');
+        emailjs.send('service_1xzcin8', 'template_60wvkxw', {
+          from_name: this.form.name,
+          from_email: this.form.email,
+          subject: this.form.subject || 'Message depuis le portfolio',
+          message: this.form.message,
+          reply_to: this.form.email
+        }).then(() => {
+          this.formSending = false;
+          this.formSent = true;
+        }).catch(() => {
+          this.formSending = false;
+          this.formError = true;
+        });
+      } else {
+        // Fallback : ouvrir le client mail
+        window.location.href = `mailto:kouonang2002@gmail.com?subject=${encodeURIComponent(this.form.subject)}&body=${encodeURIComponent(this.form.message)}`;
+        this.formSending = false;
+        this.formSent = true;
+      }
+    },
+
+    sendChat() {
+      const q = this.chatInput.trim();
+      if (!q) return;
+      this.chatMessages.push({ role:'user', text:q });
+      this.chatInput = '';
+      const reply = this.buildReply(q.toLowerCase());
+      setTimeout(() => {
+        this.chatMessages.push({ role:'assistant', text:reply });
+        this.$nextTick(() => {
+          const el = this.$refs.chatMsgs;
+          if (el) el.scrollTop = el.scrollHeight;
+        });
+      }, 400);
+    },
+
+    buildReply(q) {
+      const fr = this.lang === 'fr';
+      if (q.match(/angular|frontend|interface|ui|ux|tailwind/))
+        return fr ? 'Je maîtrise Angular avec TypeScript, HTML5, CSS3 et Tailwind CSS. J\'ai conçu des tableaux de bord et portails web responsives avec contrôle d\'accès par rôles (ex : GuestHub, ProconnectNB).' : 'I master Angular with TypeScript, HTML5, CSS3 and Tailwind CSS. I have built dashboards and responsive web portals with role-based access (e.g. GuestHub, ProconnectNB).';
+      if (q.match(/node|express|backend|api|rest/))
+        return fr ? 'Côté backend, j\'utilise Node.js/Express pour créer des API REST sécurisées avec JWT. J\'ai aussi de l\'expérience avec Spring Boot (Java) et C#/.NET.' : 'For backend, I use Node.js/Express to build secure REST APIs with JWT. I also have experience with Spring Boot (Java) and C#/.NET.';
+      if (q.match(/spring|java|boot/))
+        return fr ? 'J\'utilise Spring Boot pour des API REST Java robustes avec JPA/Hibernate, sécurité Spring Security et documentation Swagger.' : 'I use Spring Boot for robust Java REST APIs with JPA/Hibernate, Spring Security, and Swagger documentation.';
+      if (q.match(/flutter|mobile|ios|swift|swiftui/))
+        return fr ? 'Je développe des apps mobiles avec Flutter (Dart) pour le cross-platform et SwiftUI pour iOS natif. Mes projets intègrent Firebase, géolocalisation et notifications push.' : 'I develop mobile apps with Flutter (Dart) for cross-platform and SwiftUI for native iOS. My projects include Firebase, geolocation, and push notifications.';
+      if (q.match(/azure|aws|cloud|firebase|docker|ci\/cd|github action/))
+        return fr ? 'Je suis certifié AWS Cloud Practitioner et je travaille avec Azure (déploiements, pipelines CI/CD via GitHub Actions), Firebase et Docker.' : 'I am AWS Cloud Practitioner certified and work with Azure (deployments, CI/CD pipelines via GitHub Actions), Firebase, and Docker.';
+      if (q.match(/mongo|postgresql|mysql|database|sql/))
+        return fr ? 'J\'ai de l\'expérience avec MySQL, PostgreSQL, MongoDB, SQLite et Oracle. Je maîtrise la modélisation relationnelle et les ORM (Mongoose, Sequelize, Hibernate, Prisma).' : 'I have experience with MySQL, PostgreSQL, MongoDB, SQLite and Oracle. I master relational modelling and ORMs (Mongoose, Sequelize, Hibernate, Prisma).';
+      if (q.match(/proconnect|médic|medical|soin|rendez/))
+        return fr ? 'ProconnectNB est une app médicale multiplateforme (Flutter/ASP.NET/Azure/Firebase) avec rappels de médication, gestion de RDV et pipeline CI/CD complet sur GitHub Actions → Azure.' : 'ProconnectNB is a multiplatform medical app (Flutter/ASP.NET/Azure/Firebase) with medication reminders, appointment management, and a full CI/CD pipeline on GitHub Actions → Azure.';
+      if (q.match(/robot|openvla|ia|intelligence|innov|ur5|zivid/))
+        return fr ? 'Dans mon stage INNOV au CCNB, je développe un démonstrateur OpenVLA pour robot UR5 industriel avec caméra Zivid 2D/3D — modèle vision-langage-action en conditions réelles.' : 'In my INNOV internship at CCNB, I am developing an OpenVLA demonstrator for an industrial UR5 robot with a Zivid 2D/3D camera — a vision-language-action model in real conditions.';
+      if (q.match(/expérience|experience|ans|year|parcours/))
+        return fr ? 'J\'ai plus de 14 ans d\'expérience en développement logiciel, dont 14 ans comme développeur fullstack chez Clear Solutions (Cameroun), et des stages récents au CCNB Bathurst.' : 'I have 14+ years of software development experience, including 14 years as a fullstack developer at Clear Solutions (Cameroon), and recent internships at CCNB Bathurst.';
+      if (q.match(/formation|diplôme|université|laval|ccnb|étude|study/))
+        return fr ? 'Je suis diplômé du CCNB Bathurst (juin 2026, mention d\'honneur) et admis au Baccalauréat en informatique à l\'Université Laval (sept. 2026). J\'ai aussi fait l\'AEC au Collège Gérald-Godin.' : 'I graduated from CCNB Bathurst (June 2026, with honours) and am admitted to the Bachelor of Computer Science at Université Laval (Sept. 2026). I also completed the AEC at Collège Gérald-Godin.';
+      if (q.match(/contact|recrut|embauche|hire|emploi|job|poste/))
+        return fr ? 'Je suis disponible pour de nouvelles opportunités ! Utilisez le formulaire de contact ci-dessous ou écrivez-moi à kouonang2002@gmail.com. Je suis aussi sur LinkedIn : linkedin.com/in/fabrice-kouonang' : 'I am available for new opportunities! Use the contact form below or email me at kouonang2002@gmail.com. I\'m also on LinkedIn: linkedin.com/in/fabrice-kouonang';
+      return fr
+        ? 'Bonne question ! Pour plus de détails sur ce sujet ou pour discuter d\'un projet, utilisez le formulaire de contact — je vous répondrai rapidement. Vous pouvez aussi consulter mes projets dans la section Portfolio.'
+        : 'Great question! For more details on this topic or to discuss a project, use the contact form — I\'ll get back to you quickly. You can also check my projects in the Portfolio section.';
+    },
+
+    init() {
+      this.onScroll();
+      if (window.Typed) {
+        new Typed('#typed-el', {
+          strings: [
+            'Développeur Full Stack',
+            'Angular · Node.js',
+            'Spring Boot · Flutter',
+            'Azure · Firebase · CI/CD',
+            'Full Stack Developer'
+          ],
+          typeSpeed: 55, backSpeed: 30, backDelay: 1800, loop: true
+        });
+      }
+      // EmailJS init
+      if (window.emailjs) emailjs.init('t0s2lAoINc5OJqR1c');
+    }
+  }
+}
+</script>
 </body>
-</html
+</html>
