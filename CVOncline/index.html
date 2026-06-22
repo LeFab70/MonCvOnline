@@ -378,12 +378,12 @@ tailwind.config = {
           <h3 class="font-bold text-white" x-text="t('skills.frontend')">Frontend</h3>
         </div>
         <div class="flex flex-wrap gap-2">
-          <span class="skill-badge">Angular</span>
-          <span class="skill-badge">HTML5</span>
-          <span class="skill-badge">CSS3</span>
-          <span class="skill-badge">TypeScript</span>
-          <span class="skill-badge">JavaScript</span>
-          <span class="skill-badge">Tailwind CSS</span>
+          <span class="skill-badge"><i class="devicon-angularjs-plain colored"></i>Angular</span>
+          <span class="skill-badge"><i class="devicon-html5-plain colored"></i>HTML5</span>
+          <span class="skill-badge"><i class="devicon-css3-plain colored"></i>CSS3</span>
+          <span class="skill-badge"><i class="devicon-typescript-plain colored"></i>TypeScript</span>
+          <span class="skill-badge"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+          <span class="skill-badge"><i class="devicon-tailwindcss-plain colored"></i>Tailwind CSS</span>
         </div>
       </div>
 
@@ -394,11 +394,11 @@ tailwind.config = {
           <h3 class="font-bold text-white" x-text="t('skills.backend')">Backend</h3>
         </div>
         <div class="flex flex-wrap gap-2">
-          <span class="skill-badge green">Node.js</span>
-          <span class="skill-badge green">Express</span>
-          <span class="skill-badge green">Spring Boot</span>
-          <span class="skill-badge green">C# / .NET</span>
-          <span class="skill-badge green">Java</span>
+          <span class="skill-badge green"><i class="devicon-nodejs-plain colored"></i>Node.js</span>
+          <span class="skill-badge green"><i class="devicon-express-original"></i>Express</span>
+          <span class="skill-badge green"><i class="devicon-spring-plain colored"></i>Spring Boot</span>
+          <span class="skill-badge green"><i class="devicon-csharp-plain colored"></i>C# / .NET</span>
+          <span class="skill-badge green"><i class="devicon-java-plain colored"></i>Java</span>
           <span class="skill-badge green">API REST</span>
         </div>
       </div>
@@ -410,10 +410,10 @@ tailwind.config = {
           <h3 class="font-bold text-white" x-text="t('skills.mobile')">Mobile</h3>
         </div>
         <div class="flex flex-wrap gap-2">
-          <span class="skill-badge purple">Flutter (Dart)</span>
-          <span class="skill-badge purple">SwiftUI</span>
-          <span class="skill-badge purple">SwiftData</span>
-          <span class="skill-badge purple">iOS</span>
+          <span class="skill-badge purple"><i class="devicon-flutter-plain colored"></i>Flutter (Dart)</span>
+          <span class="skill-badge purple"><i class="devicon-swift-plain colored"></i>SwiftUI</span>
+          <span class="skill-badge purple"><i class="devicon-swift-plain colored"></i>SwiftData</span>
+          <span class="skill-badge purple"><i class="devicon-apple-original"></i>iOS</span>
         </div>
       </div>
 
@@ -424,11 +424,11 @@ tailwind.config = {
           <h3 class="font-bold text-white" x-text="t('skills.db')">Bases de données</h3>
         </div>
         <div class="flex flex-wrap gap-2">
-          <span class="skill-badge amber">MySQL</span>
-          <span class="skill-badge amber">PostgreSQL</span>
-          <span class="skill-badge amber">MongoDB</span>
-          <span class="skill-badge amber">SQLite</span>
-          <span class="skill-badge amber">Oracle</span>
+          <span class="skill-badge amber"><i class="devicon-mysql-plain colored"></i>MySQL</span>
+          <span class="skill-badge amber"><i class="devicon-postgresql-plain colored"></i>PostgreSQL</span>
+          <span class="skill-badge amber"><i class="devicon-mongodb-plain colored"></i>MongoDB</span>
+          <span class="skill-badge amber"><i class="devicon-sqlite-plain colored"></i>SQLite</span>
+          <span class="skill-badge amber"><i class="devicon-oracle-original colored"></i>Oracle</span>
         </div>
       </div>
 
@@ -439,12 +439,12 @@ tailwind.config = {
           <h3 class="font-bold text-white" x-text="t('skills.cloud')">Cloud & DevOps</h3>
         </div>
         <div class="flex flex-wrap gap-2">
-          <span class="skill-badge" style="color:#60A5FA">Azure</span>
-          <span class="skill-badge" style="color:#60A5FA">AWS ☁️ certifié</span>
-          <span class="skill-badge" style="color:#60A5FA">Firebase</span>
-          <span class="skill-badge" style="color:#60A5FA">Docker</span>
-          <span class="skill-badge" style="color:#60A5FA">GitHub Actions</span>
-          <span class="skill-badge" style="color:#60A5FA">Git</span>
+          <span class="skill-badge" style="color:#60A5FA"><i class="devicon-azure-plain colored"></i>Azure</span>
+          <span class="skill-badge" style="color:#60A5FA"><i class="devicon-amazonwebservices-plain-wordmark colored"></i>AWS certifié</span>
+          <span class="skill-badge" style="color:#60A5FA"><i class="devicon-firebase-plain colored"></i>Firebase</span>
+          <span class="skill-badge" style="color:#60A5FA"><i class="devicon-docker-plain colored"></i>Docker</span>
+          <span class="skill-badge" style="color:#60A5FA"><i class="devicon-githubactions-plain colored"></i>GitHub Actions</span>
+          <span class="skill-badge" style="color:#60A5FA"><i class="devicon-git-plain colored"></i>Git</span>
         </div>
       </div>
 
@@ -495,7 +495,10 @@ tailwind.config = {
             </ul>
             <div class="flex flex-wrap gap-2 mt-4">
               <template x-for="tag in job.tags" :key="tag">
-                <span class="tech-tag" x-text="tag"></span>
+                <span class="tech-tag flex items-center gap-1">
+                  <i :class="getIcon(tag)" class="text-sm" x-show="!!getIcon(tag)"></i>
+                  <span x-text="tag"></span>
+                </span>
               </template>
             </div>
           </div>
@@ -520,7 +523,10 @@ tailwind.config = {
           <div class="project-card-body">
             <div class="flex flex-wrap gap-1 mb-3">
               <template x-for="tag in p.tags" :key="tag">
-                <span class="tech-tag" x-text="tag"></span>
+                <span class="tech-tag flex items-center gap-1">
+                  <i :class="getIcon(tag)" class="text-sm" x-show="!!getIcon(tag)"></i>
+                  <span x-text="tag"></span>
+                </span>
               </template>
             </div>
             <h3 class="text-white font-bold text-lg mb-2" x-text="t(p.titleKey)"></h3>
@@ -781,6 +787,7 @@ tailwind.config = {
 
 <!-- Typed.js -->
 <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 <!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
@@ -858,7 +865,7 @@ function app() {
       { id:'cv', titleKey:'p.cv.title', descKey:'p.cv.desc',
         icon:'fas fa-globe', gradient:'linear-gradient(135deg,#1e3a5f,#155e75)',
         tags:['HTML5','CSS3','JavaScript','Tailwind','Alpine.js'],
-        github:'https://github.com/LeFab70/MonCvOnline', demo:'https://lefab70.github.io/MonCvOnline/CVOncline/' }
+        github:'https://github.com/LeFab70/MonCvOnline', demo:null }
     ],
 
     education: [
@@ -1010,6 +1017,41 @@ function app() {
         'chat.placeholder':'E.g. Tell me about Spring Boot...','chat.hint':'Based only on my profile'
       }
     },
+
+    iconMap: {
+      'Angular':'devicon-angularjs-plain colored',
+      'Node.js':'devicon-nodejs-plain colored',
+      'TypeScript':'devicon-typescript-plain colored',
+      'JavaScript':'devicon-javascript-plain colored',
+      'HTML5':'devicon-html5-plain colored',
+      'CSS3':'devicon-css3-plain colored',
+      'Tailwind CSS':'devicon-tailwindcss-plain colored',
+      'Express':'devicon-express-original',
+      'Spring Boot':'devicon-spring-plain colored',
+      'C#':'devicon-csharp-plain colored',
+      'C# / .NET':'devicon-csharp-plain colored',
+      'ASP.NET':'devicon-dot-net-plain colored',
+      'Java':'devicon-java-plain colored',
+      'Flutter':'devicon-flutter-plain colored',
+      'SwiftUI':'devicon-swift-plain colored',
+      'SwiftData':'devicon-swift-plain colored',
+      'iOS':'devicon-apple-original',
+      'Python':'devicon-python-plain colored',
+      'MySQL':'devicon-mysql-plain colored',
+      'PostgreSQL':'devicon-postgresql-plain colored',
+      'MongoDB':'devicon-mongodb-plain colored',
+      'SQLite':'devicon-sqlite-plain colored',
+      'Oracle':'devicon-oracle-original',
+      'Azure':'devicon-azure-plain colored',
+      'Firebase':'devicon-firebase-plain colored',
+      'Docker':'devicon-docker-plain colored',
+      'Git':'devicon-git-plain colored',
+      'GitHub':'devicon-github-original',
+      'GitHub Actions':'devicon-githubactions-plain colored',
+      'Dart':'devicon-dart-plain colored',
+    },
+
+    getIcon(tech) { return this.iconMap[tech] || null; },
 
     t(key) {
       return (this.translations[this.lang] && this.translations[this.lang][key]) || key;
