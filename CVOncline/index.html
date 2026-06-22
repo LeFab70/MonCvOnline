@@ -568,7 +568,7 @@ tailwind.config = {
           <template x-if="e.honour">
             <div class="inline-flex items-center gap-1.5 mt-3 bg-amber-500/10 border border-amber-500/30 text-amber-400 px-3 py-1 rounded-full text-xs font-semibold">
               <i class="fas fa-medal text-xs"></i>
-              <span x-text="t('edu.honour')">Mention d'honneur</span>
+              <span x-text="e.honourLabel ? t(e.honourLabel) : t('edu.honour')"></span>
             </div>
           </template>
         </div>
@@ -817,12 +817,12 @@ function app() {
     ],
 
     jobs: [
-      { title:'job.innov.title', org:'job.innov.org', date:'job.innov.date',
-        bullets:['job.innov.b1','job.innov.b2'],
-        tags:['OpenVLA','Python','Zivid 2D/3D','UR5','IA'] },
       { title:'job.intern.title', org:'job.intern.org', date:'job.intern.date',
         bullets:['job.intern.b1','job.intern.b2'],
         tags:['LMS','SCORM','H5P','Moodle','Brikspace'] },
+      { title:'job.innov.title', org:'job.innov.org', date:'job.innov.date',
+        bullets:['job.innov.b1','job.innov.b2'],
+        tags:['OpenVLA','Python','Zivid 2D/3D','UR5','IA'] },
       { title:'job.tutor.title', org:'job.tutor.org', date:'job.tutor.date',
         bullets:['job.tutor.b1'],
         tags:['Python','Analyse de données'] },
@@ -874,7 +874,8 @@ function app() {
       { degreeKey:'edu.godin', school:'edu.godin.school', date:'Oct. 2024 – Oct. 2025', noteKey:null },
       { degreeKey:'edu.azure', school:'edu.azure.school', date:'En cours', noteKey:null },
       { degreeKey:'edu.aws', school:'edu.aws.school', date:'Oct. 2022', noteKey:null },
-      { degreeKey:'edu.google', school:'edu.google.school', date:'Juil. 2023', noteKey:null }
+      { degreeKey:'edu.google', school:'edu.google.school', date:'Juil. 2023', noteKey:null },
+      { degreeKey:'edu.bts', school:'edu.bts.school', date:'2004 – 2006', noteKey:'edu.bts.note', honour:true, honourLabel:'edu.bts.honour' }
     ],
 
     translations: {
@@ -896,10 +897,10 @@ function app() {
         'skills.title':'Compétences','skills.frontend':'Frontend','skills.backend':'Backend',
         'skills.mobile':'Mobile','skills.db':'Bases de données','skills.cloud':'Cloud & DevOps','skills.tools':'Outils & IA',
         'exp.title':'Expérience professionnelle',
-        'job.innov.title':'Stagiaire INNOV','job.innov.org':'CCNB Bathurst','job.innov.date':'Mai 2026 – présent',
-        'job.innov.b1':'Développer un démonstrateur OpenVLA pour robot UR5 avec caméra Zivid 2D/3D — traitement de données multimodales et intégration IA embarquée.','job.innov.b2':'Veille technologique active sur les modèles vision-langage-action.',
-        'job.intern.title':'Stagiaire en programmation','job.intern.org':'CCNB Bathurst','job.intern.date':'Jan. – Juin 2026',
+        'job.intern.title':'Stagiaire en programmation','job.intern.org':'CCNB Bathurst','job.intern.date':'Jan. 2026 – présent',
         'job.intern.b1':'Migration de contenus pédagogiques Moodle → Brikspace/Ardoise : modules SCORM, H5P, activités d\'apprentissage.','job.intern.b2':'Documentation technique et collaboration avec les équipes pédagogiques.',
+        'job.innov.title':'Stagiaire INNOV','job.innov.org':'CCNB Bathurst','job.innov.date':'Mai 2026 – Juin 2026',
+        'job.innov.b1':'Développé un démonstrateur OpenVLA pour robot UR5 avec caméra Zivid 2D/3D — traitement de données multimodales et intégration IA embarquée.','job.innov.b2':'Veille technologique sur les modèles vision-langage-action.',
         'job.tutor.title':'Tuteur','job.tutor.org':'CCNB Bathurst','job.tutor.date':'Oct. 2025 – Jan. 2026',
         'job.tutor.b1':'Accompagnement d\'étudiants en analyse de données, mathématiques et Python.',
         'job.ultraspec.title':'Développeur — Projet GuestHub','job.ultraspec.org':'Ultraspec','job.ultraspec.date':'Sept. – Nov. 2025',
@@ -925,6 +926,7 @@ function app() {
         'edu.azure':'Microsoft Azure Developer Associate (en cours)','edu.azure.school':'Microsoft',
         'edu.aws':'AWS Certified Cloud Practitioner','edu.aws.school':'Amazon Web Services',
         'edu.google':'Certificat professionnel en soutien TI','edu.google.school':'Google',
+        'edu.bts':'BTS en maintenance des systèmes informatiques','edu.bts.school':'ISTDI / CS2I, Cameroun','edu.bts.note':'Major national de promotion.','edu.bts.honour':'🥇 Major national',
         'vol.title':'Bénévolat & Engagement',
         'vol.teacher':'Enseignant bénévole de français','vol.teacher.org':'Maison de l\'Amitié · Montréal',
         'vol.teacher.desc':'Enseignement du français langue seconde à des immigrants nouvellement arrivés au Canada.',
@@ -965,10 +967,10 @@ function app() {
         'skills.title':'Skills','skills.frontend':'Frontend','skills.backend':'Backend',
         'skills.mobile':'Mobile','skills.db':'Databases','skills.cloud':'Cloud & DevOps','skills.tools':'Tools & AI',
         'exp.title':'Professional Experience',
-        'job.innov.title':'INNOV Research Intern','job.innov.org':'CCNB Bathurst','job.innov.date':'May 2026 – present',
-        'job.innov.b1':'Developing an OpenVLA demonstrator for a UR5 robot with a Zivid 2D/3D camera — multimodal data processing and embedded AI integration.','job.innov.b2':'Active technology watch on vision-language-action models.',
-        'job.intern.title':'Programming Intern','job.intern.org':'CCNB Bathurst','job.intern.date':'Jan. – June 2026',
+        'job.intern.title':'Programming Intern','job.intern.org':'CCNB Bathurst','job.intern.date':'Jan. 2026 – present',
         'job.intern.b1':'Migrating pedagogical content from Moodle to Brikspace/Ardoise: SCORM modules, H5P, learning activities.','job.intern.b2':'Technical documentation and collaboration with pedagogical teams.',
+        'job.innov.title':'INNOV Research Intern','job.innov.org':'CCNB Bathurst','job.innov.date':'May – June 2026',
+        'job.innov.b1':'Developed an OpenVLA demonstrator for a UR5 robot with a Zivid 2D/3D camera — multimodal data processing and embedded AI integration.','job.innov.b2':'Technology watch on vision-language-action models.',
         'job.tutor.title':'Tutor','job.tutor.org':'CCNB Bathurst','job.tutor.date':'Oct. 2025 – Jan. 2026',
         'job.tutor.b1':'Academic support for students in data analysis, mathematics, and Python.',
         'job.ultraspec.title':'Developer — GuestHub Project','job.ultraspec.org':'Ultraspec','job.ultraspec.date':'Sept. – Nov. 2025',
@@ -994,6 +996,7 @@ function app() {
         'edu.azure':'Microsoft Azure Developer Associate (in progress)','edu.azure.school':'Microsoft',
         'edu.aws':'AWS Certified Cloud Practitioner','edu.aws.school':'Amazon Web Services',
         'edu.google':'Google IT Support Professional Certificate','edu.google.school':'Google',
+        'edu.bts':'BTS in Computer Systems Maintenance','edu.bts.school':'ISTDI / CS2I, Cameroon','edu.bts.note':'National top graduate of the graduating class.','edu.bts.honour':'🥇 National top graduate',
         'vol.title':'Volunteering & Community',
         'vol.teacher':'Volunteer French Teacher','vol.teacher.org':'Maison de l\'Amitié · Montréal',
         'vol.teacher.desc':'Teaching French as a second language to newly arrived immigrants in Canada.',
