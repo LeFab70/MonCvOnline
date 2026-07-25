@@ -1,8 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr" class="scroll-smooth" data-theme="dark">
 <head>
 <meta charset="UTF-8">
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      document.documentElement.setAttribute('data-theme', saved === 'light' ? 'light' : 'dark');
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark light">
 <title>Fabrice Kouonang — Full Stack Developer</title>
 <meta name="description" content="Portfolio et CV en ligne de Fabrice Orgrick Kouonang, développeur full stack Angular · Node.js · Spring Boot · Flutter · Azure">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚀%3C/text%3E%3C/svg%3E">
@@ -84,7 +95,6 @@ tailwind.config = {
   .skill-badge.green:hover { background: rgba(16,185,129,0.2); border-color: #10B981; color:#fff; }
   .skill-badge.purple { background: rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.25); color: #C4B5FD; }
   .skill-badge.amber { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.25); color: #FCD34D; }
-x
   /* Timeline */
   .timeline-line {
     position: absolute; left: 20px; top: 0; bottom: 0;
@@ -279,6 +289,73 @@ x
     transition: all 0.2s;
   }
   .vol-card:hover { border-color: rgba(16,185,129,0.3); transform: translateY(-2px); }
+
+  /* ═══════════════════════════════════════════════════════════
+     THÈME CLAIR — surcharge des classes Tailwind + composants
+     custom quand [data-theme="light"] est posé sur <html>.
+     Sombre = comportement par défaut (aucune surcharge requise).
+     ═══════════════════════════════════════════════════════════ */
+  :root[data-theme="light"] body { background:#F8FAFC; }
+
+  /* Fonds/textes Tailwind figés dans le markup */
+  :root[data-theme="light"] .bg-navy-900      { background:#F8FAFC !important; }
+  :root[data-theme="light"] .bg-navy-900\/90  { background:rgba(248,250,252,0.88) !important; }
+  :root[data-theme="light"] .bg-navy-800      { background:#FFFFFF !important; }
+  :root[data-theme="light"] .bg-navy-700      { background:#E2E8F0 !important; }
+  :root[data-theme="light"] .text-white       { color:#0F172A !important; }
+  :root[data-theme="light"] .text-gray-100    { color:#0F172A !important; }
+  :root[data-theme="light"] .text-gray-200    { color:#1E293B !important; }
+  :root[data-theme="light"] .text-gray-300    { color:#334155 !important; }
+  :root[data-theme="light"] .text-gray-400    { color:#64748B !important; }
+  :root[data-theme="light"] .text-gray-500    { color:#64748B !important; }
+  :root[data-theme="light"] .text-gray-600    { color:#94A3B8 !important; }
+  :root[data-theme="light"] .border-white\/5  { border-color:rgba(15,23,42,0.08) !important; }
+  :root[data-theme="light"] .border-white\/10 { border-color:rgba(15,23,42,0.12) !important; }
+  :root[data-theme="light"] .border-white\/20 { border-color:rgba(15,23,42,0.18) !important; }
+  :root[data-theme="light"] .bg-white\/5      { background:rgba(15,23,42,0.04) !important; }
+  :root[data-theme="light"] .bg-white\/10     { background:rgba(15,23,42,0.06) !important; }
+  :root[data-theme="light"] .bg-white\/20     { background:rgba(15,23,42,0.10) !important; }
+
+  /* Hero */
+  :root[data-theme="light"] .hero-bg {
+    background: linear-gradient(135deg, #EFF6FF 0%, #F8FAFC 45%, #ECFDF5 75%, #FFFFFF 100%);
+  }
+  :root[data-theme="light"] .hero-grid { background-image: radial-gradient(rgba(59,130,246,0.14) 1px, transparent 1px); }
+  :root[data-theme="light"] .avatar-inner { background:#FFFFFF; }
+
+  /* Composants custom (couleurs codées en dur dans le CSS) */
+  :root[data-theme="light"] .glass {
+    background: rgba(15,23,42,0.03);
+    border-color: rgba(15,23,42,0.08);
+  }
+  :root[data-theme="light"] .project-card { background:#FFFFFF; border-color: rgba(15,23,42,0.10); }
+  :root[data-theme="light"] .project-card:hover { box-shadow: 0 20px 40px rgba(15,23,42,0.12); }
+  :root[data-theme="light"] .edu-card { background:#FFFFFF; border-left-color:#3B82F6; }
+  :root[data-theme="light"] .vol-card { background:#FFFFFF; border-color: rgba(15,23,42,0.08); }
+  :root[data-theme="light"] .stat-card { border-color: rgba(59,130,246,0.25); }
+  :root[data-theme="light"] .timeline-dot { border-color:#F8FAFC; }
+  :root[data-theme="light"] .contact-link {
+    background: rgba(15,23,42,0.03);
+    border-color: rgba(15,23,42,0.08);
+    color: #334155;
+  }
+  :root[data-theme="light"] .contact-link:hover {
+    background: rgba(59,130,246,0.08);
+    border-color: rgba(59,130,246,0.3);
+    color: #0F172A;
+  }
+  :root[data-theme="light"] .nav-link { color: rgba(15,23,42,0.6); }
+  :root[data-theme="light"] .nav-link:hover, :root[data-theme="light"] .nav-link.active { color:#2563EB; }
+  :root[data-theme="light"] .lang-btn:not(.active) { color: rgba(15,23,42,0.5); }
+  :root[data-theme="light"] .lang-btn:not(.active):hover { color:#0F172A; }
+  :root[data-theme="light"] .mobile-menu { background:#FFFFFF !important; }
+
+  /* Toggle thème */
+  .theme-toggle {
+    width: 32px; height: 32px; border-radius: 9999px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
 </style>
 </head>
 
@@ -303,6 +380,9 @@ x
         <button class="lang-btn" :class="{active: lang==='fr'}" @click="setLang('fr')">FR</button>
         <button class="lang-btn" :class="{active: lang==='en'}" @click="setLang('en')">EN</button>
       </div>
+      <button class="theme-toggle bg-white/10 hover:bg-white/20" @click="toggleTheme()" :title="theme==='dark' ? t('theme.light') : t('theme.dark')" :aria-label="theme==='dark' ? t('theme.light') : t('theme.dark')">
+        <i class="fas text-xs" :class="theme==='dark' ? 'fa-sun text-amber-300' : 'fa-moon text-electric-400'"></i>
+      </button>
       <button class="md:hidden text-white" @click="menuOpen=!menuOpen"><i class="fas fa-bars text-xl"></i></button>
     </div>
   </div>
@@ -383,7 +463,7 @@ x
             <div class="text-xs text-gray-400 mt-1" x-text="t('stat.years')">ans d'expérience</div>
           </div>
           <div class="stat-card">
-            <div class="text-3xl font-black text-accent"><span id="stat-projects">5+</span></div>
+            <div class="text-3xl font-black text-accent"><span id="stat-projects">6+</span></div>
             <div class="text-xs text-gray-400 mt-1" x-text="t('stat.projects')">projets majeurs</div>
           </div>
           <div class="stat-card">
@@ -888,6 +968,7 @@ x
 function app() {
   return {
     lang: 'fr',
+    theme: 'dark',
     scrollPct: 0,
     showNav: false,
     menuOpen: false,
@@ -955,6 +1036,10 @@ function app() {
         icon:'fab fa-apple', gradient:'linear-gradient(135deg,#2d1b4e,#4a1d96)',
         tags:['SwiftUI','SwiftData','Firebase','Firestore','Géolocalisation'],
         github:'https://github.com/LeFab70', demo:null },
+      { id:'emprunt', titleKey:'p.emprunt.title', descKey:'p.emprunt.desc',
+        icon:'fas fa-book', gradient:'linear-gradient(135deg,#5b21b6,#312e81)',
+        tags:['C#','ASP.NET','Entity Framework Core','JWT','Swagger'],
+        github:'https://github.com/LeFab70', demo:null },
       { id:'cv', titleKey:'p.cv.title', descKey:'p.cv.desc',
         icon:'fas fa-globe', gradient:'linear-gradient(135deg,#1e3a5f,#155e75)',
         tags:['HTML5','CSS3','JavaScript','Tailwind','Alpine.js'],
@@ -975,6 +1060,7 @@ function app() {
       fr: {
         'nav.about':'À propos','nav.skills':'Compétences','nav.exp':'Expérience',
         'nav.proj':'Projets','nav.edu':'Formation','nav.contact':'Contact',
+        'theme.light':'Activer le mode clair','theme.dark':'Activer le mode sombre',
         'hero.available':'Disponible pour de nouvelles opportunités',
         'hero.desc':'Développeur full stack avec 14+ ans d\'expérience — Angular · Node.js · Spring Boot · Flutter · Azure.',
         'hero.cta1':'Voir mes projets','hero.cta2':'Me contacter','hero.download':'Télécharger CV',
@@ -1011,6 +1097,7 @@ function app() {
         'p.guesthub.title':'GuestHub (Ultraspec)','p.guesthub.desc':'Application web de gestion de visiteurs avec tableau de bord Angular, contrôle d\'accès par rôles, rapports et API REST Node.js/PostgreSQL.',
         'p.mailbox.title':'MailBox','p.mailbox.desc':'Système web de gestion de messagerie avec interface moderne Tailwind CSS, authentification JWT et API REST Node.js/Express/MySQL.',
         'p.expense.title':'ExpenseApp (iOS)','p.expense.desc':'Application iOS native en SwiftUI avec SwiftData — gestion de dépenses, géolocalisation, caméra et backend Firebase/Firestore.',
+        'p.emprunt.title':'Gestion des emprunts (API .NET)','p.emprunt.desc':'Mini API CRUD ASP.NET Core (Minimal API) pour la gestion des emprunts d\'une bibliothèque : livres, emprunteurs, emprunts. Architecture en couches (Controllers/Services/DTOs) avec injection de dépendances, authentification JWT sur toutes les routes, validation des entrées, Entity Framework Core + SQLite avec seed data, tests unitaires et documentation Swagger/OpenAPI.',
         'p.cv.title':'CV en ligne (ce site)','p.cv.desc':'Portfolio et CV interactif bilingue FR/EN avec animations, sections dynamiques et expérience recruteuse optimisée.',
         'edu.title':'Formation',
         'edu.laval':'Baccalauréat en informatique','edu.laval.school':'Université Laval, Québec','edu.laval.note':'Admission confirmée — début septembre 2026.',
@@ -1045,6 +1132,7 @@ function app() {
       en: {
         'nav.about':'About','nav.skills':'Skills','nav.exp':'Experience',
         'nav.proj':'Projects','nav.edu':'Education','nav.contact':'Contact',
+        'theme.light':'Switch to light mode','theme.dark':'Switch to dark mode',
         'hero.available':'Open to new opportunities',
         'hero.desc':'Full stack developer with 14+ years of experience — Angular · Node.js · Spring Boot · Flutter · Azure.',
         'hero.cta1':'View my projects','hero.cta2':'Contact me','hero.download':'Download CV',
@@ -1081,6 +1169,7 @@ function app() {
         'p.guesthub.title':'GuestHub (Ultraspec)','p.guesthub.desc':'Visitor management web app with Angular dashboard, role-based access control, reports, and Node.js/PostgreSQL REST API.',
         'p.mailbox.title':'MailBox','p.mailbox.desc':'Web-based messaging system with modern Tailwind CSS UI, JWT authentication, and Node.js/Express/MySQL REST API.',
         'p.expense.title':'ExpenseApp (iOS)','p.expense.desc':'Native iOS app in SwiftUI with SwiftData — expense tracking, geolocation, camera, and Firebase/Firestore backend.',
+        'p.emprunt.title':'Library Loan Management (.NET API)','p.emprunt.desc':'ASP.NET Core (Minimal API) CRUD mini API for library loan management: books, borrowers, loans. Layered architecture (Controllers/Services/DTOs) with dependency injection, JWT authentication on every route, input validation, Entity Framework Core + SQLite with seed data, unit tests, and Swagger/OpenAPI documentation.',
         'p.cv.title':'Online CV (this site)','p.cv.desc':'Bilingual FR/EN interactive portfolio and CV with animations, dynamic sections, and recruiter-optimised UX.',
         'edu.title':'Education',
         'edu.laval':'Bachelor of Computer Science','edu.laval.school':'Université Laval, Québec','edu.laval.note':'Admitted — starting September 2026.',
@@ -1156,6 +1245,19 @@ function app() {
     setLang(l) {
       this.lang = l;
       document.documentElement.lang = l;
+    },
+
+    initTheme() {
+      let saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      this.theme = saved === 'light' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', this.theme);
+    },
+
+    toggleTheme() {
+      this.theme = this.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', this.theme);
+      try { localStorage.setItem('theme', this.theme); } catch (e) {}
     },
 
     onScroll() {
@@ -1235,6 +1337,8 @@ function app() {
         return fr ? 'J\'ai de l\'expérience avec MySQL, PostgreSQL, MongoDB, SQLite et Oracle. Je maîtrise la modélisation relationnelle et les ORM (Mongoose, Sequelize, Hibernate, Prisma).' : 'I have experience with MySQL, PostgreSQL, MongoDB, SQLite and Oracle. I master relational modelling and ORMs (Mongoose, Sequelize, Hibernate, Prisma).';
       if (q.match(/proconnect|médic|medical|soin|rendez/))
         return fr ? 'ProconnectNB est une app médicale multiplateforme (Flutter/ASP.NET/Azure/Firebase) avec rappels de médication, gestion de RDV et pipeline CI/CD complet sur GitHub Actions → Azure.' : 'ProconnectNB is a multiplatform medical app (Flutter/ASP.NET/Azure/Firebase) with medication reminders, appointment management, and a full CI/CD pipeline on GitHub Actions → Azure.';
+      if (q.match(/emprunt|bibliothèque|library|c#|\.net|jwt|swagger|entity framework/))
+        return fr ? 'Mon projet de gestion des emprunts est une mini API CRUD en ASP.NET Core (Minimal API) : architecture en couches Controllers/Services/DTOs, authentification JWT, validation des entrées, Entity Framework Core + SQLite, tests unitaires et documentation Swagger.' : 'My library loan management project is a CRUD mini API built with ASP.NET Core (Minimal API): layered Controllers/Services/DTOs architecture, JWT authentication, input validation, Entity Framework Core + SQLite, unit tests, and Swagger documentation.';
       if (q.match(/robot|openvla|ia|intelligence|innov|ur5|zivid/))
         return fr ? 'Dans mon stage INNOV au CCNB, je développe un démonstrateur OpenVLA pour robot UR5 industriel avec caméra Zivid 2D/3D — modèle vision-langage-action en conditions réelles.' : 'In my INNOV internship at CCNB, I am developing an OpenVLA demonstrator for an industrial UR5 robot with a Zivid 2D/3D camera — a vision-language-action model in real conditions.';
       if (q.match(/expérience|experience|ans|year|parcours/))
@@ -1249,6 +1353,8 @@ function app() {
     },
 
     init() {
+      this.initTheme();
+
       // ── IntersectionObserver pour animations au scroll ──────────────────
       const io = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1305,7 +1411,7 @@ function app() {
           if (e.isIntersecting) {
             const targets = [
               { id: 'stat-years',    val: 14, suffix: '+' },
-              { id: 'stat-projects', val: 5,  suffix: '+' },
+              { id: 'stat-projects', val: 6,  suffix: '+' },
               { id: 'stat-certs',    val: 3,  suffix: ''  },
             ];
             targets.forEach(({ id, val, suffix }) => {
