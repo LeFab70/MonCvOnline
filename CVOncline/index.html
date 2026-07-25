@@ -141,9 +141,36 @@ tailwind.config = {
   }
   .stat-card:hover { transform: translateY(-4px); border-color: rgba(59,130,246,0.4); }
 
-  /* Nav link active */
-  .nav-link { color: rgba(255,255,255,0.7); transition: color 0.2s; }
-  .nav-link:hover, .nav-link.active { color: #60A5FA; }
+  /* Nav links — pills avec icône */
+  .nav-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    border: 1px solid transparent;
+    transition: all 0.25s cubic-bezier(.16,1,.3,1);
+  }
+  .nav-link i { font-size: 12px; opacity: 0.7; transition: all 0.25s; }
+  .nav-link:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+  }
+  .nav-link:hover i { opacity: 1; }
+  .nav-link.active {
+    color: #fff;
+    background: linear-gradient(135deg, rgba(59,130,246,0.28), rgba(16,185,129,0.16));
+    border-color: rgba(59,130,246,0.45);
+    box-shadow: 0 2px 12px rgba(59,130,246,0.2);
+  }
+  .nav-link.active i { opacity: 1; color: #60A5FA; }
+
+  /* Variante liste verticale (menu mobile) */
+  .nav-link-mobile { width: 100%; border-radius: 12px; padding: 12px 14px; }
+  .nav-link-mobile i:first-child { width: 18px; text-align: center; font-size: 14px; }
+  .nav-link-mobile:hover { transform: none; }
 
   /* Scroll progress */
   #scroll-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #3B82F6, #10B981); z-index: 10000; transition: width 0.15s linear; }
@@ -242,8 +269,6 @@ tailwind.config = {
   /* Edu card slide + glow */
   .edu-card:hover { box-shadow: 4px 0 20px rgba(16,185,129,0.1); }
 
-  /* Nav active underline */
-  .nav-link.active { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: #3B82F6; }
 
   /* Avatar ring */
   .avatar-ring {
@@ -349,7 +374,17 @@ tailwind.config = {
     color: #0F172A;
   }
   :root[data-theme="light"] .nav-link { color: rgba(15,23,42,0.6); }
-  :root[data-theme="light"] .nav-link:hover, :root[data-theme="light"] .nav-link.active { color:#2563EB; }
+  :root[data-theme="light"] .nav-link:hover {
+    color:#0F172A !important;
+    background: rgba(15,23,42,0.05) !important;
+    border-color: rgba(15,23,42,0.08) !important;
+  }
+  :root[data-theme="light"] .nav-link.active {
+    color:#1D4ED8 !important;
+    background: linear-gradient(135deg, rgba(59,130,246,0.14), rgba(16,185,129,0.10)) !important;
+    border-color: rgba(59,130,246,0.35) !important;
+  }
+  :root[data-theme="light"] .nav-link.active i { color:#2563EB !important; }
   :root[data-theme="light"] .lang-btn:not(.active) { color: rgba(15,23,42,0.5); }
   :root[data-theme="light"] .lang-btn:not(.active):hover { color:#0F172A; }
   :root[data-theme="light"] .mobile-menu { background:#FFFFFF !important; }
@@ -391,9 +426,12 @@ tailwind.config = {
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
     <a href="#hero" class="text-white font-bold text-lg tracking-tight">FK<span class="text-electric-400">.</span></a>
 
-    <div class="hidden md:flex items-center gap-8">
+    <div class="hidden md:flex items-center gap-1">
       <template x-for="s in sections" :key="s.id">
-        <a :href="'#'+s.id" class="nav-link text-sm font-medium" :class="{active: active===s.id}" x-text="t(s.key)"></a>
+        <a :href="'#'+s.id" class="nav-link text-sm" :class="{active: active===s.id}">
+          <i :class="s.icon"></i>
+          <span x-text="t(s.key)"></span>
+        </a>
       </template>
     </div>
 
@@ -413,13 +451,17 @@ tailwind.config = {
 <!-- Mobile menu -->
 <div class="fixed inset-0 z-40 md:hidden" x-show="menuOpen" x-transition.opacity>
   <div class="absolute inset-0 bg-black/60" @click="menuOpen=false"></div>
-  <div class="mobile-menu absolute right-0 top-0 h-full w-72 bg-navy-800 p-6 flex flex-col gap-4" :class="{open:menuOpen}">
+  <div class="mobile-menu absolute right-0 top-0 h-full w-72 bg-navy-800 p-6 flex flex-col gap-2" :class="{open:menuOpen}">
     <div class="flex justify-between items-center mb-4">
       <span class="font-bold text-white">Menu</span>
       <button @click="menuOpen=false" class="text-gray-400"><i class="fas fa-times text-xl"></i></button>
     </div>
     <template x-for="s in sections" :key="'m'+s.id">
-      <a :href="'#'+s.id" class="nav-link font-medium py-2 border-b border-white/5" @click="menuOpen=false" x-text="t(s.key)"></a>
+      <a :href="'#'+s.id" class="nav-link nav-link-mobile" :class="{active: active===s.id}" @click="menuOpen=false">
+        <i :class="s.icon"></i>
+        <span x-text="t(s.key)"></span>
+        <i class="fas fa-chevron-right ml-auto text-xs opacity-40"></i>
+      </a>
     </template>
   </div>
 </div>
@@ -1004,12 +1046,12 @@ function app() {
     formError: false,
 
     sections: [
-      { id:'about', key:'nav.about' },
-      { id:'skills', key:'nav.skills' },
-      { id:'experience', key:'nav.exp' },
-      { id:'projects', key:'nav.proj' },
-      { id:'education', key:'nav.edu' },
-      { id:'contact', key:'nav.contact' }
+      { id:'about', key:'nav.about', icon:'fas fa-user' },
+      { id:'skills', key:'nav.skills', icon:'fas fa-layer-group' },
+      { id:'experience', key:'nav.exp', icon:'fas fa-briefcase' },
+      { id:'projects', key:'nav.proj', icon:'fas fa-diagram-project' },
+      { id:'education', key:'nav.edu', icon:'fas fa-graduation-cap' },
+      { id:'contact', key:'nav.contact', icon:'fas fa-paper-plane' }
     ],
 
     jobs: [
@@ -1409,6 +1451,7 @@ function app() {
           strings: [
             'Développeur Full Stack',
             'Angular · Node.js',
+            'C# · ASP.NET Core',
             'Spring Boot · Flutter',
             'Azure · Firebase · CI/CD',
             'Full Stack Developer'
