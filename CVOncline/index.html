@@ -195,6 +195,10 @@ tailwind.config = {
   .skill-badge.green:hover  { box-shadow: 0 0 12px rgba(16,185,129,0.3); }
   .skill-badge.purple:hover { box-shadow: 0 0 12px rgba(139,92,246,0.3); }
   .skill-badge.amber:hover  { box-shadow: 0 0 12px rgba(245,158,11,0.3); }
+  .skill-badge.sky   { background: rgba(56,189,248,0.1); border-color: rgba(56,189,248,0.25); color: #60A5FA; }
+  .skill-badge.sky:hover   { background: rgba(56,189,248,0.2); border-color: #38BDF8; color:#fff; box-shadow: 0 0 12px rgba(56,189,248,0.3); }
+  .skill-badge.rose  { background: rgba(244,63,94,0.1); border-color: rgba(244,63,94,0.25); color: #FDA4AF; }
+  .skill-badge.rose:hover  { background: rgba(244,63,94,0.2); border-color: #FB7185; color:#fff; box-shadow: 0 0 12px rgba(244,63,94,0.3); }
 
   /* Project card shimmer on hover */
   .project-card::before {
@@ -349,6 +353,24 @@ tailwind.config = {
   :root[data-theme="light"] .lang-btn:not(.active) { color: rgba(15,23,42,0.5); }
   :root[data-theme="light"] .lang-btn:not(.active):hover { color:#0F172A; }
   :root[data-theme="light"] .mobile-menu { background:#FFFFFF !important; }
+
+  /* Skill badges — les teintes pastel pensées pour fond sombre passent
+     à des teintes plus saturées/foncées pour rester lisibles sur fond clair. */
+  :root[data-theme="light"] .skill-badge        { background: rgba(59,130,246,0.08)  !important; border-color: rgba(59,130,246,0.35)  !important; color:#1D4ED8 !important; }
+  :root[data-theme="light"] .skill-badge.green  { background: rgba(16,185,129,0.08)  !important; border-color: rgba(16,185,129,0.35) !important; color:#047857 !important; }
+  :root[data-theme="light"] .skill-badge.purple { background: rgba(139,92,246,0.08)  !important; border-color: rgba(139,92,246,0.35) !important; color:#6D28D9 !important; }
+  :root[data-theme="light"] .skill-badge.amber  { background: rgba(245,158,11,0.1)   !important; border-color: rgba(245,158,11,0.4)  !important; color:#B45309 !important; }
+  :root[data-theme="light"] .skill-badge.sky    { background: rgba(56,189,248,0.1)   !important; border-color: rgba(56,189,248,0.4) !important; color:#0369A1 !important; }
+  :root[data-theme="light"] .skill-badge.rose   { background: rgba(244,63,94,0.08)   !important; border-color: rgba(244,63,94,0.35) !important; color:#BE123C !important; }
+  :root[data-theme="light"] .skill-badge:hover        { color:#fff !important; }
+  :root[data-theme="light"] .skill-badge.green:hover  { color:#fff !important; }
+  :root[data-theme="light"] .skill-badge.purple:hover { color:#fff !important; }
+  :root[data-theme="light"] .skill-badge.amber:hover  { color:#fff !important; }
+  :root[data-theme="light"] .skill-badge.sky:hover    { color:#fff !important; }
+  :root[data-theme="light"] .skill-badge.rose:hover   { color:#fff !important; }
+
+  /* Tech-tags (expérience + portfolio) */
+  :root[data-theme="light"] .tech-tag { background: rgba(16,185,129,0.1) !important; border-color: rgba(16,185,129,0.4) !important; color:#047857 !important; }
 
   /* Toggle thème */
   .theme-toggle {
@@ -607,12 +629,12 @@ tailwind.config = {
           <h3 class="font-bold text-white" x-text="t('skills.cloud')">Cloud & DevOps</h3>
         </div>
         <div class="flex flex-wrap gap-2">
-          <span class="skill-badge" style="color:#60A5FA"><i class="devicon-azure-plain colored"></i>Azure</span>
-          <span class="skill-badge" style="color:#60A5FA"><i class="devicon-amazonwebservices-plain-wordmark colored"></i>AWS certifié</span>
-          <span class="skill-badge" style="color:#60A5FA"><i class="devicon-firebase-plain colored"></i>Firebase</span>
-          <span class="skill-badge" style="color:#60A5FA"><i class="devicon-docker-plain colored"></i>Docker</span>
-          <span class="skill-badge" style="color:#60A5FA"><i class="devicon-githubactions-plain colored"></i>GitHub Actions</span>
-          <span class="skill-badge" style="color:#60A5FA"><i class="devicon-git-plain colored"></i>Git</span>
+          <span class="skill-badge sky"><i class="devicon-azure-plain colored"></i>Azure</span>
+          <span class="skill-badge sky"><i class="devicon-amazonwebservices-plain-wordmark colored"></i>AWS certifié</span>
+          <span class="skill-badge sky"><i class="devicon-firebase-plain colored"></i>Firebase</span>
+          <span class="skill-badge sky"><i class="devicon-docker-plain colored"></i>Docker</span>
+          <span class="skill-badge sky"><i class="devicon-githubactions-plain colored"></i>GitHub Actions</span>
+          <span class="skill-badge sky"><i class="devicon-git-plain colored"></i>Git</span>
         </div>
       </div>
 
@@ -623,11 +645,11 @@ tailwind.config = {
           <h3 class="font-bold text-white" x-text="t('skills.tools')">Outils & IA</h3>
         </div>
         <div class="flex flex-wrap gap-2">
-          <span class="skill-badge" style="color:#FDA4AF">n8n</span>
-          <span class="skill-badge" style="color:#FDA4AF">OpenVLA</span>
-          <span class="skill-badge" style="color:#FDA4AF">SCORM / H5P</span>
-          <span class="skill-badge" style="color:#FDA4AF">Swagger</span>
-          <span class="skill-badge" style="color:#FDA4AF">Postman</span>
+          <span class="skill-badge rose">n8n</span>
+          <span class="skill-badge rose">OpenVLA</span>
+          <span class="skill-badge rose">SCORM / H5P</span>
+          <span class="skill-badge rose">Swagger</span>
+          <span class="skill-badge rose">Postman</span>
         </div>
       </div>
 
