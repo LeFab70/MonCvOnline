@@ -97,6 +97,8 @@ tailwind.config = {
   .skill-badge.green:hover { background: rgba(16,185,129,0.2); border-color: #10B981; color:#fff; }
   .skill-badge.purple { background: rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.25); color: #C4B5FD; }
   .skill-badge.amber { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.25); color: #FCD34D; }
+  .skill-badge.teal { background: rgba(20,184,166,0.1); border-color: rgba(20,184,166,0.25); color: #5EEAD4; }
+  .skill-badge.teal:hover { background: rgba(20,184,166,0.2); border-color: #14B8A6; color:#fff; }
   /* Timeline */
   .timeline-line {
     position: absolute; left: 20px; top: 0; bottom: 0;
@@ -228,6 +230,7 @@ tailwind.config = {
   .skill-badge.sky:hover   { background: rgba(56,189,248,0.2); border-color: #38BDF8; color:#fff; box-shadow: 0 0 12px rgba(56,189,248,0.3); }
   .skill-badge.rose  { background: rgba(244,63,94,0.1); border-color: rgba(244,63,94,0.25); color: #FDA4AF; }
   .skill-badge.rose:hover  { background: rgba(244,63,94,0.2); border-color: #FB7185; color:#fff; box-shadow: 0 0 12px rgba(244,63,94,0.3); }
+  .skill-badge.teal:hover  { box-shadow: 0 0 12px rgba(20,184,166,0.3); }
 
   /* Project card shimmer on hover */
   .project-card::before {
@@ -274,7 +277,7 @@ tailwind.config = {
 
   /* Avatar ring */
   .avatar-ring {
-    width: 160px; height: 160px; border-radius: 50%;
+    width: 200px; height: 200px; border-radius: 50%;
     background: linear-gradient(135deg, #3B82F6, #10B981);
     padding: 3px; margin: 0 auto;
   }
@@ -404,12 +407,14 @@ tailwind.config = {
   :root[data-theme="light"] .skill-badge.amber  { background: rgba(245,158,11,0.1)   !important; border-color: rgba(245,158,11,0.4)  !important; color:#B45309 !important; }
   :root[data-theme="light"] .skill-badge.sky    { background: rgba(56,189,248,0.1)   !important; border-color: rgba(56,189,248,0.4) !important; color:#0369A1 !important; }
   :root[data-theme="light"] .skill-badge.rose   { background: rgba(244,63,94,0.08)   !important; border-color: rgba(244,63,94,0.35) !important; color:#BE123C !important; }
+  :root[data-theme="light"] .skill-badge.teal   { background: rgba(20,184,166,0.08)  !important; border-color: rgba(20,184,166,0.35) !important; color:#0F766E !important; }
   :root[data-theme="light"] .skill-badge:hover        { color:#fff !important; }
   :root[data-theme="light"] .skill-badge.green:hover  { color:#fff !important; }
   :root[data-theme="light"] .skill-badge.purple:hover { color:#fff !important; }
   :root[data-theme="light"] .skill-badge.amber:hover  { color:#fff !important; }
   :root[data-theme="light"] .skill-badge.sky:hover    { color:#fff !important; }
   :root[data-theme="light"] .skill-badge.rose:hover   { color:#fff !important; }
+  :root[data-theme="light"] .skill-badge.teal:hover   { color:#fff !important; }
 
   /* Tech-tags (expérience + portfolio) */
   :root[data-theme="light"] .tech-tag { background: rgba(16,185,129,0.1) !important; border-color: rgba(16,185,129,0.4) !important; color:#047857 !important; }
@@ -642,6 +647,20 @@ tailwind.config = {
           <span class="skill-badge green"><i class="devicon-csharp-plain colored"></i>C# / .NET</span>
           <span class="skill-badge green"><i class="devicon-java-plain colored"></i>Java</span>
           <span class="skill-badge green">API REST</span>
+        </div>
+      </div>
+
+      <!-- Architecture & Messaging -->
+      <div class="glass rounded-xl p-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-10 h-10 rounded-lg bg-teal-500/20 flex items-center justify-center"><i class="fas fa-diagram-project text-teal-400"></i></div>
+          <h3 class="font-bold text-white" x-text="t('skills.arch')">Architecture & Messagerie</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-badge teal"><i class="devicon-apachekafka-original colored"></i>Apache Kafka</span>
+          <span class="skill-badge teal">Event-Driven Architecture</span>
+          <span class="skill-badge teal">Saga Pattern</span>
+          <span class="skill-badge teal">Microservices</span>
         </div>
       </div>
 
@@ -1151,6 +1170,7 @@ function app() {
         'about.military':'Réserviste FAC','about.since':'Depuis sept. 2025',
         'about.laval':'Bac informatique',
         'skills.title':'Compétences','skills.frontend':'Frontend','skills.backend':'Backend',
+        'skills.arch':'Architecture & Messagerie',
         'skills.mobile':'Mobile','skills.db':'Bases de données','skills.cloud':'Cloud & DevOps','skills.tools':'Outils & IA',
         'exp.title':'Expérience professionnelle',
         'job.intern.title':'Stagiaire en programmation','job.intern.org':'CCNB Bathurst','job.intern.date':'Jan. 2026 – présent',
@@ -1223,6 +1243,7 @@ function app() {
         'about.military':'CAF Reservist','about.since':'Since Sept. 2025',
         'about.laval':'B.Sc. Computer Science',
         'skills.title':'Skills','skills.frontend':'Frontend','skills.backend':'Backend',
+        'skills.arch':'Architecture & Messaging',
         'skills.mobile':'Mobile','skills.db':'Databases','skills.cloud':'Cloud & DevOps','skills.tools':'Tools & AI',
         'exp.title':'Professional Experience',
         'job.intern.title':'Programming Intern','job.intern.org':'CCNB Bathurst','job.intern.date':'Jan. 2026 – present',
