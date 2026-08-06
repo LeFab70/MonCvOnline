@@ -657,6 +657,7 @@ tailwind.config = {
           <span class="skill-badge teal">Event-Driven Architecture</span>
           <span class="skill-badge teal">Saga Pattern</span>
           <span class="skill-badge teal">Microservices</span>
+          <span class="skill-badge teal">WebSocket / STOMP</span>
         </div>
       </div>
 
@@ -1135,7 +1136,11 @@ function app() {
       { id:'cv', titleKey:'p.cv.title', descKey:'p.cv.desc',
         icon:'fas fa-globe', gradient:'linear-gradient(135deg,#1e3a5f,#155e75)',
         tags:['HTML5','CSS3','JavaScript','Tailwind','Alpine.js'],
-        github:'https://github.com/LeFab70/MonCvOnline', demo:null }
+        github:'https://github.com/LeFab70/MonCvOnline', demo:null },
+      { id:'springchat', titleKey:'p.springchat.title', descKey:'p.springchat.desc',
+        icon:'fas fa-comments', gradient:'linear-gradient(135deg,#134e4a,#0f766e)',
+        tags:['Spring Boot','WebSocket','STOMP','JPA','Flyway','PostgreSQL'],
+        github:'https://github.com/LeFab70/SpringChat', demo:null }
     ],
 
     education: [
@@ -1191,6 +1196,7 @@ function app() {
         'p.expense.title':'ExpenseApp (iOS)','p.expense.desc':'Application iOS native en SwiftUI avec SwiftData — gestion de dépenses, géolocalisation, caméra et backend Firebase/Firestore.',
         'p.emprunt.title':'Gestion des emprunts (API .NET)','p.emprunt.desc':'Mini API CRUD ASP.NET Core (Minimal API) pour la gestion des emprunts d\'une bibliothèque : livres, emprunteurs, emprunts. Architecture en couches (Controllers/Services/DTOs) avec injection de dépendances, authentification JWT sur toutes les routes, validation des entrées, Entity Framework Core + SQLite avec seed data, tests unitaires et documentation Swagger/OpenAPI.',
         'p.cv.title':'CV en ligne (ce site)','p.cv.desc':'Portfolio et CV interactif bilingue FR/EN avec animations, sections dynamiques et expérience recruteuse optimisée.',
+        'p.springchat.title':'SpringChat — Chat temps réel','p.springchat.desc':'Application de chat en temps réel avec Spring Boot (WebSocket + STOMP/SockJS) : diffusion publique et messages privés par session, historique rejoué à la connexion, persistance JPA avec migrations Flyway, architecture en couches (Controllers/Services/Repositories) et DTO dédié. Frontend vanilla JS avec dark/light mode.',
         'edu.title':'Formation',
         'edu.laval':'Baccalauréat en informatique','edu.laval.school':'Université Laval, Québec','edu.laval.note':'Admission confirmée — début septembre 2026.',
         'edu.ccnb':'Diplôme en programmation mobile et applications','edu.ccnb.school':'CCNB Bathurst, N.-B.','edu.ccnb.note':'Diplôme obtenu juin 2026.',
@@ -1263,6 +1269,7 @@ function app() {
         'p.expense.title':'ExpenseApp (iOS)','p.expense.desc':'Native iOS app in SwiftUI with SwiftData — expense tracking, geolocation, camera, and Firebase/Firestore backend.',
         'p.emprunt.title':'Library Loan Management (.NET API)','p.emprunt.desc':'ASP.NET Core (Minimal API) CRUD mini API for library loan management: books, borrowers, loans. Layered architecture (Controllers/Services/DTOs) with dependency injection, JWT authentication on every route, input validation, Entity Framework Core + SQLite with seed data, unit tests, and Swagger/OpenAPI documentation.',
         'p.cv.title':'Online CV (this site)','p.cv.desc':'Bilingual FR/EN interactive portfolio and CV with animations, dynamic sections, and recruiter-optimised UX.',
+        'p.springchat.title':'SpringChat — Real-Time Chat','p.springchat.desc':'Real-time chat app built with Spring Boot (WebSocket + STOMP/SockJS): public broadcast and per-session private messages, history replayed on connect, JPA persistence with Flyway migrations, layered architecture (Controllers/Services/Repositories) and a dedicated DTO layer. Vanilla JS frontend with dark/light mode.',
         'edu.title':'Education',
         'edu.laval':'Bachelor of Computer Science','edu.laval.school':'Université Laval, Québec','edu.laval.note':'Admitted — starting September 2026.',
         'edu.ccnb':'Diploma in Mobile & Application Programming','edu.ccnb.school':'CCNB Bathurst, N.B.','edu.ccnb.note':'Diploma obtained June 2026.',
