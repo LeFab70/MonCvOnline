@@ -1141,7 +1141,11 @@ function app() {
       { id:'springchat', titleKey:'p.springchat.title', descKey:'p.springchat.desc',
         icon:'fas fa-comments', gradient:'linear-gradient(135deg,#134e4a,#0f766e)',
         tags:['Spring Boot','WebSocket','STOMP','JPA','Flyway','PostgreSQL'],
-        github:'https://github.com/LeFab70/SpringChat', demo:null }
+        github:'https://github.com/LeFab70/SpringChat', demo:null },
+      { id:'notifyorder', titleKey:'p.notifyorder.title', descKey:'p.notifyorder.desc',
+        icon:'fas fa-truck-fast', gradient:'linear-gradient(135deg,#78350f,#b45309)',
+        tags:['Spring Boot','WebSocket','STOMP','JPA','Flyway'],
+        github:'https://github.com/LeFab70/NotificationOrder', demo:'https://www.loom.com/share/7753cbd241b74f07bc58aea075eed64b' }
     ],
 
     education: [
@@ -1198,6 +1202,7 @@ function app() {
         'p.emprunt.title':'Gestion des emprunts (API .NET)','p.emprunt.desc':'Mini API CRUD ASP.NET Core (Minimal API) pour la gestion des emprunts d\'une bibliothèque : livres, emprunteurs, emprunts. Architecture en couches (Controllers/Services/DTOs) avec injection de dépendances, authentification JWT sur toutes les routes, validation des entrées, Entity Framework Core + SQLite avec seed data, tests unitaires et documentation Swagger/OpenAPI.',
         'p.cv.title':'CV en ligne (ce site)','p.cv.desc':'Portfolio et CV interactif bilingue FR/EN avec animations, sections dynamiques et expérience recruteuse optimisée.',
         'p.springchat.title':'SpringChat — Chat temps réel','p.springchat.desc':'Application de chat en temps réel avec Spring Boot (WebSocket + STOMP/SockJS) : diffusion publique et messages privés par session, historique rejoué à la connexion, persistance JPA avec migrations Flyway, architecture en couches (Controllers/Services/Repositories) et DTO dédié. Frontend vanilla JS avec dark/light mode.',
+        'p.notifyorder.title':'Suivi de commande en temps réel (WebSocket)','p.notifyorder.desc':'Démo de suivi de commande en temps réel : le back-office fait évoluer le statut d\'une commande et le client la suit en direct (stepper vertical), sans recharger la page. WebSocket (STOMP/SockJS) réservé à la diffusion serveur → client, écritures via API REST classique, historique en base (JPA + migrations Flyway), gestion d\'erreurs dédiée métier/WebSocket.',
         'edu.title':'Formation',
         'edu.laval':'Baccalauréat en informatique','edu.laval.school':'Université Laval, Québec','edu.laval.note':'Admission confirmée — début septembre 2026.',
         'edu.ccnb':'Diplôme en programmation mobile et applications','edu.ccnb.school':'CCNB Bathurst, N.-B.','edu.ccnb.note':'Diplôme obtenu juin 2026.',
@@ -1271,6 +1276,7 @@ function app() {
         'p.emprunt.title':'Library Loan Management (.NET API)','p.emprunt.desc':'ASP.NET Core (Minimal API) CRUD mini API for library loan management: books, borrowers, loans. Layered architecture (Controllers/Services/DTOs) with dependency injection, JWT authentication on every route, input validation, Entity Framework Core + SQLite with seed data, unit tests, and Swagger/OpenAPI documentation.',
         'p.cv.title':'Online CV (this site)','p.cv.desc':'Bilingual FR/EN interactive portfolio and CV with animations, dynamic sections, and recruiter-optimised UX.',
         'p.springchat.title':'SpringChat — Real-Time Chat','p.springchat.desc':'Real-time chat app built with Spring Boot (WebSocket + STOMP/SockJS): public broadcast and per-session private messages, history replayed on connect, JPA persistence with Flyway migrations, layered architecture (Controllers/Services/Repositories) and a dedicated DTO layer. Vanilla JS frontend with dark/light mode.',
+        'p.notifyorder.title':'Real-Time Order Tracking (WebSocket)','p.notifyorder.desc':'Real-time order tracking demo: the back-office updates an order\'s status and the customer watches it live (vertical stepper), no page reload. WebSocket (STOMP/SockJS) used only for server → client broadcast, writes go through a plain REST API, history stored in DB (JPA + Flyway migrations), dedicated business/WebSocket error handling.',
         'edu.title':'Education',
         'edu.laval':'Bachelor of Computer Science','edu.laval.school':'Université Laval, Québec','edu.laval.note':'Admitted — starting September 2026.',
         'edu.ccnb':'Diploma in Mobile & Application Programming','edu.ccnb.school':'CCNB Bathurst, N.B.','edu.ccnb.note':'Diploma obtained June 2026.',
