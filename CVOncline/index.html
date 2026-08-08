@@ -1074,6 +1074,15 @@ tailwind.config = {
           <p class="inline-block px-4 py-2 rounded-2xl text-sm max-w-[85%]"
             :class="m.role==='user' ? 'bg-electric-500 text-white' : 'bg-navy-700 text-gray-200'"
             x-text="m.text"></p>
+          <template x-if="m.role==='assistant' && m.contactLink">
+            <div class="mt-1.5">
+              <button type="button" @click="goToContact()"
+                class="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-electric-500/15 hover:bg-electric-500/25 border border-electric-500/30 text-electric-400 hover:text-white transition">
+                <i class="fas fa-paper-plane text-[10px]"></i>
+                <span x-text="t('chat.gotoContact')">Aller au formulaire de contact</span>
+              </button>
+            </div>
+          </template>
         </div>
       </template>
       <template x-if="chatTyping">
@@ -1298,7 +1307,8 @@ function app() {
         'contact.form.success':'Message envoyé avec succès !','contact.form.success2':'Je vous répondrai dans les plus brefs délais.',
         'contact.form.another':'Envoyer un autre message','contact.form.error':'Erreur d\'envoi. Écrivez-moi directement à kouonang2002@gmail.com',
         'chat.title':'Assistant FK','chat.online':'En ligne','chat.empty':'Posez une question sur mes compétences ou projets...',
-        'chat.placeholder':'Ex : Parle-moi de Spring Boot...','chat.hint':'Basé uniquement sur mon profil'
+        'chat.placeholder':'Ex : Parle-moi de Spring Boot...','chat.hint':'Basé uniquement sur mon profil',
+        'chat.gotoContact':'Aller au formulaire de contact'
       },
       en: {
         'nav.about':'About','nav.skills':'Skills','nav.arch':'Architecture','nav.exp':'Experience',
@@ -1376,7 +1386,8 @@ function app() {
         'contact.form.success':'Message sent!','contact.form.success2':'I\'ll get back to you as soon as possible.',
         'contact.form.another':'Send another message','contact.form.error':'Send error. Email me directly at kouonang2002@gmail.com',
         'chat.title':'FK Assistant','chat.online':'Online','chat.empty':'Ask me about my skills or projects...',
-        'chat.placeholder':'E.g. Tell me about Spring Boot...','chat.hint':'Based only on my profile'
+        'chat.placeholder':'E.g. Tell me about Spring Boot...','chat.hint':'Based only on my profile',
+        'chat.gotoContact':'Go to the contact form'
       }
     },
 
@@ -1503,49 +1514,60 @@ function app() {
       this.chatTyping = true;
       this.scrollChatToBottom();
       const reply = this.buildReply(q.toLowerCase());
-      const delay = 400 + Math.min(reply.length * 6, 900);
+      const delay = 400 + Math.min(reply.text.length * 6, 900);
       setTimeout(() => {
         this.chatTyping = false;
-        this.chatMessages.push({ role:'assistant', text:reply });
+        this.chatMessages.push({ role:'assistant', text:reply.text, contactLink:!!reply.contactLink });
         this.scrollChatToBottom();
       }, delay);
+    },
+
+    goToContact() {
+      this.chatOpen = false;
+      this.$nextTick(() => {
+        const el = document.getElementById('contact');
+        if (el) el.scrollIntoView({ behavior:'smooth' });
+      });
     },
 
     buildReply(q) {
       const fr = this.lang === 'fr';
       if (q.match(/angular|frontend|interface|ui|ux|tailwind/))
-        return fr ? 'Je maîtrise Angular avec TypeScript, HTML5, CSS3 et Tailwind CSS. J\'ai conçu des tableaux de bord et portails web responsives avec contrôle d\'accès par rôles (ex : GuestHub, ProconnectNB).' : 'I master Angular with TypeScript, HTML5, CSS3 and Tailwind CSS. I have built dashboards and responsive web portals with role-based access (e.g. GuestHub, ProconnectNB).';
+        return { text: fr ? 'Je maîtrise Angular avec TypeScript, HTML5, CSS3 et Tailwind CSS. J\'ai conçu des tableaux de bord et portails web responsives avec contrôle d\'accès par rôles (ex : GuestHub, ProconnectNB).' : 'I master Angular with TypeScript, HTML5, CSS3 and Tailwind CSS. I have built dashboards and responsive web portals with role-based access (e.g. GuestHub, ProconnectNB).' };
       if (q.match(/node|express|backend|api|rest/))
-        return fr ? 'Côté backend, j\'utilise Node.js/Express pour créer des API REST sécurisées avec JWT. J\'ai aussi de l\'expérience avec Spring Boot (Java) et C#/.NET.' : 'For backend, I use Node.js/Express to build secure REST APIs with JWT. I also have experience with Spring Boot (Java) and C#/.NET.';
+        return { text: fr ? 'Côté backend, j\'utilise Node.js/Express pour créer des API REST sécurisées avec JWT. J\'ai aussi de l\'expérience avec Spring Boot (Java) et C#/.NET.' : 'For backend, I use Node.js/Express to build secure REST APIs with JWT. I also have experience with Spring Boot (Java) and C#/.NET.' };
       if (q.match(/spring|java|boot/))
-        return fr ? 'J\'utilise Spring Boot pour des API REST Java robustes avec JPA/Hibernate, sécurité Spring Security et documentation Swagger.' : 'I use Spring Boot for robust Java REST APIs with JPA/Hibernate, Spring Security, and Swagger documentation.';
+        return { text: fr ? 'J\'utilise Spring Boot pour des API REST Java robustes avec JPA/Hibernate, sécurité Spring Security et documentation Swagger.' : 'I use Spring Boot for robust Java REST APIs with JPA/Hibernate, Spring Security, and Swagger documentation.' };
       if (q.match(/kafka|event-driven|événementiel|saga|microservice|grpc|webflux|réactif|reactive messag/))
-        return fr ? 'Je travaille avec les architectures orientées microservices et événementielles : Apache Kafka pour l\'event streaming, le pattern Saga pour les transactions distribuées, gRPC pour la communication inter-services et Spring WebFlux pour la programmation réactive. J\'illustre ces architectures avec des schémas Kubernetes et Spring Cloud dans la section Architecture du site.' : 'I work with microservices and event-driven architectures: Apache Kafka for event streaming, the Saga pattern for distributed transactions, gRPC for inter-service communication, and Spring WebFlux for reactive programming. I illustrate these architectures with Kubernetes and Spring Cloud diagrams in the Architecture section of this site.';
+        return { text: fr ? 'Je travaille avec les architectures orientées microservices et événementielles : Apache Kafka pour l\'event streaming, le pattern Saga pour les transactions distribuées, gRPC pour la communication inter-services et Spring WebFlux pour la programmation réactive. J\'illustre ces architectures avec des schémas Kubernetes et Spring Cloud dans la section Architecture du site.' : 'I work with microservices and event-driven architectures: Apache Kafka for event streaming, the Saga pattern for distributed transactions, gRPC for inter-service communication, and Spring WebFlux for reactive programming. I illustrate these architectures with Kubernetes and Spring Cloud diagrams in the Architecture section of this site.' };
       if (q.match(/websocket|stomp|sockjs|temps réel|real-time|springchat|notificationorder|chat en direct|order tracking/))
-        return fr ? 'J\'ai développé deux démos temps réel avec WebSocket (STOMP/SockJS) et Spring Boot : SpringChat, une messagerie instantanée avec historique persistant, et un suivi de commande en temps réel (avec vidéo de démo Loom). Retrouvez-les dans la section Portfolio.' : 'I built two real-time demos with WebSocket (STOMP/SockJS) and Spring Boot: SpringChat, an instant messaging app with persisted history, and a real-time order tracking demo (with a Loom video walkthrough). Check them out in the Portfolio section.';
+        return { text: fr ? 'J\'ai développé deux démos temps réel avec WebSocket (STOMP/SockJS) et Spring Boot : SpringChat, une messagerie instantanée avec historique persistant, et un suivi de commande en temps réel (avec vidéo de démo Loom). Retrouvez-les dans la section Portfolio.' : 'I built two real-time demos with WebSocket (STOMP/SockJS) and Spring Boot: SpringChat, an instant messaging app with persisted history, and a real-time order tracking demo (with a Loom video walkthrough). Check them out in the Portfolio section.' };
       if (q.match(/kubernetes|k8s|coredns|ingress|statefulset|grafana|prometheus|observabilit/))
-        return fr ? 'La section Architecture du site présente mes compétences cloud-native : déploiement Kubernetes (Ingress NGINX, CoreDNS, pods, Kafka en StatefulSet) et une architecture microservices Spring Cloud (API Gateway, Eureka), avec observabilité Prometheus/Grafana.' : 'The Architecture section of this site showcases my cloud-native skills: a Kubernetes deployment (NGINX Ingress, CoreDNS, pods, Kafka as a StatefulSet) and a Spring Cloud microservices architecture (API Gateway, Eureka), with Prometheus/Grafana observability.';
+        return { text: fr ? 'La section Architecture du site présente mes compétences cloud-native : déploiement Kubernetes (Ingress NGINX, CoreDNS, pods, Kafka en StatefulSet) et une architecture microservices Spring Cloud (API Gateway, Eureka), avec observabilité Prometheus/Grafana.' : 'The Architecture section of this site showcases my cloud-native skills: a Kubernetes deployment (NGINX Ingress, CoreDNS, pods, Kafka as a StatefulSet) and a Spring Cloud microservices architecture (API Gateway, Eureka), with Prometheus/Grafana observability.' };
       if (q.match(/flutter|mobile|ios|swift|swiftui/))
-        return fr ? 'Je développe des apps mobiles avec Flutter (Dart) pour le cross-platform et SwiftUI pour iOS natif. Mes projets intègrent Firebase, géolocalisation et notifications push.' : 'I develop mobile apps with Flutter (Dart) for cross-platform and SwiftUI for native iOS. My projects include Firebase, geolocation, and push notifications.';
+        return { text: fr ? 'Je développe des apps mobiles avec Flutter (Dart) pour le cross-platform et SwiftUI pour iOS natif. Mes projets intègrent Firebase, géolocalisation et notifications push.' : 'I develop mobile apps with Flutter (Dart) for cross-platform and SwiftUI for native iOS. My projects include Firebase, geolocation, and push notifications.' };
       if (q.match(/azure|aws|cloud|firebase|docker|ci\/cd|github action/))
-        return fr ? 'Je suis certifié AWS Cloud Practitioner et je travaille avec Azure (déploiements, pipelines CI/CD via GitHub Actions), Firebase et Docker.' : 'I am AWS Cloud Practitioner certified and work with Azure (deployments, CI/CD pipelines via GitHub Actions), Firebase, and Docker.';
+        return { text: fr ? 'Je suis certifié AWS Cloud Practitioner et je travaille avec Azure (déploiements, pipelines CI/CD via GitHub Actions), Firebase et Docker.' : 'I am AWS Cloud Practitioner certified and work with Azure (deployments, CI/CD pipelines via GitHub Actions), Firebase, and Docker.' };
       if (q.match(/mongo|postgresql|mysql|database|sql/))
-        return fr ? 'J\'ai de l\'expérience avec MySQL, PostgreSQL, MongoDB, SQLite et Oracle. Je maîtrise la modélisation relationnelle et les ORM (Mongoose, Sequelize, Hibernate, Prisma).' : 'I have experience with MySQL, PostgreSQL, MongoDB, SQLite and Oracle. I master relational modelling and ORMs (Mongoose, Sequelize, Hibernate, Prisma).';
+        return { text: fr ? 'J\'ai de l\'expérience avec MySQL, PostgreSQL, MongoDB, SQLite et Oracle. Je maîtrise la modélisation relationnelle et les ORM (Mongoose, Sequelize, Hibernate, Prisma).' : 'I have experience with MySQL, PostgreSQL, MongoDB, SQLite and Oracle. I master relational modelling and ORMs (Mongoose, Sequelize, Hibernate, Prisma).' };
       if (q.match(/proconnect|médic|medical|soin|rendez/))
-        return fr ? 'ProconnectNB est une app médicale multiplateforme (Flutter/ASP.NET/Azure/Firebase) avec rappels de médication, gestion de RDV et pipeline CI/CD complet sur GitHub Actions → Azure.' : 'ProconnectNB is a multiplatform medical app (Flutter/ASP.NET/Azure/Firebase) with medication reminders, appointment management, and a full CI/CD pipeline on GitHub Actions → Azure.';
+        return { text: fr ? 'ProconnectNB est une app médicale multiplateforme (Flutter/ASP.NET/Azure/Firebase) avec rappels de médication, gestion de RDV et pipeline CI/CD complet sur GitHub Actions → Azure.' : 'ProconnectNB is a multiplatform medical app (Flutter/ASP.NET/Azure/Firebase) with medication reminders, appointment management, and a full CI/CD pipeline on GitHub Actions → Azure.' };
       if (q.match(/emprunt|bibliothèque|library|c#|\.net|jwt|swagger|entity framework/))
-        return fr ? 'Mon projet de gestion des emprunts est une mini API CRUD en ASP.NET Core (Minimal API) : architecture en couches Controllers/Services/DTOs, authentification JWT, validation des entrées, Entity Framework Core + SQLite, tests unitaires et documentation Swagger.' : 'My library loan management project is a CRUD mini API built with ASP.NET Core (Minimal API): layered Controllers/Services/DTOs architecture, JWT authentication, input validation, Entity Framework Core + SQLite, unit tests, and Swagger documentation.';
+        return { text: fr ? 'Mon projet de gestion des emprunts est une mini API CRUD en ASP.NET Core (Minimal API) : architecture en couches Controllers/Services/DTOs, authentification JWT, validation des entrées, Entity Framework Core + SQLite, tests unitaires et documentation Swagger.' : 'My library loan management project is a CRUD mini API built with ASP.NET Core (Minimal API): layered Controllers/Services/DTOs architecture, JWT authentication, input validation, Entity Framework Core + SQLite, unit tests, and Swagger documentation.' };
       if (q.match(/robot|openvla|ia|intelligence|innov|ur5|zivid/))
-        return fr ? 'Dans mon stage INNOV au CCNB, je développe un démonstrateur OpenVLA pour robot UR5 industriel avec caméra Zivid 2D/3D — modèle vision-langage-action en conditions réelles.' : 'In my INNOV internship at CCNB, I am developing an OpenVLA demonstrator for an industrial UR5 robot with a Zivid 2D/3D camera — a vision-language-action model in real conditions.';
+        return { text: fr ? 'Dans mon stage INNOV au CCNB, je développe un démonstrateur OpenVLA pour robot UR5 industriel avec caméra Zivid 2D/3D — modèle vision-langage-action en conditions réelles.' : 'In my INNOV internship at CCNB, I am developing an OpenVLA demonstrator for an industrial UR5 robot with a Zivid 2D/3D camera — a vision-language-action model in real conditions.' };
       if (q.match(/expérience|experience|ans|year|parcours/))
-        return fr ? 'J\'ai plus de 14 ans d\'expérience en développement logiciel, dont 14 ans comme développeur fullstack chez Clear Solutions (Cameroun), et des stages récents au CCNB Bathurst.' : 'I have 14+ years of software development experience, including 14 years as a fullstack developer at Clear Solutions (Cameroon), and recent internships at CCNB Bathurst.';
+        return { text: fr ? 'J\'ai plus de 14 ans d\'expérience en développement logiciel, dont 14 ans comme développeur fullstack chez Clear Solutions (Cameroun), et des stages récents au CCNB Bathurst.' : 'I have 14+ years of software development experience, including 14 years as a fullstack developer at Clear Solutions (Cameroon), and recent internships at CCNB Bathurst.' };
       if (q.match(/formation|diplôme|université|laval|ccnb|étude|study/))
-        return fr ? 'Je suis diplômé du CCNB Bathurst (juin 2026, mention d\'honneur) et admis au Baccalauréat en informatique à l\'Université Laval (sept. 2026). J\'ai aussi fait l\'AEC au Collège Gérald-Godin.' : 'I graduated from CCNB Bathurst (June 2026, with honours) and am admitted to the Bachelor of Computer Science at Université Laval (Sept. 2026). I also completed the AEC at Collège Gérald-Godin.';
+        return { text: fr ? 'Je suis diplômé du CCNB Bathurst (juin 2026, mention d\'honneur) et admis au Baccalauréat en informatique à l\'Université Laval (sept. 2026). J\'ai aussi fait l\'AEC au Collège Gérald-Godin.' : 'I graduated from CCNB Bathurst (June 2026, with honours) and am admitted to the Bachelor of Computer Science at Université Laval (Sept. 2026). I also completed the AEC at Collège Gérald-Godin.' };
       if (q.match(/contact|recrut|embauche|hire|emploi|job|poste/))
-        return fr ? 'Je suis disponible pour de nouvelles opportunités ! Utilisez le formulaire de contact ci-dessous ou écrivez-moi à kouonang2002@gmail.com. Je suis aussi sur LinkedIn : linkedin.com/in/fabrice-kouonang' : 'I am available for new opportunities! Use the contact form below or email me at kouonang2002@gmail.com. I\'m also on LinkedIn: linkedin.com/in/fabrice-kouonang';
-      return fr
-        ? 'Bonne question ! Pour plus de détails sur ce sujet ou pour discuter d\'un projet, utilisez le formulaire de contact — je vous répondrai rapidement. Vous pouvez aussi consulter mes projets dans la section Portfolio.'
-        : 'Great question! For more details on this topic or to discuss a project, use the contact form — I\'ll get back to you quickly. You can also check my projects in the Portfolio section.';
+        return { text: fr ? 'Je suis disponible pour de nouvelles opportunités ! Utilisez le formulaire de contact ci-dessous ou écrivez-moi à kouonang2002@gmail.com. Je suis aussi sur LinkedIn : linkedin.com/in/fabrice-kouonang' : 'I am available for new opportunities! Use the contact form below or email me at kouonang2002@gmail.com. I\'m also on LinkedIn: linkedin.com/in/fabrice-kouonang', contactLink: true };
+      return {
+        text: fr
+          ? 'Bonne question ! Pour plus de détails sur ce sujet ou pour discuter d\'un projet, utilisez le formulaire de contact — je vous répondrai rapidement. Vous pouvez aussi consulter mes projets dans la section Portfolio.'
+          : 'Great question! For more details on this topic or to discuss a project, use the contact form — I\'ll get back to you quickly. You can also check my projects in the Portfolio section.',
+        contactLink: true
+      };
     },
 
     init() {
