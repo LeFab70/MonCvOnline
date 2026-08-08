@@ -727,6 +727,36 @@ tailwind.config = {
 </section>
 
 <div class="section-divider"></div>
+<!-- ═══ ARCHITECTURE ═══ -->
+<section id="architecture" class="py-24 bg-navy-800">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-black text-white text-center section-title mb-4 reveal" x-text="t('arch.title')">Architecture</h2>
+    <p class="text-gray-400 text-center mb-16 reveal" x-text="t('arch.subtitle')">Schémas illustrant mes compétences en cloud, microservices et messagerie événementielle</p>
+
+    <div class="grid md:grid-cols-2 gap-8 reveal stagger">
+      <div class="glass rounded-xl overflow-hidden">
+        <img src="img/architecture-kubernetes.gif" alt="Architecture Kubernetes cloud native" class="w-full h-auto">
+        <div class="p-6">
+          <h3 class="text-white font-bold text-lg mb-2" x-text="t('arch.k8s.title')">Kubernetes · Cloud Native</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" x-text="t('arch.k8s.desc')">
+            Architecture cloud-native sur Kubernetes.
+          </p>
+        </div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden">
+        <img src="img/architecture-microservices.gif" alt="Architecture microservices Spring Cloud" class="w-full h-auto">
+        <div class="p-6">
+          <h3 class="text-white font-bold text-lg mb-2" x-text="t('arch.ms.title')">Microservices · Spring Cloud</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" x-text="t('arch.ms.desc')">
+            Architecture microservices avec Spring Cloud.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
 <!-- ═══ EXPERIENCE ═══ -->
 <section id="experience" class="py-24 bg-navy-800">
   <div class="max-w-4xl mx-auto px-6">
@@ -1078,6 +1108,7 @@ function app() {
     sections: [
       { id:'about', key:'nav.about', icon:'fas fa-user' },
       { id:'skills', key:'nav.skills', icon:'fas fa-layer-group' },
+      { id:'architecture', key:'nav.arch', icon:'fas fa-network-wired' },
       { id:'experience', key:'nav.exp', icon:'fas fa-briefcase' },
       { id:'projects', key:'nav.proj', icon:'fas fa-diagram-project' },
       { id:'education', key:'nav.edu', icon:'fas fa-graduation-cap' },
@@ -1156,8 +1187,13 @@ function app() {
 
     translations: {
       fr: {
-        'nav.about':'À propos','nav.skills':'Compétences','nav.exp':'Expérience',
+        'nav.about':'À propos','nav.skills':'Compétences','nav.arch':'Architecture','nav.exp':'Expérience',
         'nav.proj':'Projets','nav.edu':'Formation','nav.contact':'Contact',
+        'arch.title':'Architecture','arch.subtitle':'Schémas illustrant mes compétences en cloud, microservices et messagerie événementielle',
+        'arch.k8s.title':'Kubernetes · Cloud Native',
+        'arch.k8s.desc':'Déploiement cloud-native sur Kubernetes : un Ingress NGINX route le trafic client vers des pods Orders / Payments / Notifications, la découverte de service passe par CoreDNS, Kafka (StatefulSet) assure le event streaming entre services, et Prometheus + Grafana couvrent l\'observabilité (métriques temps réel).',
+        'arch.ms.title':'Microservices · Spring Cloud',
+        'arch.ms.desc':'Architecture microservices avec Spring Cloud : un API Gateway route les requêtes vers les services Orders / Payments / Notifications, Eureka assure le registre et la découverte de service, un bus d\'événements Kafka découple la communication inter-services, et Grafana fournit l\'observabilité de bout en bout.',
         'theme.light':'Activer le mode clair','theme.dark':'Activer le mode sombre',
         'hero.available':'Disponible pour de nouvelles opportunités',
         'hero.desc':'Développeur full stack avec 14+ ans d\'expérience — Angular · Node.js · Spring Boot · Flutter · Azure.',
@@ -1229,8 +1265,13 @@ function app() {
         'chat.placeholder':'Ex : Parle-moi de Spring Boot...','chat.hint':'Basé uniquement sur mon profil'
       },
       en: {
-        'nav.about':'About','nav.skills':'Skills','nav.exp':'Experience',
+        'nav.about':'About','nav.skills':'Skills','nav.arch':'Architecture','nav.exp':'Experience',
         'nav.proj':'Projects','nav.edu':'Education','nav.contact':'Contact',
+        'arch.title':'Architecture','arch.subtitle':'Diagrams illustrating my cloud, microservices and event-driven messaging skills',
+        'arch.k8s.title':'Kubernetes · Cloud Native',
+        'arch.k8s.desc':'Cloud-native deployment on Kubernetes: an NGINX Ingress routes client traffic to Orders / Payments / Notifications pods, service discovery runs through CoreDNS, Kafka (StatefulSet) handles event streaming between services, and Prometheus + Grafana cover observability (real-time metrics).',
+        'arch.ms.title':'Microservices · Spring Cloud',
+        'arch.ms.desc':'Microservices architecture with Spring Cloud: an API Gateway routes requests to the Orders / Payments / Notifications services, Eureka provides service registry and discovery, a Kafka event bus decouples inter-service communication, and Grafana delivers end-to-end observability.',
         'theme.light':'Switch to light mode','theme.dark':'Switch to dark mode',
         'hero.available':'Open to new opportunities',
         'hero.desc':'Full stack developer with 14+ years of experience — Angular · Node.js · Spring Boot · Flutter · Azure.',
